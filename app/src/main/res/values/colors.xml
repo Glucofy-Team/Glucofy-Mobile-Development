@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!--primary color-->
+    <color name="red_100">#FFD9DC</color>
+    <color name="red_200">#FFAFB6</color>
+    <color name="red_300">#FF828C</color>
+    <color name="red_400">#FF4353</color>
+    <color name="red_500">#DC3644</color>
+    <color name="red_600">#A02933</color>
+    <color name="red_700">#8C232C</color>
+    <color name="red_800">#6F1A21</color>
+    <color name="red_900">#461418</color>
+
+    <!--Neutral Colors-->
+    <color name="neutrals_100">#F7F9FC</color>
+    <color name="neutrals_200">#FFAFB6</color>
+    <color name="neutrals_300">#E2E7F0</color>
+    <color name="neutrals_400">#CBD2E0</color>
+    <color name="neutrals_500">#A0ABC0</color>
+    <color name="neutrals_600">#717D96</color>
+    <color name="neutrals_700">#4A5468</color>
+    <color name="neutrals_800">#2D3648</color>
+    <color name="neutrals_900">#1A202C</color>
+
+</resources>

@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Glucofy</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--Fragment Register 1-->
+    <string name="fragment_register_1_tv_title">Create your account</string>
+    <string name="fragment_register_1_tv_description">This will be used for each time you’re trying to log in.</string>
+    <string name="fragment_register_1_ti_first_name">First Name...</string>
+    <string name="fragment_register_1_ti_phone_number">Phone Number...</string>
+    <string name="fragment_register_1_ti_email">Email...</string>
+    <string name="fragment_register_1_ti_password">Password...</string>
+    <string name="fragment_register_1_btn_next"><![CDATA[Next ->]]></string>
+    <string name="fragment_register_1_ti_lastname">Last Name...</string>
+    <string name="fragment_register_1_tv_login">Log In</string>
+    <string name="fragment_register_1_tv_description_login">Already have an account?</string>
+
+    <!--Fragment Register 2-->
+    <string name="fragment_register_2_tv_title">Introduce Yourself</string>
+    <string name="fragment_register_2_tv_description">Your detail is important for thorough customization.</string>
+    <string name="fragment_register_2_ti_gender">Gender</string>
+    <string name="fragment_register_2_ti_weight">Berat (KG)</string>
+    <string name="fragment_register_2_ti_height">Tinggi (CM)</string>
+    <string name="fragment_register_2_ti_age">Age</string>
+    <string name="fragment_register_2_btn_register">Register</string>
+    <string name="fragment_register_2_tv_login_description">Already have an account?</string>
+    <string name="fragment_register_2_tv_login">Log In</string>
+
+    <!--Activity Login-->
+    <string name="activity_login_tv_register_title">Tidak mempunyai akun ?</string>
+    <string name="activity_login_tv_register">Daftar</string>
+
+    <!--Activity Register Success-->
+    <string name="activty_register_success_btn_login"><![CDATA[< Balik ke halaman login]]></string>
+</resources>
