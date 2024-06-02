@@ -24,7 +24,7 @@ class LoginActivity : AppCompatActivity() {
 
         loginViewModel.login.observe(this){loginResponse ->
             if(loginResponse.status == 201){
-                toast(this@LoginActivity, "Email / Password kosong")
+                toast(this@LoginActivity, "Berhasil Login")
             }
             setUserData(loginResponse)
         }

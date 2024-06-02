@@ -3,6 +3,12 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!--Home navigation-->
+    <string name="title_food">Makanan</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_alarm">Alarm</string>
+    <string name="title_glucosa">Glucosa</string>
+
     <!--Fragment Register 1-->
     <string name="fragment_register_1_tv_title">Create your account</string>
     <string name="fragment_register_1_tv_description">This will be used for each time you’re trying to log in.</string>
