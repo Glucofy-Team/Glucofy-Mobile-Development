@@ -36,8 +36,14 @@ class RegisterFragmentStep2 : Fragment() {
 
         registerViewModel.register.observe(viewLifecycleOwner, Observer { registerResponse ->
             if (registerResponse.status == 201) {
+                startActivity(Intent(requireContext(), RegisterSuccessActivity::class.java))
+                requireActivity().finish()
                 toast(requireContext(), "Email / Password kosong")
             }
+        })
+
+        registerViewModel.isLoading.observe(viewLifecycleOwner, Observer { loading ->
+            binding.btnRegister.isEnabled = !loading
         })
 
         val adapter = ArrayAdapter(requireContext(), R.layout.input_list_item, items)
@@ -55,8 +61,6 @@ class RegisterFragmentStep2 : Fragment() {
                 binding.tiHeight.text.toString(),
                 binding.tiAge.text.toString(),
             )
-            startActivity(Intent(requireContext(), RegisterSuccessActivity::class.java))
-            requireActivity().finish()
         }
 
         return binding.root

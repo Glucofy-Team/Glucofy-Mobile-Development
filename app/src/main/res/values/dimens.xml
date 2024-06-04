@@ -2,4 +2,32 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- Text style-->
+    <!--Heading bold-->
+    <dimen name="heading_bold_XXl">64sp</dimen>
+    <dimen name="heading_bold_Xl">48sp</dimen>
+    <dimen name="heading_bold_L">40sp</dimen>
+    <dimen name="heading_bold_M">32sp</dimen>
+    <dimen name="heading_bold_S">24sp</dimen>
+    <dimen name="heading_bold_XS">20sp</dimen>
+    <dimen name="heading_bold_XXS">16sp</dimen>
+    <dimen name="heading_bold_XXXS">14sp</dimen>
+
+    <!--Medium bold-->
+    <dimen name="heading_medium_XXl">56sp</dimen>
+    <dimen name="heading_medium_Xl">48sp</dimen>
+    <dimen name="heading_medium_L">40sp</dimen>
+    <dimen name="heading_medium_M">32sp</dimen>
+    <dimen name="heading_medium_S">24sp</dimen>
+    <dimen name="heading_medium_XS">20sp</dimen>
+    <dimen name="heading_medium_XXS">16sp</dimen>
+    <dimen name="heading_medium_XXXS">14sp</dimen>
+
+    <!--Body-->
+    <dimen name="body_Xl">22sp</dimen>
+    <dimen name="body_L">18sp</dimen>
+    <dimen name="body_M">16sp</dimen>
+    <dimen name="body_S">14sp</dimen>
+    <dimen name="body_XS">12sp</dimen>
 </resources>

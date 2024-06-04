@@ -22,6 +22,10 @@ class LoginActivity : AppCompatActivity() {
 
         val loginViewModel: LoginViewModel = LoginViewModel.getInstance(this)
 
+        loginViewModel.isLoading.observe(this){loading ->
+            binding.btnLogin.isEnabled = !loading
+        }
+
         loginViewModel.login.observe(this){loginResponse ->
             if(loginResponse.status == 201){
                 toast(this@LoginActivity, "Berhasil Login")

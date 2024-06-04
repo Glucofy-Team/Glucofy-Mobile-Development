@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context=".ui.fragment.RegisterFragmentStep2">
 
     <LinearLayout
@@ -47,7 +48,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:baselineAligned="false">
 
@@ -97,34 +98,38 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.dicoding2.glucofy.ui.costumview.CostumButton
-            android:id="@+id/btnRegister"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:backgroundTint="@color/red_500"
-            android:text="@string/fragment_register_2_btn_register" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
+            android:gravity="bottom"
+            android:paddingBottom="40dp"
+            android:orientation="vertical">
+            <com.dicoding2.glucofy.ui.costumview.CostumButton
+                android:id="@+id/btnRegister"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/fragment_register_2_tv_login_description"
-                android:textColor="@color/neutrals_600" />
-
-            <TextView
-                android:id="@+id/tvLogin"
-                android:layout_width="wrap_content"
+                android:layout_marginTop="60dp"
+                android:layout_marginBottom="15dp"
+                android:text="@string/fragment_register_2_btn_register" />
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/fragment_register_2_tv_login"
-                android:textColor="@color/red_500"
-                android:textStyle="bold" />
+                android:gravity="center"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fragment_register_2_tv_login_description"
+                    android:textColor="@color/neutrals_600" />
+
+                <TextView
+                    android:id="@+id/tvLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fragment_register_2_tv_login"
+                    android:textColor="@color/red_500"
+                    android:textStyle="bold" />
+            </LinearLayout>
         </LinearLayout>
-
     </LinearLayout>
 </ScrollView>

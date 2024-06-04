@@ -1,52 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
     tools:context=".ui.RegisterSuccessActivity">
-
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="270dp"
-        android:layout_marginEnd="31dp"
-        android:layout_marginBottom="190dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/btnLogin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:orientation="vertical">
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="BERHASIL!"
             android:textColor="@color/red_500"
-            android:textSize="60sp"
+            android:textSize="@dimen/heading_bold_XXl"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textView4"
             android:layout_width="match_parent"
-            android:layout_height="21dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
+            android:textSize="@dimen/body_M"
             android:text="Akun kamu sudah berhasil terbikin."
             android:textColor="@color/red_500" />
     </LinearLayout>
 
-    <com.dicoding2.glucofy.ui.costumview.CostumButton
+
+    <TextView
         android:id="@+id/btnLogin"
-        android:layout_width="285dp"
+        android:layout_width="match_parent"
         android:layout_height="52dp"
-        android:layout_marginStart="104dp"
-        android:layout_marginEnd="105dp"
-        android:layout_marginBottom="31dp"
-        android:backgroundTint="@color/red_500"
-        android:text="@string/activty_register_success_btn_login"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="@dimen/heading_bold_XS"
+        android:textColor="@color/red_500"
+        android:layout_gravity="bottom"  android:layout_margin="16dp"
+        android:text="@string/activty_register_success_btn_login" />
+</FrameLayout>

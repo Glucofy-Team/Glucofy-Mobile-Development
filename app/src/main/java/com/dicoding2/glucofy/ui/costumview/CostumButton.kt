@@ -11,22 +11,21 @@ import com.dicoding2.glucofy.R
 
 class CostumButton : AppCompatButton {
 
-    // Konstruktor dari MyButton
-    constructor(context: Context) : super(context) // untuk di Activity/Fragment
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)  // untuk di XML
+    constructor(context: Context) : super(context)
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
     private var txtColor: Int = 0
     private var enabledBackground: Drawable
     private var disabledBackground: Drawable
+    private var prevtext: String
 
-    // pemanggilan Resource harus dilakukan saat kelas MyButton diinisialisasi, jadi harus dikeluarkan dari metode onDraw
     init {
         txtColor = ContextCompat.getColor(context, android.R.color.background_light)
         enabledBackground = ContextCompat.getDrawable(context, R.drawable.bg_button) as Drawable
         disabledBackground = ContextCompat.getDrawable(context, R.drawable.bg_button_disabled) as Drawable
+        prevtext = text.toString()
     }
 
-    // Metode onDraw() digunakan untuk mengcustom button ketika enable dan disable
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         background = if(isEnabled) enabledBackground else disabledBackground
@@ -34,5 +33,7 @@ class CostumButton : AppCompatButton {
         setTextColor(txtColor)
 
         gravity = Gravity.CENTER
+
+        text = if(isEnabled) prevtext else "Loading..."
     }
 }
