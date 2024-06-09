@@ -5,10 +5,12 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.dicoding2.glucofy.data.remote.response.ErrorResponse
 import com.dicoding2.glucofy.data.remote.response.LoginResponse
 import com.dicoding2.glucofy.data.remote.retrofit.ApiService
 import com.dicoding2.glucofy.di.Injection
 import com.dicoding2.glucofy.helper.toast
+import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -26,11 +28,21 @@ class LoginViewModel(private val context: Context, private val apiService: ApiSe
         client.enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 _isLoading.value = false
-
                 if (response.isSuccessful) {
                     _login.value = response.body()
                 }else{
-                    toast(context, "Login failed")
+                    val errorBody = response.errorBody()?.string()
+                    if (errorBody != null) {
+                        try {
+                            val errorResponse = Gson().fromJson(errorBody, ErrorResponse::class.java)
+                            val message = errorResponse.message ?: "Login failed"
+                            toast(context, message)
+                        } catch (e: Exception) {
+                            toast(context, "An unexpected error occurred. Please try again later.")
+                        }
+                    } else {
+                        toast(context, "Login failed. Please check your network connection.")
+                    }
                 }
             }
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
