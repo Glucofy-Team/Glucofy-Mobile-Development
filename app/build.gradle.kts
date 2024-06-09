@@ -62,4 +62,7 @@ dependencies {
 
     //pager2
     implementation("androidx.viewpager2:viewpager2:1.0.0")
+
+    //chart
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 }
