@@ -11,11 +11,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.dicoding2.glucofy.R
 import com.dicoding2.glucofy.data.RegisterPreference
-import com.dicoding2.glucofy.data.local.entity.RegisterEntity
 import com.dicoding2.glucofy.databinding.FragmentRegisterStep2Binding
 import com.dicoding2.glucofy.helper.toast
 import com.dicoding2.glucofy.ui.RegisterSuccessActivity
-import com.dicoding2.glucofy.ui.viewmodel.LoginViewModel
 import com.dicoding2.glucofy.ui.viewmodel.RegisterViewModel
 
 
@@ -38,7 +36,6 @@ class RegisterFragmentStep2 : Fragment() {
             if (registerResponse.status == 201) {
                 startActivity(Intent(requireContext(), RegisterSuccessActivity::class.java))
                 requireActivity().finish()
-                toast(requireContext(), "Email / Password kosong")
             }
         })
 

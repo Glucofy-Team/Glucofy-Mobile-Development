@@ -23,6 +23,10 @@ class RegisterActivity : AppCompatActivity() {
         viewPager.isUserInputEnabled = false
         supportActionBar?.elevation = 0f
 
+        binding.tvBack.setOnClickListener {
+            viewPager.setCurrentItem(0,true)
+        }
+        binding.tvNext.setOnClickListener {  }
     }
 
     override fun onStart() {

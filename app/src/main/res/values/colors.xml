@@ -4,6 +4,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <!--primary color-->
+    <color name="red_50">#FFFAFA</color>
     <color name="red_100">#FFD9DC</color>
     <color name="red_200">#FFAFB6</color>
     <color name="red_300">#FF828C</color>

@@ -3,6 +3,7 @@
     <style name="Base.Theme.Glucofy" parent="Theme.Material3.Light.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:windowBackground">@color/white</item>
     </style>
 
     <style name="Theme.Glucofy" parent="Base.Theme.Glucofy" />
