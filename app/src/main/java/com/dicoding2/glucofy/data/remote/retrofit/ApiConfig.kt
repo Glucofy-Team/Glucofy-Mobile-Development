@@ -23,7 +23,7 @@ class ApiConfig {
                 .addInterceptor(authInterceptor)
                 .build()
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://glucofy-api-krjm7o43mq-et.a.run.app/")
+                .baseUrl("https://glucofy-be.vercel.app/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()
