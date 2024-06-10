@@ -1,7 +1,7 @@
 package com.dicoding2.glucofy.helper
 
 import android.view.View
-import com.unique.simplealarmclock.model.Alarm
+import com.dicoding2.glucofy.model.Alarm
 
 interface OnToggleAlarmListener {
     fun onToggle(alarm: Alarm?)

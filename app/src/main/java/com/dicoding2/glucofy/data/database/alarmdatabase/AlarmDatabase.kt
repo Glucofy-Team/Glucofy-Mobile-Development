@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room.databaseBuilder
 import androidx.room.RoomDatabase
 import com.dicoding2.glucofy.data.database.alarmdatabase.AlarmDao
-import com.unique.simplealarmclock.model.Alarm
+import com.dicoding2.glucofy.model.Alarm
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import kotlin.concurrent.Volatile

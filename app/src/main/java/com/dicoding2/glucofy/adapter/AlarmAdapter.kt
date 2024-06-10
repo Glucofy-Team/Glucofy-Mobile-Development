@@ -1,12 +1,11 @@
-package com.unique.simplealarmclock.adapter
+package com.dicoding2.glucofy.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.dicoding2.glucofy.adapter.AlarmViewHolder
 import com.dicoding2.glucofy.databinding.ItemAlarmBinding
 import com.dicoding2.glucofy.helper.OnToggleAlarmListener
-import com.unique.simplealarmclock.model.Alarm
+import com.dicoding2.glucofy.model.Alarm
 
 class AlarmRecyclerViewAdapter(listener: OnToggleAlarmListener) :
     RecyclerView.Adapter<AlarmViewHolder>() {

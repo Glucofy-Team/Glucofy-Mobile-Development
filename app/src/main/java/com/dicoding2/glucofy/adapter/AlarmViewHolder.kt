@@ -1,13 +1,12 @@
 package com.dicoding2.glucofy.adapter
 
-import android.view.View
 import android.widget.TextView
 import androidx.appcompat.widget.SwitchCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.dicoding2.glucofy.databinding.ItemAlarmBinding
 import com.dicoding2.glucofy.helper.DayUtil
 import com.dicoding2.glucofy.helper.OnToggleAlarmListener
-import com.unique.simplealarmclock.model.Alarm
+import com.dicoding2.glucofy.model.Alarm
 
 class AlarmViewHolder(binding: ItemAlarmBinding) : RecyclerView.ViewHolder(binding.root) {
     private val alarmTime: TextView = binding.tvAlarmTime
@@ -27,10 +26,11 @@ class AlarmViewHolder(binding: ItemAlarmBinding) : RecyclerView.ViewHolder(bindi
         } else {
             alarmTitle.text = "My alarm"
         }
+
         if (alarm.isRecurring) {
-            alarmDay.text = alarm.recurringDaysText
+            alarmDay.text = alarm.getRecurringDaysText()
         } else {
-            alarmDay.setText(DayUtil.getDay(alarm.hour, alarm.minute))
+            alarmDay.text = DayUtil.getDay(alarm.hour, alarm.minute)
         }
         alarmStarted.setOnCheckedChangeListener { buttonView, _ ->
             if (buttonView.isShown || buttonView.isPressed) listener.onToggle(

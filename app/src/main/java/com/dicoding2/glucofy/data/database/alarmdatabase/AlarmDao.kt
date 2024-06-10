@@ -6,7 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.unique.simplealarmclock.model.Alarm
+import com.dicoding2.glucofy.model.Alarm
 
 @Dao
 interface AlarmDao {

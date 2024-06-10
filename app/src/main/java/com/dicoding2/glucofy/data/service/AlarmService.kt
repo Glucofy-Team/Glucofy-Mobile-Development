@@ -13,7 +13,7 @@ import androidx.core.app.NotificationCompat
 import com.dicoding2.glucofy.App.Companion.CHANNEL_ID
 import com.dicoding2.glucofy.R
 import com.dicoding2.glucofy.ui.RingActivity
-import com.unique.simplealarmclock.model.Alarm
+import com.dicoding2.glucofy.model.Alarm
 import java.io.IOException
 
 class AlarmService : Service() {

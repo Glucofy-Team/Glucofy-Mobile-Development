@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import com.dicoding2.glucofy.data.database.alarmdatabase.AlarmDao
 import com.unique.simplealarmclock.data.AlarmDatabase
-import com.unique.simplealarmclock.model.Alarm
+import com.dicoding2.glucofy.model.Alarm
 
 class AlarmRepository(application: Application?) {
     private lateinit var  alarmDao: AlarmDao

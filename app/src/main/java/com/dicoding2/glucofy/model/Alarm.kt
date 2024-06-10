@@ -1,4 +1,4 @@
-package com.unique.simplealarmclock.model
+package com.dicoding2.glucofy.model
 
 import android.app.AlarmManager
 import android.app.PendingIntent
@@ -17,6 +17,7 @@ import com.dicoding2.glucofy.broadcastreceiver.AlarmBroadcastReceiver
 import com.dicoding2.glucofy.helper.DayUtil
 import java.io.Serializable
 import java.util.Calendar
+import java.util.Locale
 
 @Entity(tableName = "alarm_table")
 class Alarm(
@@ -72,12 +73,21 @@ class Alarm(
         }
 
         if (isRecurring) {
-            val toastText = "Recurring Alarm $title scheduled for $recurringDaysText at $hour:$minute"
+            val toastText = String.format(
+                Locale.getDefault(),
+                "Recurring Alarm %s scheduled for %s at %02d:%02d",
+                title.toLowerCase(Locale.getDefault()),
+                getRecurringDaysText(),
+                hour,
+                minute
+            )
             Toast.makeText(context, toastText, Toast.LENGTH_LONG).show()
+
+            val RUN_DAILY = (24 * 60 * 60 * 1000).toLong()
             alarmManager.setRepeating(
                 AlarmManager.RTC_WAKEUP,
                 calendar.timeInMillis,
-                AlarmManager.INTERVAL_DAY,
+                RUN_DAILY,
                 alarmPendingIntent
             )
         } else {
@@ -106,15 +116,22 @@ class Alarm(
         Log.i("cancel", toastText)
     }
 
-    val recurringDaysText: String
-        get() = listOf(
-            if (isMonday) "Mo" else "",
-            if (isTuesday) "Tu" else "",
-            if (isWednesday) "We" else "",
-            if (isThursday) "Th" else "",
-            if (isFriday) "Fr" else "",
-            if (isSaturday) "Sa" else "",
-            if (isSunday) "Su" else ""
-        ).filter { it.isNotEmpty() }.joinToString(" ")
+    fun getRecurringDaysText(): String? {
+        if (isRecurring) {
+            return null
+        }
 
+        val days = StringBuilder()
+
+        when {
+            isMonday -> days.append("Mo ")
+            isTuesday -> days.append("Tu ")
+            isWednesday -> days.append("We ")
+            isThursday -> days.append("Th ")
+            isFriday -> days.append("Fr ")
+            isSaturday -> days.append("Sa ")
+            isSunday -> days.append("Su ")
+        }
+        return days.toString()
+    }
 }
