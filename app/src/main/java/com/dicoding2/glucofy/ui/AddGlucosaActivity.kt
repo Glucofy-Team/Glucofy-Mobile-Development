@@ -44,8 +44,8 @@ class AddGlucosaActivity : AppCompatActivity() {
             val datePickerDialog = DatePickerDialog(
                 this,
                 { view, year, monthOfYear, dayOfMonth ->
-                    val dat = (dayOfMonth.toString() + "-" + (monthOfYear + 1) + "-" + year)
-                    binding.tiDate.setText(dat)
+                    val formattedDate = String.format("%04d-%02d-%02d", year, monthOfYear + 1, dayOfMonth)
+                    binding.tiDate.setText(formattedDate)
                 },
                 year,
                 month,
@@ -63,7 +63,8 @@ class AddGlucosaActivity : AppCompatActivity() {
             val timePickerDialog = TimePickerDialog(
                 this,
                 { view, hourOfDay, minute ->
-                    binding.tiTime.setText("$hourOfDay:$minute")
+                    val formattedTime = String.format("%02d:%02d", hourOfDay, minute)
+                    binding.tiTime.setText(formattedTime)
                 },
                 hour,
                 minute,
@@ -77,7 +78,7 @@ class AddGlucosaActivity : AppCompatActivity() {
             val glucosa = binding.tiGlucosaLevel.text.toString()
             val condition = binding.tiCondition.text.toString()
             val notes = binding.tiNotes.text.toString()
-            val date = "${binding.tiDate.text.toString()} ${binding.tiTime.text.toString()}:00"
+            val date = "${binding.tiDate.text.toString()} ${binding.tiTime.text.toString()}"
 
 
             addGlucosaViewModel.postGlucosa(glucosa,condition,notes, date)

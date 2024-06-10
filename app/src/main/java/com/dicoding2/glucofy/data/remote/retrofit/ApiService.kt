@@ -1,6 +1,7 @@
 package com.dicoding2.glucofy.data.remote.retrofit
 
 import com.dicoding2.glucofy.data.remote.response.AddGlucosaResponse
+import com.dicoding2.glucofy.data.remote.response.GlucosaResponse
 import com.dicoding2.glucofy.data.remote.response.LoginResponse
 import com.dicoding2.glucofy.data.remote.response.RegisterResponse
 import retrofit2.Call
@@ -41,5 +42,7 @@ interface ApiService {
     ): Call<AddGlucosaResponse>
 
     @GET("tracker")
-    fun getGlucosa()
+    suspend fun getGlucosa(
+
+    ): GlucosaResponse
 }
