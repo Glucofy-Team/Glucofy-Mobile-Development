@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.dicoding2.glucofy.R
-import com.dicoding2.glucofy.databinding.FragmentGlucosaTodayBinding
 import com.dicoding2.glucofy.databinding.FragmentGlucosaWeeklyBinding
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.CandleData

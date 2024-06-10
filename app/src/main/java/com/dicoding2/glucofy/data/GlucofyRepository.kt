@@ -30,7 +30,9 @@ class GlucofyRepository (
             }
 
             glucofyRoomDatabase.glucoseAverageTodayDao().deleteAll()
-            glucofyRoomDatabase.glucoseAverageTodayDao().insertGlucose(glucoseToday)
+            if (glucoseToday != null) {
+                glucofyRoomDatabase.glucoseAverageTodayDao().insertGlucose(glucoseToday)
+            }
 
             val glucoseWeekly = response.averages?.weeklyThisMonth?.map {data ->
                 GlucoseAverageWeeklyEntity(
@@ -39,7 +41,9 @@ class GlucofyRepository (
             }
 
             glucofyRoomDatabase.glucoseAverageWeeklyDao().deleteAll()
-            glucofyRoomDatabase.glucoseAverageWeeklyDao().insertGlucose(glucoseWeekly)
+            if (glucoseWeekly != null) {
+                glucofyRoomDatabase.glucoseAverageWeeklyDao().insertGlucose(glucoseWeekly)
+            }
 
             val glucoseMonthly = response.averages?.monthly?.map {data ->
                 GlucoseAverageMonthlyEntity(
@@ -48,7 +52,9 @@ class GlucofyRepository (
             }
 
             glucofyRoomDatabase.glucoseAverageMonthlyDao().deleteAll()
-            glucofyRoomDatabase.glucoseAverageMonthlyDao().insertGlucose(glucoseMonthly)
+            if (glucoseMonthly != null) {
+                glucofyRoomDatabase.glucoseAverageMonthlyDao().insertGlucose(glucoseMonthly)
+            }
 
             emit(Result.Success(response))
         }catch (e: Exception){

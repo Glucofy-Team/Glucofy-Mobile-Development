@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.dicoding2.glucofy"
-        minSdk = 24
+        minSdk = 31
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -54,6 +54,8 @@ dependencies {
     implementation("androidx.compose.material3:material3-android:1.2.1")
     implementation("androidx.activity:activity:1.9.0")
     implementation("androidx.lifecycle:lifecycle-service:2.8.1")
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
+    implementation("androidx.fragment:fragment-ktx:1.5.6")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -72,4 +74,6 @@ dependencies {
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
     ksp("androidx.room:room-compiler:2.6.1")
+
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 }

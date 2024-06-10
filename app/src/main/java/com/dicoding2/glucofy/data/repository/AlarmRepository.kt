@@ -2,8 +2,8 @@ package com.dicoding2.glucofy.data.repository
 
 import android.app.Application
 import androidx.lifecycle.LiveData
-import com.dicoding2.glucofy.data.database.alarmdatabase.AlarmDao
-import com.unique.simplealarmclock.data.AlarmDatabase
+import com.dicoding2.glucofy.data.local.room.AlarmDao
+import com.dicoding2.glucofy.data.local.room.AlarmDatabase
 import com.dicoding2.glucofy.model.Alarm
 
 class AlarmRepository(application: Application?) {

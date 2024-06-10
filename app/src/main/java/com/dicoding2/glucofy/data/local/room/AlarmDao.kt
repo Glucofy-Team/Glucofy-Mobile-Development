@@ -1,4 +1,4 @@
-package com.dicoding2.glucofy.data.database.alarmdatabase
+package com.dicoding2.glucofy.data.local.room
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

@@ -38,7 +38,6 @@ class Alarm(
     var isVibrate: Boolean
 ) : Serializable {
 
-    @RequiresApi(Build.VERSION_CODES.S)
     fun schedule(context: Context) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 

@@ -27,5 +27,16 @@
         android:id="@+id/navigation_alarm"
         android:name="com.dicoding2.glucofy.ui.fragment.AlarmFragment"
         android:label="@string/title_alarm"
-        tools:layout="@layout/fragment_alarm" />
+        tools:layout="@layout/fragment_alarm">
+        <action
+            android:id="@+id/action_alarmsListFragment_to_createAlarmFragment"
+            android:name="com.dicoding2.glucofy.ui.fragment.CreateAlarmFragment"
+            android:label="fragment_create_alarm"
+            tools:layout="@layout/fragment_create_alarm" />
+    </fragment>
+    <fragment
+        android:id="@+id/createAlarmFragment"
+        android:name="com.dicoding2.glucofy.ui.fragment.CreateAlarmFragment"
+        android:label="fragment_create_alarm"
+        tools:layout="@layout/fragment_create_alarm" />
 </navigation>
