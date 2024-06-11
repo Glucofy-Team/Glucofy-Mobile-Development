@@ -5,6 +5,12 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="android:windowBackground">@color/white</item>
     </style>
-
+    <style name="Widget.Button.Toggle" parent="android:Widget">
+        <item name="android:background">@drawable/toggle_bg</item>
+    </style>
+    <style name="toggleButton" parent="Base.Theme.Glucofy">
+        <item name="android:buttonStyleToggle">@style/Widget.Button.Toggle</item>
+        <item name="android:textColor">@drawable/toggle_text_color</item>
+    </style>
     <style name="Theme.Glucofy" parent="Base.Theme.Glucofy" />
 </resources>

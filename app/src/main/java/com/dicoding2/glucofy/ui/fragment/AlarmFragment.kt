@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,7 +20,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class AlarmFragment : Fragment(), OnToggleAlarmListener {
     private lateinit var adapter: AlarmRecyclerViewAdapter
-    private lateinit var viewModel: AlarmViewModel
+    private val viewModel: AlarmViewModel by viewModels()
     private lateinit var binding: FragmentAlarmBinding
     private var alarmsRecyclerView: RecyclerView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
