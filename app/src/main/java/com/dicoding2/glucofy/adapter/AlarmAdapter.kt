@@ -7,8 +7,7 @@ import com.dicoding2.glucofy.databinding.ItemAlarmBinding
 import com.dicoding2.glucofy.helper.OnToggleAlarmListener
 import com.dicoding2.glucofy.model.Alarm
 
-class AlarmRecyclerViewAdapter(listener: OnToggleAlarmListener) :
-    RecyclerView.Adapter<AlarmViewHolder>() {
+class AlarmRecyclerViewAdapter(listener: OnToggleAlarmListener) : RecyclerView.Adapter<AlarmViewHolder>() {
     private var alarms: List<Alarm>
     private val listener: OnToggleAlarmListener
     private var itemAlarmBinding: ItemAlarmBinding? = null

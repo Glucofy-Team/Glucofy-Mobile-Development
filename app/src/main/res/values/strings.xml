@@ -49,4 +49,9 @@
     <string name="bundle_alarm_obj">BundleAlarmObject</string>
     <string name="alarm_title">My Alarm</string>
     <string name="dayNightTheme">DayNightTheme</string>
+
+    <string name="notification_title">Tester</string>
+    <string name="default_alarm_title">Tester</string>
+
+
 </resources>

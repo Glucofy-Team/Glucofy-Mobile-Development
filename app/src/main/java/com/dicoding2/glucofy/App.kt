@@ -41,5 +41,6 @@ class App : Application() {
 
     companion object {
         const val CHANNEL_ID: String = "ALARM_SERVICE_CHANNEL"
+        const val CHANNEL_NAME: String = "ALARM SERVICE"
     }
 }

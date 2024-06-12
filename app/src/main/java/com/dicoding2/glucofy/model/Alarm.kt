@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.dicoding2.glucofy.R
@@ -38,26 +37,42 @@ class Alarm(
     var isVibrate: Boolean
 ) : Serializable {
 
+    @JvmName("getStarted")
+    fun setStarted(started: Boolean) {
+        this.isStarted = started
+    }
+
     fun schedule(context: Context) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-
-        // Check if the permission is granted
-        if (!alarmManager.canScheduleExactAlarms()) {
-            val intent = Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM)
-            context.startActivity(intent)
-            return
-        }
-
         val intent = Intent(context, AlarmBroadcastReceiver::class.java).apply {
             val bundle = Bundle().apply {
                 putSerializable(context.getString(R.string.arg_alarm_obj), this@Alarm)
             }
             putExtra(context.getString(R.string.bundle_alarm_obj), bundle)
         }
-
         val alarmPendingIntent = PendingIntent.getBroadcast(
             context, alarmId, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
+
+        // Check if the permission is granted
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            // Call the method introduced in Android 12 or later
+            if (!alarmManager.canScheduleExactAlarms()) {
+                val intent = Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM)
+                context.startActivity(intent)
+                return
+            }
+        } else {
+            val alarmTimeMillis = System.currentTimeMillis()
+            alarmManager.setExact(
+                AlarmManager.RTC_WAKEUP,
+                alarmTimeMillis,
+                alarmPendingIntent
+            )
+        }
+
+
+
 
         val calendar = Calendar.getInstance().apply {
             timeInMillis = System.currentTimeMillis()

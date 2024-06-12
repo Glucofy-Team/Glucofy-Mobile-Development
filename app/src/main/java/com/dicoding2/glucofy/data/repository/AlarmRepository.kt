@@ -9,7 +9,7 @@ import com.dicoding2.glucofy.data.remote.retrofit.ApiService
 import com.dicoding2.glucofy.model.Alarm
 
 class AlarmRepository(
-    private val alarmDatabase: AlarmDatabase,
+    alarmDatabase: AlarmDatabase,
 ) {
     private val alarmDao: AlarmDao?
     private val alarmsLiveData: LiveData<List<Alarm>>
