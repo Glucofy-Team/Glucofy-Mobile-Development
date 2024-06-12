@@ -9,34 +9,33 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CompoundButton
-import android.widget.TimePicker.OnTimeChangedListener
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation.findNavController
 import com.dicoding2.glucofy.R
 import com.dicoding2.glucofy.databinding.FragmentCreateAlarmBinding
-import com.dicoding2.glucofy.helper.DayUtil
 import com.dicoding2.glucofy.helper.TimePickerUtil
 import com.dicoding2.glucofy.model.Alarm
 import com.dicoding2.glucofy.ui.viewmodel.CreateAlarmViewModel
+import com.dicoding2.glucofy.ui.viewmodel.ViewModelFactory
 import java.util.Random
 
 class CreateAlarmFragment : Fragment() {
+
     private var _binding: FragmentCreateAlarmBinding? = null
     private val binding get() = _binding!!
-    private var isVibrate: Boolean = false
-    private lateinit var tone: String
-    var alarm: Alarm? = null
-    private lateinit var ringtone: Ringtone
 
-    private val viewModel = ViewModelProvider(this)[CreateAlarmViewModel::class.java]
+    private lateinit var viewModel: CreateAlarmViewModel
+
+    private lateinit var ringtone: Ringtone
+    private var isVibrate = false
+    var alarm: Alarm? = null
+    private lateinit var tone: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (arguments != null) {
-            alarm = requireArguments().getSerializable(getString(R.string.arg_alarm_obj)) as Alarm?
-        }
+        viewModel = obtainViewModel(requireActivity())
     }
 
     override fun onCreateView(
@@ -92,6 +91,11 @@ class CreateAlarmFragment : Fragment() {
 //            )
 //        }
         return root
+    }
+
+    private fun obtainViewModel(activity: FragmentActivity): CreateAlarmViewModel {
+        val factory = ViewModelFactory.getInstance(requireContext())
+        return ViewModelProvider(activity, factory)[CreateAlarmViewModel::class.java]
     }
 
     private fun scheduleAlarm() {

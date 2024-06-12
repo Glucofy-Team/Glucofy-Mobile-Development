@@ -3,11 +3,11 @@ package com.dicoding2.glucofy.ui.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import com.dicoding2.glucofy.data.repository.AlarmRepository
 import com.dicoding2.glucofy.model.Alarm
 
-class AlarmViewModel(application: Application) : AndroidViewModel(application) {
-    private val alarmRepository: AlarmRepository = AlarmRepository(application)
+class AlarmViewModel(private val alarmRepository: AlarmRepository) : ViewModel() {
     private val alarmsLiveData: LiveData<List<Alarm>> = alarmRepository.getAlarmsLiveData()
 
     fun update(alarm: Alarm) {

@@ -40,9 +40,7 @@
         tools:layout="@layout/fragment_create_alarm">
         <action
             android:id="@+id/action_createAlarmFragment_to_alarmsListFragment"
-            android:name="com.dicoding2.glucofy.ui.fragment.AlarmsListFragment"
-            android:label="fragment_alarms_list"
-            tools:layout="@layout/fragment_create_alarm"/>
+            app:destination="@id/navigation_alarm"/>
     </fragment>
 
 </navigation>

@@ -1,4 +1,4 @@
-package com.unique.simplealarmclock.service
+package com.dicoding2.glucofy.data.service
 
 import android.app.Notification
 import android.app.PendingIntent

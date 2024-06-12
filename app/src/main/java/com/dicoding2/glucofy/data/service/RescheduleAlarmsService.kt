@@ -5,11 +5,13 @@ import android.content.Intent
 import android.os.IBinder
 import android.os.PowerManager
 import androidx.lifecycle.LifecycleService
+import com.dicoding2.glucofy.data.local.room.AlarmDatabase
+import com.dicoding2.glucofy.data.remote.retrofit.ApiService
 import com.dicoding2.glucofy.data.repository.AlarmRepository
 
 class RescheduleAlarmsService : LifecycleService() {
 
-    private val alarmRepository: AlarmRepository by lazy { AlarmRepository(application) }
+    private lateinit var alarmRepository: AlarmRepository
 
     private val wakeLock: PowerManager.WakeLock by lazy {
         (getSystemService(Context.POWER_SERVICE) as PowerManager).run {
@@ -17,6 +19,15 @@ class RescheduleAlarmsService : LifecycleService() {
                 acquire(10*60*1000L /*10 minutes*/)
             }
         }
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        alarmRepository = AlarmDatabase.getDatabase(application)?.let {
+            AlarmRepository.getInstance(
+                it
+            )
+        }!!
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -41,6 +52,7 @@ class RescheduleAlarmsService : LifecycleService() {
     }
 
     override fun onBind(intent: Intent): IBinder? {
+        super.onBind(intent)
         return null
     }
 }

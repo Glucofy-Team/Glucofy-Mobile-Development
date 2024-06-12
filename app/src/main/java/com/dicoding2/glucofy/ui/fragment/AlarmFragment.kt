@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,16 +18,22 @@ import com.dicoding2.glucofy.databinding.FragmentAlarmBinding
 import com.dicoding2.glucofy.helper.OnToggleAlarmListener
 import com.dicoding2.glucofy.model.Alarm
 import com.dicoding2.glucofy.ui.viewmodel.AlarmViewModel
+import com.dicoding2.glucofy.ui.viewmodel.ViewModelFactory
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class AlarmFragment : Fragment(), OnToggleAlarmListener {
     private lateinit var adapter: AlarmRecyclerViewAdapter
-    private val viewModel: AlarmViewModel by viewModels()
+    private lateinit var viewModel: AlarmViewModel
     private lateinit var binding: FragmentAlarmBinding
     private var alarmsRecyclerView: RecyclerView? = null
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         adapter = AlarmRecyclerViewAdapter(this)
+
+        viewModel = obtainViewModel(requireActivity())
+
         viewModel.getAlarmsLiveData().observe(this) { alarms ->
             if (alarms != null) {
                 adapter.setAlarms(alarms)
@@ -83,5 +91,10 @@ class AlarmFragment : Fragment(), OnToggleAlarmListener {
             R.id.action_alarmsListFragment_to_createAlarmFragment,
             args
         )
+    }
+
+    private fun obtainViewModel(activity: FragmentActivity): AlarmViewModel {
+        val factory = ViewModelFactory.getInstance(requireContext())
+        return ViewModelProvider(activity, factory)[AlarmViewModel::class.java]
     }
 }

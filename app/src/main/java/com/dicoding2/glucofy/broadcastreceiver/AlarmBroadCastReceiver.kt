@@ -8,7 +8,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.dicoding2.glucofy.R
 import com.dicoding2.glucofy.model.Alarm
-import com.unique.simplealarmclock.service.AlarmService
+import com.dicoding2.glucofy.data.service.AlarmService
 import com.dicoding2.glucofy.data.service.RescheduleAlarmsService
 import java.util.Calendar
 
