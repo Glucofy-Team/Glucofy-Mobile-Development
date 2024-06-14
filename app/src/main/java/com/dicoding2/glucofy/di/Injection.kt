@@ -1,9 +1,8 @@
 package com.dicoding2.glucofy.di
 
-import android.app.Application
 import android.content.Context
 import android.util.Log
-import com.dicoding2.glucofy.data.GlucofyRepository
+import com.dicoding2.glucofy.data.repository.GlucofyRepository
 import com.dicoding2.glucofy.data.UserPreference
 import com.dicoding2.glucofy.data.local.room.AlarmDatabase
 import com.dicoding2.glucofy.data.local.room.GlucofyRoomDatabase

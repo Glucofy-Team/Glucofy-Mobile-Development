@@ -1,10 +1,9 @@
 package com.dicoding2.glucofy.ui.viewmodel
 
-import android.app.Application
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.dicoding2.glucofy.data.GlucofyRepository
+import com.dicoding2.glucofy.data.repository.GlucofyRepository
 import com.dicoding2.glucofy.data.repository.AlarmRepository
 import com.dicoding2.glucofy.di.Injection
 
