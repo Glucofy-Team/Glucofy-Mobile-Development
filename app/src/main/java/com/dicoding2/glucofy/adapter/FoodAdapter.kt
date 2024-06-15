@@ -5,29 +5,22 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
 import com.dicoding2.glucofy.data.remote.response.FoodListItem
 import com.dicoding2.glucofy.databinding.ItemFoodBinding
-import com.dicoding2.glucofy.model.Food
 import com.dicoding2.glucofy.ui.FoodDetailActivity
-import kotlinx.coroutines.InternalCoroutinesApi
-import kotlinx.coroutines.NonDisposableHandle.parent
 
-class FoodAdapter : PagingDataAdapter<FoodListItem, FoodViewHolder>(DIFF_CALLBACK) {
+class FoodAdapter : PagingDataAdapter<FoodListItem, FoodAdapter.FoodViewHolder>(DIFF_CALLBACK) {
     override fun onBindViewHolder(holder: FoodViewHolder, position: Int) {
         val food = getItem(position)
-
-        if (food!= null){
+        if (food != null) {
             holder.bind(food)
-        }
-        holder.itemView.setOnClickListener {
-            val intent = Intent(holder.itemView.context, FoodDetailActivity::class.java)
-            if (food != null) {
+            holder.itemView.setOnClickListener {
+                val intent = Intent(holder.itemView.context, FoodDetailActivity::class.java)
                 intent.putExtra("id", food.id)
+                holder.itemView.context.startActivity(intent)
             }
-
-            holder.itemView.context.startActivity(intent)
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodViewHolder {
@@ -44,6 +37,16 @@ class FoodAdapter : PagingDataAdapter<FoodListItem, FoodViewHolder>(DIFF_CALLBAC
             override fun areContentsTheSame(oldItem: FoodListItem, newItem: FoodListItem): Boolean {
                 return oldItem == newItem
             }
+        }
+    }
+
+    class FoodViewHolder(val binding: ItemFoodBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(food: FoodListItem) {
+            binding.tvFoodName.text = food.foodName
+            binding.tvCalories.text = food.calories.toString()
+            binding.tvFats.text = food.fats.toString()
+            binding.tvProtein.text = food.proteins.toString()
+            binding.tvGlIndex.text = food.gIndex.toString()
         }
     }
 }
