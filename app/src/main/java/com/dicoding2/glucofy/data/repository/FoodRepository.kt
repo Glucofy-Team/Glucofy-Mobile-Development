@@ -14,14 +14,27 @@ class FoodRepository (
     private val foodDatabase : FoodDatabase,
     private val apiService: ApiService,
     ) {
-    fun getFoods() : LiveData<PagingData<FoodListItem>> {
+    fun getFoods(query: String? = null) : LiveData<PagingData<FoodListItem>> {
         return Pager(
             config = PagingConfig(
                 pageSize = 5
             ),
             pagingSourceFactory = {
-                FoodPagingSource(apiService)
+                FoodPagingSource(apiService, query)
             }
         ).liveData
+    }
+
+    companion object {
+        private const val TAG = "FoodRepository"
+        @Volatile
+        private var instance: FoodRepository? = null
+        fun getInstance(
+            foodDatabase : FoodDatabase,
+            apiService: ApiService,
+        ): FoodRepository =
+            instance ?: synchronized(this) {
+                instance ?: FoodRepository(foodDatabase, apiService)
+            }.also { instance = it }
     }
 }

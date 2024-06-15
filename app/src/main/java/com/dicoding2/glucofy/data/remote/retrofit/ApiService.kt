@@ -50,6 +50,7 @@ interface ApiService {
 
     @GET("food")
     suspend fun getFood(
+        @Query("name") name: String,
         @Query("page") page: Int = 1,
         @Query("size") size: Int = 20
     ): FoodResponse

@@ -6,10 +6,10 @@ import com.dicoding2.glucofy.databinding.ItemFoodBinding
 
 class FoodViewHolder (val binding: ItemFoodBinding) : RecyclerView.ViewHolder(binding.root) {
     fun bind(food: FoodListItem) {
-        binding.tvFoodName.text = food.name
-        binding.tvCalories.text = food.caloriesKcal.toString()
-        binding.tvFats.text = food.fatsG.toString()
-        binding.tvProtein.text = food.proteinsG.toString()
-        binding.tvGlIndex.text = food.carbohydratesG.toString()
+        binding.tvFoodName.text = food.foodName
+        binding.tvCalories.text = food.calories.toString()
+        binding.tvFats.text = food.fats.toString()
+        binding.tvProtein.text = food.proteins.toString()
+        binding.tvGlIndex.text = food.gIndex.toString()
     }
 }

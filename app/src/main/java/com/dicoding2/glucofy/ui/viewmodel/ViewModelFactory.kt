@@ -5,11 +5,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding2.glucofy.data.repository.GlucofyRepository
 import com.dicoding2.glucofy.data.repository.AlarmRepository
+import com.dicoding2.glucofy.data.repository.FoodRepository
 import com.dicoding2.glucofy.di.Injection
 
 class ViewModelFactory private constructor(
     private val glucofyRepository: GlucofyRepository,
     private val alarmRepository: AlarmRepository,
+    private val foodRepository: FoodRepository,
 ) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
@@ -24,6 +26,9 @@ class ViewModelFactory private constructor(
             modelClass.isAssignableFrom(AlarmViewModel::class.java) -> {
                 return AlarmViewModel(alarmRepository) as T
             }
+            modelClass.isAssignableFrom(InputViewModel::class.java) -> {
+                return InputViewModel(foodRepository) as T
+            }
             else -> {throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")}
         }
     }
@@ -36,7 +41,8 @@ class ViewModelFactory private constructor(
             instance ?: synchronized(this) {
                 instance ?: ViewModelFactory(
                     Injection.provideGlucofyRepository(context),
-                    Injection.provideAlarmRepository(context)
+                    Injection.provideAlarmRepository(context),
+                    Injection.provideFoodRepository(context)
                 ).also { instance = it }
             }
     }

@@ -3,35 +3,49 @@ package com.dicoding2.glucofy.data.remote.response
 import com.google.gson.annotations.SerializedName
 
 data class FoodResponse(
-	@field:SerializedName("translated name glycemic data")
-	val foodListItem: List<FoodListItem>
+
+	@field:SerializedName("foodListItem")
+	val foodListItem: List<FoodListItem>,
+
+	@field:SerializedName("message")
+	val message: String,
+
+	@field:SerializedName("status")
+	val status: Int
 )
+
 data class FoodListItem(
 
-	@field:SerializedName("glycemic_load")
-	val glycemicLoad: Any,
+	@field:SerializedName("gIndex")
+	val gIndex: Int,
 
-	@field:SerializedName("calories (kcal)")
-	val caloriesKcal: Int,
+	@field:SerializedName("gLoad")
+	val gLoad: Any,
 
-	@field:SerializedName("proteins (g)")
-	val proteinsG: Int,
+	@field:SerializedName("foodName")
+	val foodName: String,
 
-	@field:SerializedName("web-scraper-order")
-	val webScraperOrder: String,
+	@field:SerializedName("fats")
+	val fats: Any,
 
-	@field:SerializedName("glycemic_index")
-	val glycemicIndex: Int,
+	@field:SerializedName("carbs")
+	val carbs: Any,
 
-	@field:SerializedName("name")
-	val name: String,
+	@field:SerializedName("proteins")
+	val proteins: Any,
 
-	@field:SerializedName("carbohydrates (g)")
-	val carbohydratesG: Int,
+	@field:SerializedName("id")
+	val id: String,
+
+	@field:SerializedName("giCategory")
+	val giCategory: String,
+
+	@field:SerializedName("glCategory")
+	val glCategory: String,
+
+	@field:SerializedName("calories")
+	val calories: Int,
 
 	@field:SerializedName("category")
-	val category: String,
-
-	@field:SerializedName("fats (g)")
-	val fatsG: Any
+	val category: String
 )
