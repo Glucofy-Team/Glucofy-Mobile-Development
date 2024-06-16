@@ -12,7 +12,6 @@ import androidx.lifecycle.Observer
 import com.dicoding2.glucofy.R
 import com.dicoding2.glucofy.data.RegisterPreference
 import com.dicoding2.glucofy.databinding.FragmentRegisterStep2Binding
-import com.dicoding2.glucofy.helper.toast
 import com.dicoding2.glucofy.ui.RegisterSuccessActivity
 import com.dicoding2.glucofy.ui.viewmodel.RegisterViewModel
 
@@ -20,7 +19,7 @@ import com.dicoding2.glucofy.ui.viewmodel.RegisterViewModel
 class RegisterFragmentStep2 : Fragment() {
     private var _binding: FragmentRegisterStep2Binding? = null
     private val binding get() = _binding!!
-    private val items: Array<String> = arrayOf("L","P")
+    private val items: Array<String> = arrayOf(getString(R.string.man), getString(R.string.woman))
     private var gender: String = ""
     private lateinit var registerViewModel: RegisterViewModel
 
@@ -66,14 +65,19 @@ class RegisterFragmentStep2 : Fragment() {
     fun sendRegister(gender: String, weight: String, height: String, age: String){
         val registerPreference = RegisterPreference(requireContext())
         val data = registerPreference.getUserRegister()
-
+        var genderSend = "";
+        if(gender === getString(R.string.man)){
+            genderSend = "L"
+        }else if(gender === getString(R.string.woman)){
+            genderSend = "P"
+        }
         registerViewModel.postRegister(
             data.first_name ?: "",
             data.last_name ?: "",
             data.phone_number ?: "",
             data.email ?: "",
             data.password ?: "",
-            gender,
+            genderSend,
             weight,
             height,
             age)

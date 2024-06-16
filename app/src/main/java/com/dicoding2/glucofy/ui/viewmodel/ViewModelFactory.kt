@@ -13,6 +13,14 @@ class ViewModelFactory private constructor(private val glucofyRepository: Glucof
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if(modelClass.isAssignableFrom(GlucosaLogViewModel::class.java)){
             return GlucosaLogViewModel(glucofyRepository) as T
+        }else if(modelClass.isAssignableFrom(GlucosaTodayViewModel::class.java)){
+            return GlucosaTodayViewModel(glucofyRepository) as T
+        }else if(modelClass.isAssignableFrom(GlucosaWeeklyViewModel::class.java)){
+            return GlucosaWeeklyViewModel(glucofyRepository) as T
+        }else if(modelClass.isAssignableFrom(GlucosaMonthlyViewModel::class.java)){
+            return GlucosaMonthlyViewModel(glucofyRepository) as T
+        }else if(modelClass.isAssignableFrom(ProfileViewModel::class.java)){
+            return ProfileViewModel(glucofyRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
     }

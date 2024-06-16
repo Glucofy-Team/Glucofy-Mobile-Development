@@ -43,4 +43,6 @@
 
     <!--Activity Register Success-->
     <string name="activty_register_success_btn_login"><![CDATA[< Balik ke halaman login]]></string>
+    <string name="woman">Perempuan</string>
+    <string name="man">Laki- laki</string>
 </resources>

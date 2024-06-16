@@ -1,65 +1,111 @@
 package com.dicoding2.glucofy.ui.fragment
 
 import android.graphics.Color
-import android.graphics.Paint
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.dicoding2.glucofy.R
-import com.dicoding2.glucofy.databinding.FragmentGlucosaTodayBinding
+import androidx.annotation.RequiresApi
+import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.ViewModelProvider
+import com.dicoding2.glucofy.data.local.entity.GlucoseAverageWeeklyEntity
 import com.dicoding2.glucofy.databinding.FragmentGlucosaWeeklyBinding
+import com.dicoding2.glucofy.ui.viewmodel.GlucosaWeeklyViewModel
+import com.dicoding2.glucofy.ui.viewmodel.ViewModelFactory
 import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.data.CandleData
-import com.github.mikephil.charting.data.CandleDataSet
-import com.github.mikephil.charting.data.CandleEntry
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
-
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 class GlucosaWeeklyFragment : Fragment() {
     private var _binding: FragmentGlucosaWeeklyBinding? = null
     private val binding get() = _binding!!
+    private lateinit var glucosaWeeklyViewModel: GlucosaWeeklyViewModel
+
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentGlucosaWeeklyBinding.inflate(inflater, container, false)
-        val candleStickChart = binding.candleStickChart
+        glucosaWeeklyViewModel = obtainViewModel(requireActivity())
 
-        val entries = ArrayList<CandleEntry>()
-        entries.add(CandleEntry(0f, 200f, 50f, 85f, 88f))
-        entries.add(CandleEntry(1f, 200f, 50f, 92f, 94f))
-        entries.add(CandleEntry(2f, 200f, 50f, 100f, 103f))
-        entries.add(CandleEntry(3f, 200f, 50f, 110f, 113f))
-        entries.add(CandleEntry(4f, 200f, 50f, 98f, 101f))
+        glucosaWeeklyViewModel.getAllDataGlucose().observe(viewLifecycleOwner) { data ->
+            updateChartData(data)
+        }
 
-        val candleDataSet = CandleDataSet(entries, "Blood Sugar Levels")
-        candleDataSet.color = Color.rgb(220, 54, 68)
-        candleDataSet.shadowColor = Color.DKGRAY
-        candleDataSet.shadowWidth = 0.7f
-        candleDataSet.decreasingColor = R.color.red_500
-        candleDataSet.decreasingPaintStyle = Paint.Style.FILL
-        candleDataSet.increasingColor = Color.rgb(220, 54, 68)
-        candleDataSet.increasingPaintStyle = Paint.Style.FILL
-        candleDataSet.neutralColor = R.color.red_500
-        candleDataSet.valueTextColor = R.color.red_500
-        candleDataSet.valueTextSize = 10f
-
-        val candleData = CandleData(candleDataSet)
-        candleStickChart.data = candleData
-
-        val xAxis = candleStickChart.xAxis
-        xAxis.valueFormatter = IndexAxisValueFormatter(arrayOf("27-2 Mei", "3-9 Juni", "10-16 Juni", "17-23 Juni", "24-30 Juni"))
-        xAxis.position = XAxis.XAxisPosition.BOTTOM
-        xAxis.granularity = 1f
-        xAxis.setDrawGridLines(false)
-
-        candleStickChart.axisLeft.axisMinimum = 0f
-        candleStickChart.axisRight.isEnabled = false
-        candleStickChart.description.isEnabled = false
-        candleStickChart.invalidate()
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun updateChartData(data: List<GlucoseAverageWeeklyEntity>) {
+        val entries = ArrayList<BarEntry>()
+        val labels = ArrayList<String>()
+        val today = LocalDate.now()
+
+        data.forEachIndexed { index, glucoseData ->
+            val dateRange = glucoseData.date?.split(" - ")
+
+            entries.add(BarEntry(index.toFloat(), glucoseData.glucose?.toFloat() ?: 0f))
+
+            if (dateRange?.size == 2) {
+                val dateStart = dateRange[0].split(" ")
+                val dateEnd = dateRange[1].split(" ")
+
+                labels.add("${dateStart[0]} - ${dateEnd[0]} ${dateEnd[1]}")
+
+                val startDate = LocalDate.parse(dateRange[0], DateTimeFormatter.ofPattern("d MMMM yyyy", Locale("id", "ID")))
+                val endDate = LocalDate.parse(dateRange[1], DateTimeFormatter.ofPattern("d MMMM yyyy", Locale("id", "ID")))
+
+                if (today in startDate..endDate) {
+                    binding.tvAverageGlucose.text = glucoseData.glucose.toString()
+                }
+            }
+        }
+
+        while (entries.size < 4) {
+            val index = entries.size
+            entries.add(BarEntry(index.toFloat(), 0f))
+            labels.add("")
+        }
+
+        val barDataSet = BarDataSet(entries, "Glucose Levels")
+        barDataSet.color = Color.parseColor("#DC3644")
+
+        val barData = BarData(barDataSet)
+        binding.barChart.data = barData
+
+        binding.barChart.description.isEnabled = false
+        binding.barChart.axisLeft.axisMinimum = 0f
+
+        binding.barChart.axisRight.isEnabled = false
+
+        val xAxis = binding.barChart.xAxis
+        xAxis.granularity = 1f
+        xAxis.position = XAxis.XAxisPosition.BOTTOM
+        xAxis.setDrawGridLines(false)
+        xAxis.valueFormatter = IndexAxisValueFormatter(labels)
+
+        binding.barChart.invalidate()
+    }
+
+    private fun obtainViewModel(activity: FragmentActivity): GlucosaWeeklyViewModel {
+        val factory = ViewModelFactory.getInstance(requireContext())
+        return ViewModelProvider(activity, factory)[GlucosaWeeklyViewModel::class.java]
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onResume() {
+        super.onResume()
+        glucosaWeeklyViewModel.getAllDataGlucose().observe(viewLifecycleOwner) { data ->
+            updateChartData(data)
+        }
+    }
 }
