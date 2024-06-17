@@ -23,7 +23,7 @@ class FoodFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val foodViewModel =
-            ViewModelProvider(this).get(FoodViewModel::class.java)
+            ViewModelProvider(this)[FoodViewModel::class.java]
 
         _binding = FragmentFoodBinding.inflate(inflater, container, false)
         val root: View = binding.root

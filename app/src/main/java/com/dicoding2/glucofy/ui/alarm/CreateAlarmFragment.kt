@@ -17,7 +17,7 @@ import com.dicoding2.glucofy.R
 import com.dicoding2.glucofy.databinding.FragmentCreateAlarmBinding
 import com.dicoding2.glucofy.helper.TimePickerUtil
 import com.dicoding2.glucofy.model.Alarm
-import com.dicoding2.glucofy.ui.viewmodel.ViewModelFactory
+import com.dicoding2.glucofy.ui.factory.ViewModelFactory
 import java.util.Random
 
 class CreateAlarmFragment : Fragment() {

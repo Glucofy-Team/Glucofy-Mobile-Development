@@ -14,7 +14,7 @@ import com.dicoding2.glucofy.data.remote.retrofit.ApiService
 
 class FoodRepository (
     private val foodDatabase : FoodDatabase,
-    private val apiService: ApiService,
+    val apiService: ApiService,
     ) {
     fun getFoods(query: String? = null) : LiveData<PagingData<FoodListItem>> {
         Log.d("Food Repository", "Fetching Food list with query")

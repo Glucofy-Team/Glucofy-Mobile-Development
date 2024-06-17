@@ -5,6 +5,7 @@ import com.dicoding2.glucofy.data.remote.response.DetailFoodResponse
 import com.dicoding2.glucofy.data.remote.response.FoodResponse
 import com.dicoding2.glucofy.data.remote.response.GlucosaResponse
 import com.dicoding2.glucofy.data.remote.response.LoginResponse
+import com.dicoding2.glucofy.data.remote.response.NewFoodResponse
 import com.dicoding2.glucofy.data.remote.response.RegisterResponse
 import com.dicoding2.glucofy.data.remote.response.UserProfilePostResponse
 import com.dicoding2.glucofy.data.remote.response.UserProfileResponse
@@ -14,9 +15,9 @@ import retrofit2.http.FieldMap
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Path
 import retrofit2.http.Query
-import retrofit2.http.PUT
 
 interface ApiService {
     @GET("/user/profile")
@@ -65,7 +66,7 @@ interface ApiService {
 
     ): GlucosaResponse
 
-    @GET("food")
+    @GET("dataset")
     suspend fun getFood(
         @Query("name") name: String,
         @Query("page") page: Int = 1,
@@ -76,5 +77,16 @@ interface ApiService {
     suspend fun getFoodDetail(
         @Path("id") foodID: String
     ): DetailFoodResponse
+
+    @FormUrlEncoded
+    @POST("predict_new_data")
+    fun postNewFood(
+        @Field("foodName") name: String,
+        @Field("category") category: String,
+        @Field("calories") calories : Int,
+        @Field("proteins") proteins : Int,
+        @Field("carbs") carbs : Int,
+        @Field("fats") fats : Int,
+    ): Call<NewFoodResponse>
 
 }

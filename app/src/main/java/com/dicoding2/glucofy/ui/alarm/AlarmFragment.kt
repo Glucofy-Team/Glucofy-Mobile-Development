@@ -15,7 +15,7 @@ import com.dicoding2.glucofy.adapter.AlarmRecyclerViewAdapter
 import com.dicoding2.glucofy.databinding.FragmentAlarmBinding
 import com.dicoding2.glucofy.helper.OnToggleAlarmListener
 import com.dicoding2.glucofy.model.Alarm
-import com.dicoding2.glucofy.ui.viewmodel.ViewModelFactory
+import com.dicoding2.glucofy.ui.factory.ViewModelFactory
 
 class AlarmFragment : Fragment(), OnToggleAlarmListener {
     private lateinit var adapter: AlarmRecyclerViewAdapter

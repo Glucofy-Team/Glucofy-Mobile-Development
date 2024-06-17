@@ -21,6 +21,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Glucofy">
         <activity
+            android:name=".ui.food.InputNewFoodActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.food.FoodDetailActivity"
             android:exported="false" />
         <activity

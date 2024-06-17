@@ -36,4 +36,5 @@ class ExploreFoodViewModel(private val foodRepository: FoodRepository) : ViewMod
             }
         }
     }
+
 }

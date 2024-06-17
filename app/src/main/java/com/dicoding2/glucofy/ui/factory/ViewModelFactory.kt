@@ -1,16 +1,22 @@
-package com.dicoding2.glucofy.ui.viewmodel
+package com.dicoding2.glucofy.ui.factory
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.dicoding2.glucofy.data.repository.GlucofyRepository
 import com.dicoding2.glucofy.data.repository.AlarmRepository
 import com.dicoding2.glucofy.data.repository.FoodRepository
+import com.dicoding2.glucofy.data.repository.GlucofyRepository
 import com.dicoding2.glucofy.di.Injection
 import com.dicoding2.glucofy.ui.alarm.AlarmViewModel
 import com.dicoding2.glucofy.ui.alarm.CreateAlarmViewModel
 import com.dicoding2.glucofy.ui.food.ExploreFoodViewModel
 import com.dicoding2.glucofy.ui.food.FoodDetailViewModel
+import com.dicoding2.glucofy.ui.food.InputNewFoodViewModel
+import com.dicoding2.glucofy.ui.viewmodel.GlucosaLogViewModel
+import com.dicoding2.glucofy.ui.viewmodel.GlucosaMonthlyViewModel
+import com.dicoding2.glucofy.ui.viewmodel.GlucosaTodayViewModel
+import com.dicoding2.glucofy.ui.viewmodel.GlucosaWeeklyViewModel
+import com.dicoding2.glucofy.ui.viewmodel.ProfileViewModel
 
 class ViewModelFactory private constructor(
     private val glucofyRepository: GlucofyRepository,
@@ -48,6 +54,9 @@ class ViewModelFactory private constructor(
            modelClass.isAssignableFrom(FoodDetailViewModel::class.java) -> {
              return FoodDetailViewModel(foodRepository) as T
           }
+           modelClass.isAssignableFrom(InputNewFoodViewModel::class.java) -> {
+               return InputNewFoodViewModel(foodRepository) as T
+           }
           else -> {throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")}
        }
         

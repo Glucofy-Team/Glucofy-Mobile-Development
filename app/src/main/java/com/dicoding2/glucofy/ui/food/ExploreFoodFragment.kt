@@ -5,28 +5,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding2.glucofy.adapter.FoodAdapter
-import com.dicoding2.glucofy.databinding.FragmentInputBinding
-import com.dicoding2.glucofy.ui.viewmodel.ViewModelFactory
+import com.dicoding2.glucofy.databinding.FragmentExploreFoodBinding
+import com.dicoding2.glucofy.ui.factory.ViewModelFactory
 import kotlinx.coroutines.launch
 
 class ExploreFoodFragment : Fragment() {
 
     private lateinit var adapter: FoodAdapter
     private lateinit var viewModel: ExploreFoodViewModel
-    private var _binding: FragmentInputBinding? = null
+    private var _binding: FragmentExploreFoodBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentInputBinding.inflate(inflater, container, false)
+        _binding = FragmentExploreFoodBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         viewModel = obtainViewModel(requireActivity())
@@ -52,6 +53,10 @@ class ExploreFoodFragment : Fragment() {
     private fun setupSearchView() {
         with(binding) {
             searchView.setupWithSearchBar(searchBar)
+            searchView.editText.addTextChangedListener {editable ->
+                val query = editable.toString()
+                viewModel.findFoods(query)
+            }
             searchView.editText.setOnEditorActionListener { _, _, _ ->
                 binding.searchBar.setText(binding.searchView.text)
                 searchView.hide()

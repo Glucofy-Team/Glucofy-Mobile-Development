@@ -1,9 +1,7 @@
 package com.dicoding2.glucofy.ui.fragment
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,11 +11,10 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding2.glucofy.R
 import com.dicoding2.glucofy.adapter.SectionPagerGlucosaAdapter
-import com.dicoding2.glucofy.data.Result
 import com.dicoding2.glucofy.databinding.FragmentGlucosaLogBinding
 import com.dicoding2.glucofy.ui.AddGlucosaActivity
 import com.dicoding2.glucofy.ui.viewmodel.GlucosaLogViewModel
-import com.dicoding2.glucofy.ui.viewmodel.ViewModelFactory
+import com.dicoding2.glucofy.ui.factory.ViewModelFactory
 import com.google.android.material.tabs.TabLayoutMediator
 
 class GlucosaLogFragment : Fragment() {
