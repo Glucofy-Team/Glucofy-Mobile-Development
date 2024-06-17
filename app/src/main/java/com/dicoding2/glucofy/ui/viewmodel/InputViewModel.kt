@@ -1,5 +1,6 @@
 package com.dicoding2.glucofy.ui.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -27,9 +28,11 @@ class InputViewModel(private val foodRepository: FoodRepository) : ViewModel() {
                 val newResult = foodRepository.getFoods(name).cachedIn(viewModelScope)
                 newResult.observeForever { pagingData ->
                     _searchResults.value = pagingData
+                    Log.d("InputViewModel", "Data received: $pagingData")
                 }
             } catch (e: Exception) {
                 _errorMessage.value = e.message
+                Log.e("InputViewModel", "Error: ${e.message}")
             }
         }
     }

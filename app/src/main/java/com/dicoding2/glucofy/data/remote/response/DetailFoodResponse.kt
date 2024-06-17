@@ -2,10 +2,10 @@ package com.dicoding2.glucofy.data.remote.response
 
 import com.google.gson.annotations.SerializedName
 
-data class FoodResponse(
+data class DetailFoodResponse(
 
 	@field:SerializedName("data")
-	val foodListItem: List<FoodListItem>,
+	val detailFood: DetailFood,
 
 	@field:SerializedName("message")
 	val message: String,
@@ -14,22 +14,25 @@ data class FoodResponse(
 	val status: Int
 )
 
-data class FoodListItem(
+data class DetailFood(
 
 	@field:SerializedName("gIndex")
 	val gIndex: Int,
 
-	@field:SerializedName("gLoad")
-	val gLoad: Any,
-
 	@field:SerializedName("foodName")
 	val foodName: String,
 
-	@field:SerializedName("fats")
-	val fats: Any,
+	@field:SerializedName("gLoad")
+	val gLoad: Int,
+
+	@field:SerializedName("datetime")
+	val datetime: Datetime,
 
 	@field:SerializedName("carbs")
-	val carbs: Any,
+	val carbs: Int,
+
+	@field:SerializedName("fats")
+	val fats: Any,
 
 	@field:SerializedName("proteins")
 	val proteins: Any,
@@ -48,4 +51,13 @@ data class FoodListItem(
 
 	@field:SerializedName("category")
 	val category: String
+)
+
+data class Datetime(
+
+	@field:SerializedName("_nanoseconds")
+	val nanoseconds: Int,
+
+	@field:SerializedName("_seconds")
+	val seconds: Int
 )

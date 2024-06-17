@@ -29,6 +29,9 @@ class ViewModelFactory private constructor(
             modelClass.isAssignableFrom(InputViewModel::class.java) -> {
                 return InputViewModel(foodRepository) as T
             }
+            modelClass.isAssignableFrom(FoodDetailViewModel::class.java) -> {
+                return FoodDetailViewModel(foodRepository) as T
+            }
             else -> {throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")}
         }
     }

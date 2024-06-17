@@ -59,7 +59,7 @@ class InputFragment : Fragment() {
                 searchView.hide()
                 val query = searchView.text.toString()
                 viewModel.findFoods(query)
-                true // Return true to indicate that the action has been consumed
+                true
             }
         }
     }
@@ -73,7 +73,7 @@ class InputFragment : Fragment() {
 
         viewModel.searchResults.observe(viewLifecycleOwner) { pagingData ->
             lifecycleScope.launch {
-                pagingData?.let {
+                pagingData?. let {
                     adapter.submitData(it)
                 }
             }

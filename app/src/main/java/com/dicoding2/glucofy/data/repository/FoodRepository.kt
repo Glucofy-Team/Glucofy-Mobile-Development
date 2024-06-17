@@ -1,5 +1,6 @@
 package com.dicoding2.glucofy.data.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -7,6 +8,7 @@ import androidx.paging.PagingData
 import androidx.paging.liveData
 import com.dicoding2.glucofy.data.local.room.FoodDatabase
 import com.dicoding2.glucofy.data.pagingsource.FoodPagingSource
+import com.dicoding2.glucofy.data.remote.response.DetailFoodResponse
 import com.dicoding2.glucofy.data.remote.response.FoodListItem
 import com.dicoding2.glucofy.data.remote.retrofit.ApiService
 
@@ -15,6 +17,7 @@ class FoodRepository (
     private val apiService: ApiService,
     ) {
     fun getFoods(query: String? = null) : LiveData<PagingData<FoodListItem>> {
+        Log.d("Food Repository", "Fetching Food list with query")
         return Pager(
             config = PagingConfig(
                 pageSize = 5
@@ -23,6 +26,10 @@ class FoodRepository (
                 FoodPagingSource(apiService, query)
             }
         ).liveData
+    }
+
+    suspend fun getFoodDetail(foodId: String) : DetailFoodResponse{
+        return apiService.getFoodDetail(foodId)
     }
 
     companion object {
