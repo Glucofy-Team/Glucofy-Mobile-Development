@@ -1,4 +1,4 @@
-package com.dicoding2.glucofy.ui
+package com.dicoding2.glucofy.ui.alarm
 
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
@@ -12,7 +12,6 @@ import com.dicoding2.glucofy.R
 import com.dicoding2.glucofy.data.service.AlarmService
 import com.dicoding2.glucofy.databinding.ActivityRingBinding
 import com.dicoding2.glucofy.model.Alarm
-import com.dicoding2.glucofy.ui.viewmodel.AlarmViewModel
 import com.dicoding2.glucofy.ui.viewmodel.ViewModelFactory
 import java.util.Calendar
 

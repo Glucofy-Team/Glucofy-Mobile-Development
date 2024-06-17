@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.RegisterActivity"
+    tools:context=".ui.auth.RegisterActivity"
     android:paddingEnd="10dp"
     android:paddingStart="10dp"
     android:orientation="vertical">

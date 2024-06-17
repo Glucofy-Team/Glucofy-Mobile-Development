@@ -3,8 +3,8 @@ package com.dicoding2.glucofy.adapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.dicoding2.glucofy.ui.fragment.RegisterFragmentStep1
-import com.dicoding2.glucofy.ui.fragment.RegisterFragmentStep2
+import com.dicoding2.glucofy.ui.auth.RegisterFragmentStep1
+import com.dicoding2.glucofy.ui.auth.RegisterFragmentStep2
 
 class SectionPagerAdapter(activity: AppCompatActivity) : FragmentStateAdapter(activity) {
     override fun getItemCount(): Int {

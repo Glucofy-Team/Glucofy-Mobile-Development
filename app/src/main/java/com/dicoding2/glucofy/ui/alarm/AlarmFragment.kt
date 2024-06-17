@@ -1,4 +1,4 @@
-package com.dicoding2.glucofy.ui.fragment
+package com.dicoding2.glucofy.ui.alarm
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,8 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,9 +15,7 @@ import com.dicoding2.glucofy.adapter.AlarmRecyclerViewAdapter
 import com.dicoding2.glucofy.databinding.FragmentAlarmBinding
 import com.dicoding2.glucofy.helper.OnToggleAlarmListener
 import com.dicoding2.glucofy.model.Alarm
-import com.dicoding2.glucofy.ui.viewmodel.AlarmViewModel
 import com.dicoding2.glucofy.ui.viewmodel.ViewModelFactory
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class AlarmFragment : Fragment(), OnToggleAlarmListener {
     private lateinit var adapter: AlarmRecyclerViewAdapter

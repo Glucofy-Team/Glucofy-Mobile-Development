@@ -1,4 +1,4 @@
-package com.dicoding2.glucofy.ui.viewmodel
+package com.dicoding2.glucofy.ui.alarm
 
 import com.dicoding2.glucofy.data.repository.AlarmRepository
 import com.dicoding2.glucofy.model.Alarm

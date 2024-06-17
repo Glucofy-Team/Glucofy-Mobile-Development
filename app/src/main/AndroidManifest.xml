@@ -21,10 +21,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Glucofy">
         <activity
-            android:name=".ui.FoodDetailActivity"
+            android:name=".ui.food.FoodDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.RingActivity"
+            android:name=".ui.alarm.RingActivity"
             android:exported="false" />
         <activity
             android:name=".ui.AddGlucosaActivity"
@@ -42,7 +42,7 @@
             android:name=".ui.RegisterSuccessActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.RegisterActivity"
+            android:name=".ui.auth.RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".ui.MainActivity"

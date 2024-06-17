@@ -1,19 +1,11 @@
-package com.dicoding2.glucofy.ui
+package com.dicoding2.glucofy.ui.food
 
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.dicoding2.glucofy.R
 import com.dicoding2.glucofy.data.remote.response.DetailFood
-import com.dicoding2.glucofy.data.remote.response.FoodResponse
 import com.dicoding2.glucofy.databinding.ActivityFoodDetailBinding
-import com.dicoding2.glucofy.ui.viewmodel.FoodDetailViewModel
 import com.dicoding2.glucofy.ui.viewmodel.ViewModelFactory
 
 class FoodDetailActivity : AppCompatActivity() {

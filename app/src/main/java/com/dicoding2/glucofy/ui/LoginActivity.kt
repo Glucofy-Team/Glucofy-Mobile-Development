@@ -3,13 +3,13 @@ package com.dicoding2.glucofy.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.dicoding2.glucofy.R
 import com.dicoding2.glucofy.data.UserPreference
 import com.dicoding2.glucofy.data.local.entity.UserEntity
 import com.dicoding2.glucofy.data.remote.response.LoginResponse
 import com.dicoding2.glucofy.databinding.ActivityLoginBinding
 import com.dicoding2.glucofy.helper.toast
-import com.dicoding2.glucofy.ui.viewmodel.LoginViewModel
+import com.dicoding2.glucofy.ui.auth.LoginViewModel
+import com.dicoding2.glucofy.ui.auth.RegisterActivity
 
 class LoginActivity : AppCompatActivity() {
 

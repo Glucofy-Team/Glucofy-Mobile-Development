@@ -1,4 +1,4 @@
-package com.dicoding2.glucofy.ui.viewmodel
+package com.dicoding2.glucofy.ui.auth
 
 import android.content.Context
 import android.util.Log
@@ -14,7 +14,6 @@ import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.http.Field
 
 class RegisterViewModel(private val context: Context, private val apiService: ApiService): ViewModel() {
     private val _register = MutableLiveData<RegisterResponse>()

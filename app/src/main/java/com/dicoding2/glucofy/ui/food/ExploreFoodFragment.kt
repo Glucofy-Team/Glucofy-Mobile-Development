@@ -1,4 +1,4 @@
-package com.dicoding2.glucofy.ui.fragment
+package com.dicoding2.glucofy.ui.food
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,15 +12,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding2.glucofy.adapter.FoodAdapter
 import com.dicoding2.glucofy.databinding.FragmentInputBinding
-import com.dicoding2.glucofy.ui.viewmodel.InputViewModel
 import com.dicoding2.glucofy.ui.viewmodel.ViewModelFactory
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class InputFragment : Fragment() {
+class ExploreFoodFragment : Fragment() {
 
     private lateinit var adapter: FoodAdapter
-    private lateinit var viewModel: InputViewModel
+    private lateinit var viewModel: ExploreFoodViewModel
     private var _binding: FragmentInputBinding? = null
     private val binding get() = _binding!!
 
@@ -40,9 +38,9 @@ class InputFragment : Fragment() {
         return root
     }
 
-    private fun obtainViewModel(activity: FragmentActivity): InputViewModel {
+    private fun obtainViewModel(activity: FragmentActivity): ExploreFoodViewModel {
         val factory = ViewModelFactory.getInstance(requireContext())
-        return ViewModelProvider(activity, factory)[InputViewModel::class.java]
+        return ViewModelProvider(activity, factory)[ExploreFoodViewModel::class.java]
     }
 
     private fun initRecyclerView() {

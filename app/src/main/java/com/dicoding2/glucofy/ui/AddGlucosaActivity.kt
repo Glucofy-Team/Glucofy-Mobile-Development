@@ -4,13 +4,11 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.ArrayAdapter
 import com.dicoding2.glucofy.R
 import com.dicoding2.glucofy.databinding.ActivityAddGlucosaBinding
 import com.dicoding2.glucofy.helper.toast
 import com.dicoding2.glucofy.ui.viewmodel.AddGlucosaViewModel
-import com.dicoding2.glucofy.ui.viewmodel.LoginViewModel
 import java.util.Calendar
 
 class AddGlucosaActivity : AppCompatActivity() {

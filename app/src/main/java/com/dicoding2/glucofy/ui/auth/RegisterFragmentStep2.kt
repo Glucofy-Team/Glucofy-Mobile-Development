@@ -1,4 +1,4 @@
-package com.dicoding2.glucofy.ui.fragment
+package com.dicoding2.glucofy.ui.auth
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,9 +12,7 @@ import androidx.lifecycle.Observer
 import com.dicoding2.glucofy.R
 import com.dicoding2.glucofy.data.RegisterPreference
 import com.dicoding2.glucofy.databinding.FragmentRegisterStep2Binding
-import com.dicoding2.glucofy.helper.toast
 import com.dicoding2.glucofy.ui.RegisterSuccessActivity
-import com.dicoding2.glucofy.ui.viewmodel.RegisterViewModel
 
 
 class RegisterFragmentStep2 : Fragment() {

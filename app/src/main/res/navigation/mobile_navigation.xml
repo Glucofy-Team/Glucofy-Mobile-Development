@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.dicoding2.glucofy.ui.fragment.DashboardFragment"
+        android:name="com.dicoding2.glucofy.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_food"
-        android:name="com.dicoding2.glucofy.ui.fragment.FoodFragment"
+        android:name="com.dicoding2.glucofy.ui.food.FoodFragment"
         android:label="@string/title_food"
         tools:layout="@layout/fragment_food" />
 
@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/navigation_alarm"
-        android:name="com.dicoding2.glucofy.ui.fragment.AlarmFragment"
+        android:name="com.dicoding2.glucofy.ui.alarm.AlarmFragment"
         android:label="@string/title_alarm"
         tools:layout="@layout/fragment_alarm">
 
@@ -35,7 +35,7 @@
     </fragment>
     <fragment
         android:id="@+id/createAlarmFragment"
-        android:name="com.dicoding2.glucofy.ui.fragment.CreateAlarmFragment"
+        android:name="com.dicoding2.glucofy.ui.alarm.CreateAlarmFragment"
         android:label="fragment_create_alarm"
         tools:layout="@layout/fragment_create_alarm">
         <action
@@ -44,7 +44,7 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_input"
-        android:name="com.dicoding2.glucofy.ui.fragment.InputFragment"
+        android:name="com.dicoding2.glucofy.ui.food.ExploreFoodFragment"
         android:label="fragment_input"
         tools:layout="@layout/fragment_input" />
 </navigation>

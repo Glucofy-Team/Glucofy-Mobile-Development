@@ -7,6 +7,10 @@ import com.dicoding2.glucofy.data.repository.GlucofyRepository
 import com.dicoding2.glucofy.data.repository.AlarmRepository
 import com.dicoding2.glucofy.data.repository.FoodRepository
 import com.dicoding2.glucofy.di.Injection
+import com.dicoding2.glucofy.ui.alarm.AlarmViewModel
+import com.dicoding2.glucofy.ui.alarm.CreateAlarmViewModel
+import com.dicoding2.glucofy.ui.food.ExploreFoodViewModel
+import com.dicoding2.glucofy.ui.food.FoodDetailViewModel
 
 class ViewModelFactory private constructor(
     private val glucofyRepository: GlucofyRepository,
@@ -26,8 +30,8 @@ class ViewModelFactory private constructor(
             modelClass.isAssignableFrom(AlarmViewModel::class.java) -> {
                 return AlarmViewModel(alarmRepository) as T
             }
-            modelClass.isAssignableFrom(InputViewModel::class.java) -> {
-                return InputViewModel(foodRepository) as T
+            modelClass.isAssignableFrom(ExploreFoodViewModel::class.java) -> {
+                return ExploreFoodViewModel(foodRepository) as T
             }
             modelClass.isAssignableFrom(FoodDetailViewModel::class.java) -> {
                 return FoodDetailViewModel(foodRepository) as T

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.dicoding2.glucofy.data.remote.response.FoodListItem
 import com.dicoding2.glucofy.databinding.ItemFoodBinding
-import com.dicoding2.glucofy.ui.FoodDetailActivity
+import com.dicoding2.glucofy.ui.food.FoodDetailActivity
 
 class FoodAdapter : PagingDataAdapter<FoodListItem, FoodAdapter.FoodViewHolder>(DIFF_CALLBACK) {
     override fun onBindViewHolder(holder: FoodViewHolder, position: Int) {

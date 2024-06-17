@@ -1,4 +1,4 @@
-package com.dicoding2.glucofy.ui.fragment
+package com.dicoding2.glucofy.ui.food
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding2.glucofy.databinding.FragmentFoodBinding
-import com.dicoding2.glucofy.ui.viewmodel.FoodViewModel
 
 class FoodFragment : Fragment() {
 
