@@ -4,19 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.AlarmFragment">
+    tools:context=".ui.fragment.AlarmFragment"
+    android:padding="12dp">
 
     <TextView
-        android:id="@+id/text_alarm"
+        android:id="@+id/tv_alarm_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="Set Reminder"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/btn_addAlarm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/tv_alarm_title"
+        app:layout_constraintBottom_toBottomOf="@id/tv_alarm_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/baseline_add_24" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_alarmList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/tv_alarm_title"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

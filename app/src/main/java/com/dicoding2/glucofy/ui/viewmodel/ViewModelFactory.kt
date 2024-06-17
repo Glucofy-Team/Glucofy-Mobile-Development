@@ -1,36 +1,56 @@
 package com.dicoding2.glucofy.ui.viewmodel
 
+import android.app.Application
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding2.glucofy.data.GlucofyRepository
+import com.dicoding2.glucofy.data.repository.AlarmRepository
 import com.dicoding2.glucofy.di.Injection
 
-class ViewModelFactory private constructor(private val glucofyRepository: GlucofyRepository) :
-    ViewModelProvider.NewInstanceFactory() {
+class ViewModelFactory private constructor(
+    private val glucofyRepository: GlucofyRepository,
+    private val alarmRepository: AlarmRepository,
+) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if(modelClass.isAssignableFrom(GlucosaLogViewModel::class.java)){
-            return GlucosaLogViewModel(glucofyRepository) as T
-        }else if(modelClass.isAssignableFrom(GlucosaTodayViewModel::class.java)){
-            return GlucosaTodayViewModel(glucofyRepository) as T
-        }else if(modelClass.isAssignableFrom(GlucosaWeeklyViewModel::class.java)){
-            return GlucosaWeeklyViewModel(glucofyRepository) as T
-        }else if(modelClass.isAssignableFrom(GlucosaMonthlyViewModel::class.java)){
-            return GlucosaMonthlyViewModel(glucofyRepository) as T
-        }else if(modelClass.isAssignableFrom(ProfileViewModel::class.java)){
-            return ProfileViewModel(glucofyRepository) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
+       return when {
+          modelClass.isAssignableFrom(GlucosaLogViewModel::class.java) -> {
+              return GlucosaLogViewModel(glucofyRepository) as T
+          }
+          modelClass.isAssignableFrom(GlucosaTodayViewModel::class.java) -> {
+              return GlucosaTodayViewModel(glucofyRepository) as T
+          }
+          modelClass.isAssignableFrom(GlucosaWeeklyViewModel::class.java) -> {
+              return GlucosaWeeklyViewModel(glucofyRepository) as T
+          }
+          modelClass.isAssignableFrom(GlucosaMonthlyViewModel::class.java) -> {
+              return GlucosaMonthlyViewModel(glucofyRepository) as T
+          }
+          modelClass.isAssignableFrom(ProfileViewModel::class.java) -> {
+              return ProfileViewModel(glucofyRepository) as T
+          }
+          modelClass.isAssignableFrom(CreateAlarmViewModel::class.java) -> {
+              return CreateAlarmViewModel(alarmRepository) as T
+          }
+          modelClass.isAssignableFrom(AlarmViewModel::class.java) -> {
+              return AlarmViewModel(alarmRepository) as T
+          }
+          else -> {throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")}
+       }
     }
 
     companion object {
         @Volatile
         private var instance: ViewModelFactory? = null
+
         fun getInstance(context: Context): ViewModelFactory =
             instance ?: synchronized(this) {
-                instance ?: ViewModelFactory(Injection.provideRepository(context))
-            }.also { instance = it }
+                instance ?: ViewModelFactory(
+                    Injection.provideGlucofyRepository(context),
+                    Injection.provideAlarmRepository(context)
+                ).also { instance = it }
+            }
     }
 }

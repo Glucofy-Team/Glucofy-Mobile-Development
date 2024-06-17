@@ -17,5 +17,5 @@ interface GlucoseAverageWeeklyDao {
     suspend fun deleteAll()
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertGlucose(glucose: List<GlucoseAverageWeeklyEntity>?)
+    suspend fun insertGlucose(glucose: List<GlucoseAverageWeeklyEntity>)
 }
