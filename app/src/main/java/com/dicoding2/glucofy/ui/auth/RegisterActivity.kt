@@ -1,4 +1,4 @@
-package com.dicoding2.glucofy.ui
+package com.dicoding2.glucofy.ui.auth
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

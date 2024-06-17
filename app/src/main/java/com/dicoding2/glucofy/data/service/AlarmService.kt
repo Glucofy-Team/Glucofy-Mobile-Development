@@ -4,7 +4,6 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.Service
-import android.content.Context
 import android.content.Intent
 import android.media.MediaPlayer
 import android.media.RingtoneManager
@@ -13,11 +12,10 @@ import android.os.Build
 import android.os.IBinder
 import android.os.Vibrator
 import androidx.core.app.NotificationCompat
-import androidx.core.content.ContextCompat
 import com.dicoding2.glucofy.App.Companion.CHANNEL_ID
 import com.dicoding2.glucofy.App.Companion.CHANNEL_NAME
 import com.dicoding2.glucofy.R
-import com.dicoding2.glucofy.ui.RingActivity
+import com.dicoding2.glucofy.ui.alarm.RingActivity
 import com.dicoding2.glucofy.model.Alarm
 import java.io.IOException
 

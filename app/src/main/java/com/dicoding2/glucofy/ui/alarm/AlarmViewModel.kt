@@ -1,4 +1,4 @@
-package com.dicoding2.glucofy.ui.viewmodel
+package com.dicoding2.glucofy.ui.alarm
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

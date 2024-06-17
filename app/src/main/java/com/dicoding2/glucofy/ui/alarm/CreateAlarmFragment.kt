@@ -1,4 +1,4 @@
-package com.dicoding2.glucofy.ui.fragment
+package com.dicoding2.glucofy.ui.alarm
 
 import android.app.Activity
 import android.content.Intent
@@ -17,7 +17,6 @@ import com.dicoding2.glucofy.R
 import com.dicoding2.glucofy.databinding.FragmentCreateAlarmBinding
 import com.dicoding2.glucofy.helper.TimePickerUtil
 import com.dicoding2.glucofy.model.Alarm
-import com.dicoding2.glucofy.ui.viewmodel.CreateAlarmViewModel
 import com.dicoding2.glucofy.ui.viewmodel.ViewModelFactory
 import java.util.Random
 

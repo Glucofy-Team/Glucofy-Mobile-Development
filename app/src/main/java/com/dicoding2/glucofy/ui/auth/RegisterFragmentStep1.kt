@@ -1,4 +1,4 @@
-package com.dicoding2.glucofy.ui.fragment
+package com.dicoding2.glucofy.ui.auth
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,10 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.dicoding2.glucofy.R
 import com.dicoding2.glucofy.data.RegisterPreference
-import com.dicoding2.glucofy.data.UserPreference
 import com.dicoding2.glucofy.data.local.entity.RegisterEntity
-import com.dicoding2.glucofy.data.local.entity.UserEntity
-import com.dicoding2.glucofy.data.remote.response.LoginResponse
 import com.dicoding2.glucofy.databinding.FragmentRegisterStep1Binding
 
 

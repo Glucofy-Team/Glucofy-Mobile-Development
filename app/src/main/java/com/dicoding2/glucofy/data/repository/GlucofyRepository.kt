@@ -1,8 +1,9 @@
-package com.dicoding2.glucofy.data
+package com.dicoding2.glucofy.data.repository
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
+import com.dicoding2.glucofy.data.Result
 import com.dicoding2.glucofy.data.local.entity.GlucoseAverageMonthlyEntity
 import com.dicoding2.glucofy.data.local.entity.GlucoseAverageTodayEntity
 import com.dicoding2.glucofy.data.local.entity.GlucoseAverageWeeklyEntity

@@ -21,7 +21,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Glucofy">
         <activity
-            android:name=".ui.RingActivity"
+            android:name=".ui.food.FoodDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.alarm.RingActivity"
             android:exported="false" />
         <activity
             android:name=".ui.ProfileEditActivity"
@@ -48,21 +51,23 @@
             android:name=".ui.RegisterSuccessActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.RegisterActivity"
+            android:name=".ui.auth.RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".ui.MainActivity"
             android:exported="false" />
 
-        <receiver android:name=".broadcastreceiver.AlarmBroadcastReceiver"
+        <receiver
+            android:name=".broadcastreceiver.AlarmBroadcastReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
-        <service android:name=".data.service.AlarmService"
-            android:foregroundServiceType="remoteMessaging"/>
+        <service
+            android:name=".data.service.AlarmService"
+            android:foregroundServiceType="remoteMessaging" />
         <service android:name=".data.service.RescheduleAlarmsService" />
     </application>
 
