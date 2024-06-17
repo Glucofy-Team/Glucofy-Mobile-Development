@@ -6,11 +6,13 @@ import androidx.lifecycle.ViewModelProvider
 import com.dicoding2.glucofy.data.repository.AlarmRepository
 import com.dicoding2.glucofy.data.repository.FoodRepository
 import com.dicoding2.glucofy.data.repository.GlucofyRepository
+import com.dicoding2.glucofy.data.repository.InputFoodRepository
 import com.dicoding2.glucofy.di.Injection
 import com.dicoding2.glucofy.ui.alarm.AlarmViewModel
 import com.dicoding2.glucofy.ui.alarm.CreateAlarmViewModel
 import com.dicoding2.glucofy.ui.food.ExploreFoodViewModel
 import com.dicoding2.glucofy.ui.food.FoodDetailViewModel
+import com.dicoding2.glucofy.ui.food.FoodViewModel
 import com.dicoding2.glucofy.ui.food.InputNewFoodViewModel
 import com.dicoding2.glucofy.ui.viewmodel.GlucosaLogViewModel
 import com.dicoding2.glucofy.ui.viewmodel.GlucosaMonthlyViewModel
@@ -22,6 +24,7 @@ class ViewModelFactory private constructor(
     private val glucofyRepository: GlucofyRepository,
     private val alarmRepository: AlarmRepository,
     private val foodRepository: FoodRepository,
+    private val InputFoodRepository : InputFoodRepository,
 ) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
@@ -55,7 +58,10 @@ class ViewModelFactory private constructor(
              return FoodDetailViewModel(foodRepository) as T
           }
            modelClass.isAssignableFrom(InputNewFoodViewModel::class.java) -> {
-               return InputNewFoodViewModel(foodRepository) as T
+               return InputNewFoodViewModel(InputFoodRepository) as T
+           }
+           modelClass.isAssignableFrom(FoodViewModel::class.java) -> {
+               return FoodViewModel(foodRepository) as T
            }
           else -> {throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")}
        }
@@ -71,7 +77,8 @@ class ViewModelFactory private constructor(
                 instance ?: ViewModelFactory(
                     Injection.provideGlucofyRepository(context),
                     Injection.provideAlarmRepository(context),
-                    Injection.provideFoodRepository(context)
+                    Injection.provideFoodRepository(context),
+                    Injection.provideFoodRepositoryML(context)
                 ).also { instance = it }
             }
     }

@@ -8,6 +8,10 @@
     <string name="tab_text_2">Weekly</string>
     <string name="tab_text_3">Monthly</string>
 
+    <string name="tab_text_food_1">Explore</string>
+    <string name="tab_text_food_2">My Foods</string>
+    <string name="tab_text_food_3">Favorites</string>
+
     <!--Home navigation-->
     <string name="title_food">Makanan</string>
     <string name="title_dashboard">Dashboard</string>

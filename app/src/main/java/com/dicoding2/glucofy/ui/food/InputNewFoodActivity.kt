@@ -44,10 +44,10 @@ class InputNewFoodActivity : AppCompatActivity() {
     private fun postFood() {
         val foodName = binding.edFoodName.text.toString()
         val category = binding.edCategory.text.toString()
-        val carbs = binding.edCarbs.text.toString().toIntOrNull() ?: 0
-        val protein = binding.edProtein.text.toString().toIntOrNull() ?: 0
-        val fats = binding.edFats.text.toString().toIntOrNull() ?: 0
-        val calories = binding.edCalories.text.toString().toIntOrNull() ?: 0
+        val carbs = binding.edCarbs.text.toString().toDoubleOrNull() ?: 0
+        val protein = binding.edProtein.text.toString().toDoubleOrNull() ?: 0
+        val fats = binding.edFats.text.toString().toDoubleOrNull() ?: 0
+        val calories = binding.edCalories.text.toString().toDoubleOrNull() ?: 0
 
         if (foodName.isNotEmpty() && category.isNotEmpty()) {
             viewModel.postNewFood(foodName, category, carbs, protein, fats, calories)

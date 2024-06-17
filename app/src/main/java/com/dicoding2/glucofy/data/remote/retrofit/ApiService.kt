@@ -83,10 +83,9 @@ interface ApiService {
     fun postNewFood(
         @Field("foodName") name: String,
         @Field("category") category: String,
-        @Field("calories") calories : Int,
-        @Field("proteins") proteins : Int,
-        @Field("carbs") carbs : Int,
-        @Field("fats") fats : Int,
+        @Field("calories") calories: Number,
+        @Field("proteins") proteins: Number,
+        @Field("carbs") carbs: Number,
+        @Field("fats") fats: Number,
     ): Call<NewFoodResponse>
-
 }

@@ -20,13 +20,13 @@ data class NewFoodResponse(
 	val carbs: Int? = null,
 
 	@field:SerializedName("fats")
-	val fats: Int? = null,
+	val fats: Double? = null,
 
 	@field:SerializedName("proteins")
-	val proteins: Int? = null,
+	val proteins: Double? = null,
 
 	@field:SerializedName("calories")
-	val calories: Int? = null,
+	val calories: Double? = null,
 
 	@field:SerializedName("category")
 	val category: String? = null,
