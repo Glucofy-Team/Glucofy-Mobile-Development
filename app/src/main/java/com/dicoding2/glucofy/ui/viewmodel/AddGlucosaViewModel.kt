@@ -6,14 +6,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dicoding2.glucofy.data.remote.response.AddGlucosaResponse
+import com.dicoding2.glucofy.data.remote.response.ErrorResponse
 import com.dicoding2.glucofy.data.remote.retrofit.ApiService
 import com.dicoding2.glucofy.di.Injection
 import com.dicoding2.glucofy.helper.toast
+import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class AddGlucosaViewModel(private val context: Context,private val apiService: ApiService) : ViewModel() {
+class AddGlucosaViewModel(private val apiService: ApiService) : ViewModel() {
     private val _glucosa = MutableLiveData<AddGlucosaResponse>()
     val glucosa: LiveData<AddGlucosaResponse> = _glucosa
 
@@ -30,7 +32,15 @@ class AddGlucosaViewModel(private val context: Context,private val apiService: A
                 if (response.isSuccessful) {
                     _glucosa.value = response.body()
                 }else{
-                    toast(context, "Post failed")
+                    val errorBody = response.errorBody()?.string()
+                    if (errorBody != null) {
+                        try {
+                            val errorResponse = Gson().fromJson(errorBody, ErrorResponse::class.java)
+                            val message = errorResponse.message
+                            val status = errorResponse.status
+                            _glucosa.value = AddGlucosaResponse("",message,status)
+                        } catch (e: Exception) {}
+                    }
                 }
             }
             override fun onFailure(call: Call<AddGlucosaResponse>, t: Throwable) {
@@ -39,13 +49,17 @@ class AddGlucosaViewModel(private val context: Context,private val apiService: A
         })
     }
 
+    fun clearGlucosaData() {
+        _glucosa.value = AddGlucosaResponse()
+    }
+
     companion object{
         private const val TAG = "AddGlucosaViewModel"
         @Volatile
         private var instance: AddGlucosaViewModel? = null
         fun getInstance(context: Context): AddGlucosaViewModel =
             instance ?: synchronized(this) {
-                instance ?: AddGlucosaViewModel(context, Injection.provideApiConfig(context))
+                instance ?: AddGlucosaViewModel(Injection.provideApiConfig(context))
             }.also { instance = it }
     }
 }

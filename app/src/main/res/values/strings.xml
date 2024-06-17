@@ -43,7 +43,9 @@
 
     <!--Activity Register Success-->
     <string name="activty_register_success_btn_login"><![CDATA[< Balik ke halaman login]]></string>
-
+    <string name="woman">Perempuan</string>
+    <string name="man">Laki- laki</string>
+    
     <!--Alarm-->
     <string name="arg_alarm_obj">AlarmObject</string>
     <string name="bundle_alarm_obj">BundleAlarmObject</string>
@@ -52,6 +54,4 @@
 
     <string name="notification_title">Tester</string>
     <string name="default_alarm_title">Tester</string>
-
-
 </resources>

@@ -20,24 +20,37 @@ class ViewModelFactory private constructor(
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return when {
-            modelClass.isAssignableFrom(GlucosaLogViewModel::class.java) -> {
-                return GlucosaLogViewModel(glucofyRepository) as T
-            }
-            modelClass.isAssignableFrom(CreateAlarmViewModel::class.java) -> {
-                return CreateAlarmViewModel(alarmRepository) as T
-            }
-            modelClass.isAssignableFrom(AlarmViewModel::class.java) -> {
-                return AlarmViewModel(alarmRepository) as T
-            }
-            modelClass.isAssignableFrom(ExploreFoodViewModel::class.java) -> {
-                return ExploreFoodViewModel(foodRepository) as T
-            }
-            modelClass.isAssignableFrom(FoodDetailViewModel::class.java) -> {
-                return FoodDetailViewModel(foodRepository) as T
-            }
-            else -> {throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")}
-        }
+       return when {
+          modelClass.isAssignableFrom(GlucosaLogViewModel::class.java) -> {
+              return GlucosaLogViewModel(glucofyRepository) as T
+          }
+          modelClass.isAssignableFrom(GlucosaTodayViewModel::class.java) -> {
+              return GlucosaTodayViewModel(glucofyRepository) as T
+          }
+          modelClass.isAssignableFrom(GlucosaWeeklyViewModel::class.java) -> {
+              return GlucosaWeeklyViewModel(glucofyRepository) as T
+          }
+          modelClass.isAssignableFrom(GlucosaMonthlyViewModel::class.java) -> {
+              return GlucosaMonthlyViewModel(glucofyRepository) as T
+          }
+          modelClass.isAssignableFrom(ProfileViewModel::class.java) -> {
+              return ProfileViewModel(glucofyRepository) as T
+          }
+          modelClass.isAssignableFrom(CreateAlarmViewModel::class.java) -> {
+              return CreateAlarmViewModel(alarmRepository) as T
+          }
+          modelClass.isAssignableFrom(AlarmViewModel::class.java) -> {
+              return AlarmViewModel(alarmRepository) as T
+          }
+          modelClass.isAssignableFrom(ExploreFoodViewModel::class.java) -> {
+            return ExploreFoodViewModel(foodRepository) as T
+          }
+           modelClass.isAssignableFrom(FoodDetailViewModel::class.java) -> {
+             return FoodDetailViewModel(foodRepository) as T
+          }
+          else -> {throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")}
+       }
+        
     }
 
     companion object {

@@ -3,11 +3,10 @@ package com.dicoding2.glucofy.ui.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.dicoding2.glucofy.data.GlucofyRepository
+import com.dicoding2.glucofy.data.local.entity.GlucoseAverageTodayEntity
+import com.dicoding2.glucofy.data.local.entity.GlucoseAverageWeeklyEntity
 
-class GlucosaWeeklyViewModel : ViewModel() {
-
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is glucosa log Fragment"
-    }
-    val text: LiveData<String> = _text
+class GlucosaWeeklyViewModel(private val glucofyRepository: GlucofyRepository) : ViewModel() {
+    fun getAllDataGlucose(): LiveData<List<GlucoseAverageWeeklyEntity>> = glucofyRepository.getAllGlucoseAverageWeekly()
 }

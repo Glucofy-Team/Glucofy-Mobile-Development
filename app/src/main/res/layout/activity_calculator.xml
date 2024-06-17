@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:paddingStart="10sp"
+    android:paddingEnd="10sp"
+    tools:context=".ui.CalculatorActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15sp"
+            android:layout_marginBottom="20sp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Calculator"
+            android:textColor="@color/red_500"
+            android:textSize="@dimen/heading_bold_M"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10sp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_shadow"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="Makan Pagi"
+                    android:textColor="@color/red_500"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvMorning"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="@color/red_500"
+                    android:textSize="@dimen/heading_bold_Xl"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="unit"
+                    android:textColor="@color/red_200"
+                    android:textSize="@dimen/heading_medium_XS" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="10sp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_shadow"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="Makan Siang"
+                    android:textColor="@color/red_500"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvAfternoon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="@color/red_500"
+                    android:textSize="@dimen/heading_bold_Xl"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="unit"
+                    android:textColor="@color/red_200"
+                    android:textSize="@dimen/heading_medium_XS" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="10sp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_shadow"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="Makan Malam"
+                android:textColor="@color/red_500"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvEvening"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@color/red_500"
+                android:textSize="@dimen/heading_bold_Xl"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="unit"
+                android:textColor="@color/red_200"
+                android:textSize="@dimen/heading_medium_XS" />
+        </LinearLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15sp"
+            android:hint="Kategori insulin"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+
+            <AutoCompleteTextView
+                android:id="@+id/tiInsulin"
+                android:layout_width="match_parent"
+                android:editable="false"
+                android:inputType="none"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15sp"
+            android:layout_marginBottom="10dp"
+            android:hint="Berat badan">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiWeight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.dicoding2.glucofy.ui.costumview.CostumButton
+            android:id="@+id/btnSum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Hitung" />
+    </LinearLayout>
+</ScrollView>

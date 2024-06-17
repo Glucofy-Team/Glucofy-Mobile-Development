@@ -1,5 +1,6 @@
 package com.dicoding2.glucofy.ui
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +15,7 @@ import java.util.Calendar
 class AddGlucosaActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddGlucosaBinding
+    private lateinit var addGlucosaViewModel: AddGlucosaViewModel
     private val items: Array<String> = arrayOf("puasa","acak","2 jam setelah makan")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,12 +26,21 @@ class AddGlucosaActivity : AppCompatActivity() {
         val adapter = ArrayAdapter(this, R.layout.input_list_item, items)
         binding.tiCondition.setAdapter(adapter)
 
-        val addGlucosaViewModel: AddGlucosaViewModel = AddGlucosaViewModel.getInstance(this)
+        addGlucosaViewModel = AddGlucosaViewModel.getInstance(this)
 
         addGlucosaViewModel.glucosa.observe(this){loginResponse ->
             if(loginResponse.status == 201){
                 toast(this@AddGlucosaActivity, "Berhasil Menambah Data")
+                addGlucosaViewModel.clearGlucosaData()
+                finish()
+            }else if(loginResponse.status == 400){
+                addGlucosaViewModel.clearGlucosaData()
+                toast(this@AddGlucosaActivity, "Gagal Menambah Data")
             }
+        }
+
+        addGlucosaViewModel.isLoading.observe(this){ loading ->
+            binding.btnSubmit.isEnabled = !loading
         }
 
         binding.tiDate.setOnClickListener {
@@ -71,6 +82,7 @@ class AddGlucosaActivity : AppCompatActivity() {
 
             timePickerDialog.show()
         }
+
 
         binding.btnSubmit.setOnClickListener {
             val glucosa = binding.tiGlucosaLevel.text.toString()

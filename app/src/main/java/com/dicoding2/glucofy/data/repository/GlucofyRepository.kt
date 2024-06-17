@@ -1,5 +1,6 @@
 package com.dicoding2.glucofy.data.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.dicoding2.glucofy.data.Result
@@ -8,6 +9,7 @@ import com.dicoding2.glucofy.data.local.entity.GlucoseAverageTodayEntity
 import com.dicoding2.glucofy.data.local.entity.GlucoseAverageWeeklyEntity
 import com.dicoding2.glucofy.data.local.room.GlucofyRoomDatabase
 import com.dicoding2.glucofy.data.remote.response.GlucosaResponse
+import com.dicoding2.glucofy.data.remote.response.UserProfileResponse
 import com.dicoding2.glucofy.data.remote.retrofit.ApiService
 import com.dicoding2.glucofy.helper.generateRandomString
 
@@ -23,7 +25,6 @@ class GlucofyRepository (
         emit(Result.Loading)
         try{
             val response = apiService.getGlucosa()
-
             val glucoseToday = response.today?.data?.map {data ->
                 GlucoseAverageTodayEntity(
                     data?.id ?: "", data?.datetime, data?.glucose
@@ -57,6 +58,16 @@ class GlucofyRepository (
                 glucofyRoomDatabase.glucoseAverageMonthlyDao().insertGlucose(glucoseMonthly)
             }
 
+            emit(Result.Success(response))
+        }catch (e: Exception){
+            emit(Result.Error(e.message.toString()))
+        }
+    }
+
+    fun getProfile(): LiveData<Result<UserProfileResponse>> = liveData {
+        emit(Result.Loading)
+        try{
+            val response = apiService.getUserProfile()
             emit(Result.Success(response))
         }catch (e: Exception){
             emit(Result.Error(e.message.toString()))
