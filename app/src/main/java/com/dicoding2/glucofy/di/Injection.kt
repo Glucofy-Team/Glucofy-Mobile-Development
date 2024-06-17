@@ -31,7 +31,6 @@ object Injection {
     fun provideApiConfig(context: Context): ApiService {
         val pref = UserPreference(context)
         val user = runBlocking { pref.getUser() }
-        Log.d("test",user.token.toString())
         return ApiConfig.getApiService(user.token)
     }
 }

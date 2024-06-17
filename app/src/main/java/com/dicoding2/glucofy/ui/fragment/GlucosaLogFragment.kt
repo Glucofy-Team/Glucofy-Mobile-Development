@@ -1,5 +1,6 @@
 package com.dicoding2.glucofy.ui.fragment
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -39,22 +40,7 @@ class GlucosaLogFragment : Fragment() {
             startActivity(Intent(requireContext(), AddGlucosaActivity::class.java))
         }
 
-        glucosaLogViewModel.getRequestGlucose().observe(viewLifecycleOwner){result ->
-            if (result != null) {
-                when (result) {
-                    is Result.Loading -> {
-                        //nothing
-                    }
-                    is Result.Success -> {
-
-                        Log.d("testing123",result.data.toString())
-                    }
-                    is Result.Error -> {
-                        //nothing
-                    }
-                }
-            }
-        }
+        glucosaLogViewModel.getRequestGlucose().observe(viewLifecycleOwner){}
         return root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -74,6 +60,11 @@ class GlucosaLogFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onResume() {
+        super.onResume()
+        glucosaLogViewModel.getRequestGlucose().observe(viewLifecycleOwner){}
     }
 
     companion object {

@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.dicoding2.glucofy.R
 import com.dicoding2.glucofy.data.remote.response.ErrorResponse
 import com.dicoding2.glucofy.data.remote.response.RegisterResponse
 import com.dicoding2.glucofy.data.remote.retrofit.ApiService
@@ -25,6 +26,7 @@ class RegisterViewModel(private val context: Context, private val apiService: Ap
 
     fun postRegister(firstname: String, lastname: String, phonenumber: String, email: String,password: String, gender: String, weight: String, height: String, age: String) {
         _isLoading.value = true
+
         val client = apiService.postRegister(firstname,lastname,phonenumber,email,password,gender,weight,height,age)
         client.enqueue(object : Callback<RegisterResponse> {
             override fun onResponse(call: Call<RegisterResponse>, response: Response<RegisterResponse>) {

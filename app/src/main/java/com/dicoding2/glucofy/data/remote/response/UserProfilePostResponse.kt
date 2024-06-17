@@ -2,14 +2,11 @@ package com.dicoding2.glucofy.data.remote.response
 
 import com.google.gson.annotations.SerializedName
 
-data class AddGlucosaResponse(
-
-	@field:SerializedName("trackerId")
-	val trackerId: String = "",
+data class UserProfilePostResponse(
 
 	@field:SerializedName("message")
-	val message: String = "",
+	val message: String? = null,
 
 	@field:SerializedName("status")
-	val status: Int = 0
+	val status: Int? = null
 )
