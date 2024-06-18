@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding2.glucofy.databinding.FragmentDashboardBinding
+import com.dicoding2.glucofy.ui.food.InputNewFoodActivity
 
 class DashboardFragment : Fragment() {
 
@@ -28,8 +29,13 @@ class DashboardFragment : Fragment() {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        binding.fabAddFood.setOnClickListener {
+            val intent = Intent(activity, InputNewFoodActivity::class.java)
+            startActivity(intent)
+        }
         return root
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

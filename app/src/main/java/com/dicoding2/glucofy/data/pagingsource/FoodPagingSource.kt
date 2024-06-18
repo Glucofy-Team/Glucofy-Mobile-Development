@@ -21,17 +21,19 @@ class FoodPagingSource (
             val position = params.key ?: INITIAL_PAGE_INDEX
             val responseData = apiService.getFood(name ?: "", position, params.loadSize)
 
+            val nextPage = if (responseData.foodListItem.isEmpty()) null else position + 1
+
             LoadResult.Page(
                 data = responseData.foodListItem,
                 prevKey = if (position == INITIAL_PAGE_INDEX) null else position - 1,
-                nextKey = if (responseData.foodListItem.isEmpty()) null else position + 1
+                nextKey = nextPage
             )
         } catch (exception: Exception) {
             return LoadResult.Error(exception)
         }
     }
 
-    private companion object {
+    companion object {
         const val INITIAL_PAGE_INDEX = 1
     }
 }

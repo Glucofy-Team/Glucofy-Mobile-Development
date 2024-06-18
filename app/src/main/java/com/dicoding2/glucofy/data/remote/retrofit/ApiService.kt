@@ -1,22 +1,23 @@
 package com.dicoding2.glucofy.data.remote.retrofit
 
 import com.dicoding2.glucofy.data.remote.response.AddGlucosaResponse
-import com.dicoding2.glucofy.data.remote.response.DetailFoodResponse
 import com.dicoding2.glucofy.data.remote.response.FoodResponse
 import com.dicoding2.glucofy.data.remote.response.GlucosaResponse
 import com.dicoding2.glucofy.data.remote.response.LoginResponse
+import com.dicoding2.glucofy.data.remote.response.MyFoodResponse
+import com.dicoding2.glucofy.data.remote.response.NewFoodResponse
 import com.dicoding2.glucofy.data.remote.response.RegisterResponse
 import com.dicoding2.glucofy.data.remote.response.UserProfilePostResponse
 import com.dicoding2.glucofy.data.remote.response.UserProfileResponse
 import retrofit2.Call
+import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FieldMap
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.POST
-import retrofit2.http.Path
-import retrofit2.http.Query
 import retrofit2.http.PUT
+import retrofit2.http.Query
 
 interface ApiService {
     @GET("/user/profile")
@@ -62,19 +63,23 @@ interface ApiService {
 
     @GET("tracker")
     suspend fun getGlucosa(
-
     ): GlucosaResponse
 
-    @GET("food")
+    @GET("dataset")
     suspend fun getFood(
         @Query("name") name: String,
         @Query("page") page: Int = 1,
         @Query("size") size: Int = 2
     ): FoodResponse
 
-    @GET("food/detail/{id}")
-    suspend fun getFoodDetail(
-        @Path("id") foodID: String
-    ): DetailFoodResponse
+    @POST("predict_new_data")
+    fun postNewFoodJson(
+        @Body request: NewFoodRequest
+    ): Call<NewFoodResponse>
 
+    @GET("food")
+    fun getMyFood(
+        @Query("page") page: Int = 1,
+        @Query("size") size: Int = 2
+    ) : MyFoodResponse
 }

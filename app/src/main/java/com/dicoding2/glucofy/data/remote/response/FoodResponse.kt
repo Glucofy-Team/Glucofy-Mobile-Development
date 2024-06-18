@@ -23,7 +23,7 @@ data class FoodListItem(
 	val gLoad: Any,
 
 	@field:SerializedName("foodName")
-	val foodName: String,
+	val foodName: String?,
 
 	@field:SerializedName("fats")
 	val fats: Any,
@@ -47,5 +47,5 @@ data class FoodListItem(
 	val calories: Int,
 
 	@field:SerializedName("category")
-	val category: String
+	val category: String?
 )

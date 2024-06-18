@@ -12,7 +12,7 @@ import com.dicoding2.glucofy.R
 import com.dicoding2.glucofy.data.service.AlarmService
 import com.dicoding2.glucofy.databinding.ActivityRingBinding
 import com.dicoding2.glucofy.model.Alarm
-import com.dicoding2.glucofy.ui.viewmodel.ViewModelFactory
+import com.dicoding2.glucofy.ui.factory.ViewModelFactory
 import java.util.Calendar
 
 class RingActivity() : AppCompatActivity() {

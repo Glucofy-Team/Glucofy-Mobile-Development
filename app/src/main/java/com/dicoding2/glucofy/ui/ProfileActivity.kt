@@ -3,16 +3,14 @@ package com.dicoding2.glucofy.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding2.glucofy.data.Result
 import com.dicoding2.glucofy.data.UserPreference
 import com.dicoding2.glucofy.data.local.entity.UserEntity
 import com.dicoding2.glucofy.data.remote.response.Data
-import com.dicoding2.glucofy.data.remote.response.UserProfileResponse
 import com.dicoding2.glucofy.databinding.ActivityProfileBinding
 import com.dicoding2.glucofy.ui.viewmodel.ProfileViewModel
-import com.dicoding2.glucofy.ui.viewmodel.ViewModelFactory
+import com.dicoding2.glucofy.ui.factory.ViewModelFactory
 
 class ProfileActivity : AppCompatActivity() {
 

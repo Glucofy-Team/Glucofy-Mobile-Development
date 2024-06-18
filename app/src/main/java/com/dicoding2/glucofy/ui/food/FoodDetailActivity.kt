@@ -1,12 +1,11 @@
 package com.dicoding2.glucofy.ui.food
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.dicoding2.glucofy.data.remote.response.DetailFood
+import com.dicoding2.glucofy.data.remote.response.FoodListItem
 import com.dicoding2.glucofy.databinding.ActivityFoodDetailBinding
-import com.dicoding2.glucofy.ui.viewmodel.ViewModelFactory
+import com.dicoding2.glucofy.ui.factory.ViewModelFactory
 
 class FoodDetailActivity : AppCompatActivity() {
 
@@ -21,21 +20,32 @@ class FoodDetailActivity : AppCompatActivity() {
 
         viewModel = obtainViewModel(this)
 
-        val foodId = intent.getStringExtra("id")
+        val foodName = intent.getStringExtra("foodName")
+        val calories = intent.getIntExtra("calories", 0)
+        val fats = intent.getDoubleExtra("fats", 0.0)
+        val carbs = intent.getDoubleExtra("carbs", 0.0)
+        val proteins = intent.getDoubleExtra("proteins", 0.0)
+        val gIndex = intent.getIntExtra("gIndex", 0)
+        val gLoad = intent.getDoubleExtra("gLoad", 0.0)
+        val category = intent.getStringExtra("category")
 
-        foodId?.let {
-            viewModel.getFoodDetail(it)
-        }
+        val food = FoodListItem(
+            foodName = foodName,
+            calories = calories,
+            fats = fats,
+            carbs = carbs,
+            proteins = proteins,
+            gIndex = gIndex,
+            gLoad = gLoad,
+            category = category,
+            giCategory = "",
+            glCategory = "",
+            id = "",
+        )
 
-        viewModel.food.observe(this) { foodResponse ->
-            if (foodResponse!=null) {
-                showFoodDetails(foodResponse.detailFood)
-            } else {
-                Toast.makeText(this, "Failed to load food", Toast.LENGTH_SHORT).show()
-            }
-        }
+        showFoodDetails(food)
     }
-    private fun showFoodDetails(food: DetailFood) {
+    private fun showFoodDetails(food: FoodListItem) {
         with(binding) {
             tvFoodName.text = food.foodName
             tvFoodCategory.text = food.category
