@@ -16,8 +16,16 @@ class FoodAdapter : PagingDataAdapter<FoodListItem, FoodAdapter.FoodViewHolder>(
         if (food != null) {
             holder.bind(food)
             holder.itemView.setOnClickListener {
-                val intent = Intent(holder.itemView.context, FoodDetailActivity::class.java)
-                intent.putExtra("id", food.id)
+                val intent = Intent(holder.itemView.context, FoodDetailActivity::class.java).apply {
+                    putExtra("foodName", food.foodName)
+                    putExtra("calories", food.calories)
+                    putExtra("fats", food.fats as Double)
+                    putExtra("proteins", food.proteins as Double)
+                    putExtra("carbs", food.carbs as Double)
+                    putExtra("gIndex", food.gIndex)
+                    putExtra("gLoad", food.gLoad as Double)
+                    putExtra("category", food.category)
+                }
                 holder.itemView.context.startActivity(intent)
             }
         }

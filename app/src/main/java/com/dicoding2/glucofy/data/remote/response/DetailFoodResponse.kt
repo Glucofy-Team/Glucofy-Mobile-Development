@@ -20,7 +20,7 @@ data class DetailFood(
 	val gIndex: Int,
 
 	@field:SerializedName("foodName")
-	val foodName: String,
+	val foodName: String?,
 
 	@field:SerializedName("gLoad")
 	val gLoad: Int,
@@ -50,7 +50,7 @@ data class DetailFood(
 	val calories: Int,
 
 	@field:SerializedName("category")
-	val category: String
+	val category: String?
 )
 
 data class Datetime(
