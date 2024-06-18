@@ -1,4 +1,4 @@
-package com.dicoding2.glucofy.ui.viewmodel
+package com.dicoding2.glucofy.ui.calculator
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
