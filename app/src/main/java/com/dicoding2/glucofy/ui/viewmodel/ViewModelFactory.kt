@@ -11,6 +11,11 @@ import com.dicoding2.glucofy.ui.alarm.AlarmViewModel
 import com.dicoding2.glucofy.ui.alarm.CreateAlarmViewModel
 import com.dicoding2.glucofy.ui.food.ExploreFoodViewModel
 import com.dicoding2.glucofy.ui.food.FoodDetailViewModel
+import com.dicoding2.glucofy.ui.glucose.log.GlucosaLogViewModel
+import com.dicoding2.glucofy.ui.glucose.monthly.GlucosaMonthlyViewModel
+import com.dicoding2.glucofy.ui.glucose.today.GlucosaTodayViewModel
+import com.dicoding2.glucofy.ui.glucose.weekly.GlucosaWeeklyViewModel
+import com.dicoding2.glucofy.ui.profile.ProfileViewModel
 
 class ViewModelFactory private constructor(
     private val glucofyRepository: GlucofyRepository,
@@ -34,7 +39,7 @@ class ViewModelFactory private constructor(
               return GlucosaMonthlyViewModel(glucofyRepository) as T
           }
           modelClass.isAssignableFrom(ProfileViewModel::class.java) -> {
-              return ProfileViewModel(glucofyRepository) as T
+              return ProfileViewModel(glucofyRepository,alarmRepository) as T
           }
           modelClass.isAssignableFrom(CreateAlarmViewModel::class.java) -> {
               return CreateAlarmViewModel(alarmRepository) as T

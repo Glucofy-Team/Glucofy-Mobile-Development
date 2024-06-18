@@ -7,6 +7,7 @@ import com.dicoding2.glucofy.data.Result
 import com.dicoding2.glucofy.data.local.entity.GlucoseAverageMonthlyEntity
 import com.dicoding2.glucofy.data.local.entity.GlucoseAverageTodayEntity
 import com.dicoding2.glucofy.data.local.entity.GlucoseAverageWeeklyEntity
+import com.dicoding2.glucofy.data.local.entity.GlucoseDataEntity
 import com.dicoding2.glucofy.data.local.room.GlucofyRoomDatabase
 import com.dicoding2.glucofy.data.remote.response.GlucosaResponse
 import com.dicoding2.glucofy.data.remote.response.UserProfileResponse
@@ -20,6 +21,7 @@ class GlucofyRepository (
     fun getAllGlucoseAverageToday(): LiveData<List<GlucoseAverageTodayEntity>> = glucofyRoomDatabase.glucoseAverageTodayDao().getAllGlucoseAverageToday()
     fun getAllGlucoseAverageWeekly(): LiveData<List<GlucoseAverageWeeklyEntity>> = glucofyRoomDatabase.glucoseAverageWeeklyDao().getAllGlucoseAverageWeekly()
     fun getAllGlucoseAverageMonthly(): LiveData<List<GlucoseAverageMonthlyEntity>> = glucofyRoomDatabase.glucoseAverageMonthlyDao().getAllGlucoseAverageMonthly()
+    fun getAllDataGlucose(): LiveData<List<GlucoseDataEntity>> = glucofyRoomDatabase.glucoseDataDao().getAllDataGlucose()
 
     fun getRequestGlucose(): LiveData<Result<GlucosaResponse>> = liveData {
         emit(Result.Loading)
@@ -31,9 +33,21 @@ class GlucofyRepository (
                 )
             }
 
+
             glucofyRoomDatabase.glucoseAverageTodayDao().deleteAll()
             if (glucoseToday != null) {
                 glucofyRoomDatabase.glucoseAverageTodayDao().insertGlucose(glucoseToday)
+            }
+
+            val glucoseData = response.data?.map {data ->
+                GlucoseDataEntity(
+                    data?.id ?: "", data?.datetime, data?.glucose, data?.condition
+                )
+            }
+
+            glucofyRoomDatabase.glucoseDataDao().deleteAll()
+            if (glucoseData != null) {
+                glucofyRoomDatabase.glucoseDataDao().insertGlucose(glucoseData)
             }
 
             val glucoseWeekly = response.averages?.weeklyThisMonth?.map {data ->
@@ -71,6 +85,29 @@ class GlucofyRepository (
             emit(Result.Success(response))
         }catch (e: Exception){
             emit(Result.Error(e.message.toString()))
+        }
+    }
+
+    suspend fun deleteGlucose(id: String): LiveData<Boolean>{
+        try {
+            apiService.deleteGlucosaById(id)
+
+            glucofyRoomDatabase.glucoseDataDao().deleteById(id)
+
+            return liveData {  true }
+        }catch (e: Exception){
+            return liveData { false }
+        }
+
+    }
+
+    suspend fun clearTableGlucose(): LiveData<Result<Boolean>> {
+        glucofyRoomDatabase.glucoseAverageTodayDao().deleteAll()
+        glucofyRoomDatabase.glucoseAverageWeeklyDao().deleteAll()
+        glucofyRoomDatabase.glucoseAverageMonthlyDao().deleteAll()
+        glucofyRoomDatabase.glucoseDataDao().deleteAll()
+        return liveData {
+            emit(Result.Success(true))
         }
     }
 

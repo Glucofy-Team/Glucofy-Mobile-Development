@@ -3,11 +3,11 @@
 
     <item
         android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:icon="@drawable/ic_dashboard"
         android:title="@string/title_dashboard" />
     <item
         android:id="@+id/navigation_food"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:icon="@drawable/ic_food"
         android:title="@string/title_food" />
     <item
         android:id="@+id/navigation_input"
@@ -15,12 +15,12 @@
         android:title="Input"/>
     <item
         android:id="@+id/navigation_glucosa"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/ic_glucose"
         android:title="@string/title_glucosa" />
 
     <item
         android:id="@+id/navigation_alarm"
-        android:icon="@drawable/ic_notifications_black_24dp"
+        android:icon="@drawable/ic_alarm"
         android:title="@string/title_alarm" />
 
 </menu>

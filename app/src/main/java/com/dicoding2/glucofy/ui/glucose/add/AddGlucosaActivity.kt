@@ -1,15 +1,14 @@
-package com.dicoding2.glucofy.ui
+package com.dicoding2.glucofy.ui.glucose.add
 
-import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import androidx.core.widget.addTextChangedListener
 import com.dicoding2.glucofy.R
 import com.dicoding2.glucofy.databinding.ActivityAddGlucosaBinding
 import com.dicoding2.glucofy.helper.toast
-import com.dicoding2.glucofy.ui.viewmodel.AddGlucosaViewModel
 import java.util.Calendar
 
 class AddGlucosaActivity : AppCompatActivity() {
@@ -83,16 +82,41 @@ class AddGlucosaActivity : AppCompatActivity() {
             timePickerDialog.show()
         }
 
+        binding.tiGlucosaLevel.addTextChangedListener {
+            updateSubmitButtonState()
+        }
+        binding.tiCondition.addTextChangedListener {
+            updateSubmitButtonState()
+        }
+        binding.tiNotes.addTextChangedListener {
+            updateSubmitButtonState()
+        }
+        binding.tiDate.addTextChangedListener {
+            updateSubmitButtonState()
+        }
+        binding.tiTime.addTextChangedListener {
+            updateSubmitButtonState()
+        }
 
         binding.btnSubmit.setOnClickListener {
             val glucosa = binding.tiGlucosaLevel.text.toString()
             val condition = binding.tiCondition.text.toString()
             val notes = binding.tiNotes.text.toString()
-            val date = "${binding.tiDate.text.toString()} ${binding.tiTime.text.toString()}"
+            val date = binding.tiDate.text.toString()
+            val time = binding.tiTime.text.toString()
 
-
-            addGlucosaViewModel.postGlucosa(glucosa,condition,notes, date)
+            addGlucosaViewModel.postGlucosa(glucosa,condition,notes, "$date $time")
         }
+        updateSubmitButtonState()
+    }
 
+    private fun updateSubmitButtonState() {
+        val isAllFieldsFilled = binding.tiGlucosaLevel.text?.isNotEmpty() == true &&
+                binding.tiCondition.text.isNotEmpty() &&
+                binding.tiNotes.text?.isNotEmpty() == true  &&
+                binding.tiDate.text?.isNotEmpty() == true &&
+                binding.tiTime.text?.isNotEmpty() == true
+
+        binding.btnSubmit.isEnabled = isAllFieldsFilled
     }
 }
