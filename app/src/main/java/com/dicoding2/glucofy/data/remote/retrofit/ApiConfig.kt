@@ -33,5 +33,35 @@ class ApiConfig {
                 .build()
             return retrofit.create(ApiService::class.java)
         }
+
+        fun getApiServiceML(token: String?) : ApiService {
+            val loggingInterceptor =
+                HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+
+            val authInterceptor = Interceptor { chain ->
+                val req = chain.request()
+                val requestHeaders = req.newBuilder()
+                    .addHeader("Authorization", "Bearer $token")
+                    .build()
+                chain.proceed(requestHeaders)
+            }
+
+            // Customize OkHttpClient with timeout settings
+            val client = OkHttpClient.Builder()
+                .addInterceptor(loggingInterceptor)
+                .addInterceptor(authInterceptor)
+                .connectTimeout(30, TimeUnit.SECONDS) // Connection timeout
+                .readTimeout(30, TimeUnit.SECONDS)    // Read timeout
+                .writeTimeout(30, TimeUnit.SECONDS)   // Write timeout
+                .build()
+
+            val retrofit = Retrofit.Builder()
+                .baseUrl("https://glucoft-ml2-krjm7o43mq-et.a.run.app/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client)
+                .build()
+
+            return retrofit.create(ApiService::class.java)
+        }
     }
 }

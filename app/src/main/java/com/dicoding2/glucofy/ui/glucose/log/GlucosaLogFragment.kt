@@ -2,7 +2,6 @@ package com.dicoding2.glucofy.ui.glucose.log
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,10 +12,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.dicoding2.glucofy.R
 import com.dicoding2.glucofy.adapter.SectionPagerGlucosaAdapter
-import com.dicoding2.glucofy.data.Result
 import com.dicoding2.glucofy.databinding.FragmentGlucosaLogBinding
 import com.dicoding2.glucofy.ui.glucose.add.AddGlucosaActivity
-import com.dicoding2.glucofy.ui.viewmodel.ViewModelFactory
+import com.dicoding2.glucofy.ui.viewmodel.GlucosaLogViewModel
+import com.dicoding2.glucofy.ui.factory.ViewModelFactory
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.launch
 

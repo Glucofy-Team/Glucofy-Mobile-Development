@@ -14,6 +14,8 @@ import com.dicoding2.glucofy.ui.MainActivity
 import com.dicoding2.glucofy.ui.auth.LoginActivity
 import com.dicoding2.glucofy.ui.viewmodel.ViewModelFactory
 import kotlinx.coroutines.launch
+import com.dicoding2.glucofy.ui.viewmodel.ProfileViewModel
+import com.dicoding2.glucofy.ui.factory.ViewModelFactory
 
 class ProfileActivity : AppCompatActivity() {
 

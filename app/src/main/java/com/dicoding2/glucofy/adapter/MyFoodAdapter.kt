@@ -7,12 +7,32 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.dicoding2.glucofy.R
-import com.dicoding2.glucofy.data.remote.response.FoodListItem
+import com.dicoding2.glucofy.data.remote.response.MyFoodListItem
 import com.dicoding2.glucofy.databinding.ItemFoodBinding
 import com.dicoding2.glucofy.ui.food.FoodDetailActivity
 
-class FoodAdapter : PagingDataAdapter<FoodListItem, FoodAdapter.FoodViewHolder>(DIFF_CALLBACK) {
-    override fun onBindViewHolder(holder: FoodViewHolder, position: Int) {
+class MyFoodAdapter : PagingDataAdapter<MyFoodListItem, MyFoodAdapter.MyFoodViewHolder> (DIFF_CALLBACK) {
+    class MyFoodViewHolder(val binding: ItemFoodBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(food: MyFoodListItem) {
+            binding.tvFoodName.text = food.foodName
+            binding.tvCalories.text = "${food.calories.toString()} kkal"
+            binding.tvGlIndex.text = food.gIndex.toString()
+
+            when {
+                food.gIndex!! <= 55 -> {
+                    binding.circleLayout.setBackgroundResource(R.drawable.circle_background_low)
+                }
+                food.gIndex <= 69 -> {
+                    binding.circleLayout.setBackgroundResource(R.drawable.circle_background_medium)
+                }
+                else -> {
+                    binding.circleLayout.setBackgroundResource(R.drawable.circle_background_high)
+                }
+            }
+        }
+    }
+
+    override fun onBindViewHolder(holder: MyFoodViewHolder, position: Int) {
         val food = getItem(position)
         if (food != null) {
             holder.bind(food)
@@ -32,39 +52,19 @@ class FoodAdapter : PagingDataAdapter<FoodListItem, FoodAdapter.FoodViewHolder>(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyFoodViewHolder {
         val binding = ItemFoodBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return FoodViewHolder(binding)
+        return MyFoodViewHolder(binding)
     }
 
     companion object {
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<FoodListItem>() {
-            override fun areItemsTheSame(oldItem: FoodListItem, newItem: FoodListItem): Boolean {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<MyFoodListItem>() {
+            override fun areItemsTheSame(oldItem: MyFoodListItem, newItem: MyFoodListItem): Boolean {
                 return oldItem.id == newItem.id
             }
 
-            override fun areContentsTheSame(oldItem: FoodListItem, newItem: FoodListItem): Boolean {
+            override fun areContentsTheSame(oldItem: MyFoodListItem, newItem: MyFoodListItem): Boolean {
                 return oldItem == newItem
-            }
-        }
-    }
-
-    class FoodViewHolder(val binding: ItemFoodBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(food: FoodListItem) {
-            binding.tvFoodName.text = food.foodName
-            binding.tvCalories.text = "${food.calories.toString()} kkal"
-            binding.tvGlIndex.text = food.gIndex.toString()
-
-            when {
-                food.gIndex <= 55 -> {
-                    binding.circleLayout.setBackgroundResource(R.drawable.circle_background_low)
-                }
-                food.gIndex <= 69 -> {
-                    binding.circleLayout.setBackgroundResource(R.drawable.circle_background_medium)
-                }
-                else -> {
-                    binding.circleLayout.setBackgroundResource(R.drawable.circle_background_high)
-                }
             }
         }
     }

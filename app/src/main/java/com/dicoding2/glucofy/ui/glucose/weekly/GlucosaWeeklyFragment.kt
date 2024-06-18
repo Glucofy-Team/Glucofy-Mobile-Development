@@ -12,7 +12,8 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding2.glucofy.data.local.entity.GlucoseAverageWeeklyEntity
 import com.dicoding2.glucofy.databinding.FragmentGlucosaWeeklyBinding
-import com.dicoding2.glucofy.ui.viewmodel.ViewModelFactory
+import com.dicoding2.glucofy.ui.viewmodel.GlucosaWeeklyViewModel
+import com.dicoding2.glucofy.ui.factory.ViewModelFactory
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet

@@ -26,4 +26,7 @@
     <color name="neutrals_800">#2D3648</color>
     <color name="neutrals_900">#1A202C</color>
 
+    <color name="high_index">#DC3644</color>
+    <color name="medium_index">#F9A73E</color>
+    <color name="low_index">#006F3C</color>
 </resources>

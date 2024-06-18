@@ -13,7 +13,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding2.glucofy.data.local.entity.GlucoseAverageMonthlyEntity
 import com.dicoding2.glucofy.databinding.FragmentGlucosaMonthlyBinding
-import com.dicoding2.glucofy.ui.viewmodel.ViewModelFactory
+import com.dicoding2.glucofy.ui.viewmodel.GlucosaMonthlyViewModel
+import com.dicoding2.glucofy.ui.factory.ViewModelFactory
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet

@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +22,8 @@ import com.dicoding2.glucofy.data.Result
 import com.dicoding2.glucofy.data.local.entity.GlucoseAverageTodayEntity
 import com.dicoding2.glucofy.data.local.entity.GlucoseDataEntity
 import com.dicoding2.glucofy.databinding.FragmentGlucosaTodayBinding
-import com.dicoding2.glucofy.ui.viewmodel.ViewModelFactory
+import com.dicoding2.glucofy.ui.viewmodel.GlucosaTodayViewModel
+import com.dicoding2.glucofy.ui.factory.ViewModelFactory
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.components.MarkerView
