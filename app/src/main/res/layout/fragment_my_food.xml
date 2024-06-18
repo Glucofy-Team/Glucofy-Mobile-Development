@@ -5,9 +5,13 @@
     android:layout_height="match_parent"
     tools:context=".ui.food.MyFoodFragment">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_my_food"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="16dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_height="wrap_content"
+        android:overScrollMode="never"
+        android:scrollbarSize="0dp" />
 
 </FrameLayout>

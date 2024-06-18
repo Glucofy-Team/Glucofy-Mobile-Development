@@ -8,7 +8,9 @@ import androidx.paging.PagingData
 import androidx.paging.liveData
 import com.dicoding2.glucofy.data.local.room.FoodDatabase
 import com.dicoding2.glucofy.data.pagingsource.FoodPagingSource
+import com.dicoding2.glucofy.data.pagingsource.MyFoodPagingSource
 import com.dicoding2.glucofy.data.remote.response.FoodListItem
+import com.dicoding2.glucofy.data.remote.response.MyFoodListItem
 import com.dicoding2.glucofy.data.remote.retrofit.ApiService
 
 class FoodRepository (
@@ -24,6 +26,18 @@ class FoodRepository (
             ),
             pagingSourceFactory = {
                 FoodPagingSource(apiService, query)
+            }
+        ).liveData
+    }
+
+    fun getMyFoods() : LiveData<PagingData<MyFoodListItem>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 5,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = {
+                MyFoodPagingSource(apiService)
             }
         ).liveData
     }

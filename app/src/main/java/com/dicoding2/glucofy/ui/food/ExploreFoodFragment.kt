@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
@@ -65,11 +64,6 @@ class ExploreFoodFragment : Fragment() {
 
     private fun setupSearchView() {
         with(binding) {
-            searchView.setupWithSearchBar(searchBar)
-            searchView.editText.addTextChangedListener {editable ->
-                val query = editable.toString()
-                viewModel.findFoods(query)
-            }
             searchView.editText.setOnEditorActionListener { _, _, _ ->
                 binding.searchBar.setText(binding.searchView.text)
                 binding.addNewFoodButton.text = "Tambahkan \"${binding.searchView.text}\""

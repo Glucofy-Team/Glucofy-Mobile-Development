@@ -5,6 +5,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 class ApiConfig {
     companion object{
@@ -33,6 +34,7 @@ class ApiConfig {
         fun getApiServiceML(token: String?) : ApiService {
             val loggingInterceptor =
                 HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+
             val authInterceptor = Interceptor { chain ->
                 val req = chain.request()
                 val requestHeaders = req.newBuilder()
@@ -40,15 +42,22 @@ class ApiConfig {
                     .build()
                 chain.proceed(requestHeaders)
             }
+
+            // Customize OkHttpClient with timeout settings
             val client = OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
                 .addInterceptor(authInterceptor)
+                .connectTimeout(30, TimeUnit.SECONDS) // Connection timeout
+                .readTimeout(30, TimeUnit.SECONDS)    // Read timeout
+                .writeTimeout(30, TimeUnit.SECONDS)   // Write timeout
                 .build()
+
             val retrofit = Retrofit.Builder()
                 .baseUrl("https://glucoft-ml2-krjm7o43mq-et.a.run.app/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()
+
             return retrofit.create(ApiService::class.java)
         }
     }

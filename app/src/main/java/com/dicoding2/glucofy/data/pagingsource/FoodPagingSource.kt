@@ -33,7 +33,7 @@ class FoodPagingSource (
         }
     }
 
-    private companion object {
+    companion object {
         const val INITIAL_PAGE_INDEX = 1
     }
 }

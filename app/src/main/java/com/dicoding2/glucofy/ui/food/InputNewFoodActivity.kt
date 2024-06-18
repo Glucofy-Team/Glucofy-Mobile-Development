@@ -53,7 +53,7 @@ class InputNewFoodActivity : AppCompatActivity() {
         val calories = binding.edCalories.text.toString().toDoubleOrNull() ?: 0
 
         if (foodName.isNotEmpty() && category.isNotEmpty()) {
-            viewModel.postNewFood(foodName, category, carbs, protein, fats, calories)
+            viewModel.postNewFood(this, foodName, category, carbs, protein, fats, calories)
         } else {
             Snackbar.make(binding.root, "Please fill out all fields", Snackbar.LENGTH_LONG).show()
         }
@@ -68,7 +68,7 @@ class InputNewFoodActivity : AppCompatActivity() {
                     val intent = Intent(this, FoodDetailActivity::class.java).apply {
                         putExtra("foodName", it.foodName)
                         putExtra("category", it.category)
-                        putExtra("carbs", it.carbs)
+                        putExtra("carbs", it.carbs as Double)
                         putExtra("protein", it.proteins)
                         putExtra("fats", it.fats)
                         putExtra("calories", it.calories)

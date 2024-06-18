@@ -6,7 +6,7 @@ import com.dicoding2.glucofy.ui.food.ExploreFoodFragment
 
 class SectionPagerFoodAdapter (fragment: Fragment) : FragmentStateAdapter(fragment) {
     override fun getItemCount(): Int {
-        return 3
+        return 2
     }
 
     override fun createFragment(position: Int): Fragment {
@@ -14,7 +14,6 @@ class SectionPagerFoodAdapter (fragment: Fragment) : FragmentStateAdapter(fragme
         when (position) {
             0 -> fragment = ExploreFoodFragment()
             1 -> fragment = ExploreFoodFragment()
-            2 -> fragment = ExploreFoodFragment()
         }
         return fragment as Fragment
     }
