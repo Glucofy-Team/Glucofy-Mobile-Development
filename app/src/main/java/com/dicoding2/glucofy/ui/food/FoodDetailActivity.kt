@@ -43,7 +43,6 @@ class FoodDetailActivity : AppCompatActivity() {
             id = "",
         )
 
-        // Pass the DetailFood instance to showFoodDetails
         showFoodDetails(food)
     }
     private fun showFoodDetails(food: FoodListItem) {

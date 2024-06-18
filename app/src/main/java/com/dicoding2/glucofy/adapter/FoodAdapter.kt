@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.dicoding2.glucofy.R
 import com.dicoding2.glucofy.data.remote.response.FoodListItem
 import com.dicoding2.glucofy.databinding.ItemFoodBinding
 import com.dicoding2.glucofy.ui.food.FoodDetailActivity
@@ -51,10 +52,20 @@ class FoodAdapter : PagingDataAdapter<FoodListItem, FoodAdapter.FoodViewHolder>(
     class FoodViewHolder(val binding: ItemFoodBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(food: FoodListItem) {
             binding.tvFoodName.text = food.foodName
-            binding.tvCalories.text = food.calories.toString()
-            binding.tvFats.text = food.fats.toString()
-            binding.tvProtein.text = food.proteins.toString()
+            binding.tvCalories.text = "${food.calories.toString()} kkal"
             binding.tvGlIndex.text = food.gIndex.toString()
+
+            when {
+                food.gIndex <= 55 -> {
+                    binding.circleLayout.setBackgroundResource(R.drawable.circle_background_low)
+                }
+                food.gIndex <= 69 -> {
+                    binding.circleLayout.setBackgroundResource(R.drawable.circle_background_medium)
+                }
+                else -> {
+                    binding.circleLayout.setBackgroundResource(R.drawable.circle_background_high)
+                }
+            }
         }
     }
 }

@@ -22,6 +22,9 @@ class ExploreFoodViewModel(private val foodRepository: FoodRepository) : ViewMod
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String> get() = _errorMessage
 
+//    private val _showAddButton = MutableLiveData<Boolean>()
+//    val showAddButton: LiveData<Boolean> get() = _showAddButton
+
     fun findFoods(name: String) {
         viewModelScope.launch {
             try {

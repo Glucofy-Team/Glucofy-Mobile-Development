@@ -22,6 +22,9 @@ class InputNewFoodActivity : AppCompatActivity() {
         binding = ActivityInputNewFoodBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val foodName = intent.getStringExtra("name")
+        binding.edFoodName.text?.append(foodName)
+
         viewModel = obtainViewModel(this)
         setupCategoryAdapter()
 
