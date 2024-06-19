@@ -9,8 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding2.glucofy.databinding.FragmentDashboardBinding
 import com.dicoding2.glucofy.ui.calculator.CalculatorActivity
-import com.dicoding2.glucofy.ui.profile.ProfileActivity
 import com.dicoding2.glucofy.ui.food.InputNewFoodActivity
+import com.dicoding2.glucofy.ui.profile.ProfileActivity
 import com.dicoding2.glucofy.ui.recomendation.RecomendationActivity
 
 class DashboardFragment : Fragment() {
@@ -47,7 +47,7 @@ class DashboardFragment : Fragment() {
             startActivity(intent)
         }
 
-        binding.fabAddFood.setOnClickListener {
+        binding.btnFoodInput.setOnClickListener {
             val intent = Intent(requireContext(), InputNewFoodActivity::class.java)
             intent.putExtra("name", "")
             startActivity(intent)
