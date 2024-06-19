@@ -9,7 +9,6 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.dicoding2.glucofy.data.remote.response.FoodListItem
 import com.dicoding2.glucofy.data.remote.response.MyFoodListItem
-import com.dicoding2.glucofy.data.remote.response.MyFoodResponse
 import com.dicoding2.glucofy.data.repository.FoodRepository
 import kotlinx.coroutines.launch
 
@@ -23,8 +22,8 @@ class FoodViewModel(private val foodRepository: FoodRepository) : ViewModel() {
     val searchFoodResults: LiveData<PagingData<FoodListItem>> get() = _searchFoodResults
 
     // My Food
-    private val _myFood = MutableLiveData<MyFoodResponse>()
-    val myFood: LiveData<MyFoodResponse> = _myFood
+    val myFood: LiveData<PagingData<MyFoodListItem>> =
+        foodRepository.getMyFoods().cachedIn(viewModelScope)
 
     private val _searchMyFoodResults = MutableLiveData<PagingData<MyFoodListItem>>()
     val searchMyFoodResults: LiveData<PagingData<MyFoodListItem>> get() = _searchMyFoodResults
@@ -52,9 +51,11 @@ class FoodViewModel(private val foodRepository: FoodRepository) : ViewModel() {
     fun findMyFoods() {
         viewModelScope.launch {
             try {
-                val newResult = foodRepository.getMyFoods()
-                _myFood.value = newResult
-                Log.d("FoodViewModel", "MyFood data received:")
+                val newResult = foodRepository.getMyFoods().cachedIn(viewModelScope)
+                newResult.observeForever { pagingData ->
+                    _searchMyFoodResults.value = pagingData
+                    Log.d("FoodViewModel", "MyFood data received: $pagingData")
+                }
             } catch (e: Exception) {
                 _errorMessage.value = e.message
                 Log.e("FoodViewModel", "Error: ${e.message}")
