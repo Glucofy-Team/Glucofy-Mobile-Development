@@ -18,7 +18,7 @@ class MyFoodPagingSource (
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MyFoodListItem> {
         return try {
             val position = params.key ?: FoodPagingSource.INITIAL_PAGE_INDEX
-            val responseData = apiService.getMyFood( position, params.loadSize)
+            val responseData = apiService.getMyFood(position, params.loadSize)
 
             val nextPage = if (responseData.myFoodLisItem.isEmpty()) null else position + 1
 

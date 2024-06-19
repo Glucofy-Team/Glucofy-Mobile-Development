@@ -43,17 +43,16 @@ class ApiConfig {
                 chain.proceed(requestHeaders)
             }
 
-            // Customize OkHttpClient with timeout settings
             val client = OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
                 .addInterceptor(authInterceptor)
-                .connectTimeout(30, TimeUnit.SECONDS) // Connection timeout
-                .readTimeout(30, TimeUnit.SECONDS)    // Read timeout
-                .writeTimeout(30, TimeUnit.SECONDS)   // Write timeout
+                .connectTimeout(120, TimeUnit.SECONDS)
+                .readTimeout(120, TimeUnit.SECONDS)
+                .writeTimeout(120, TimeUnit.SECONDS)
                 .build()
 
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://glucoft-ml2-krjm7o43mq-et.a.run.app/")
+                .baseUrl("https://glucofy-ml-krjm7o43mq-et.a.run.app/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()
