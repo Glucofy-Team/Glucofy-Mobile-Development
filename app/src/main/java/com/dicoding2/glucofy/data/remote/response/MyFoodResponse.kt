@@ -5,10 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class MyFoodResponse(
 
 	@field:SerializedName("data")
-	val myFoodLisItem: List<MyFoodListItem>,
-
-	@field:SerializedName("today")
-	val today: List<Any?>? = null,
+	val myFoodListItem: List<MyFoodListItem?>? = null,
 
 	@field:SerializedName("message")
 	val message: String? = null,
@@ -26,13 +23,13 @@ data class MyFoodListItem(
 	val foodName: String? = null,
 
 	@field:SerializedName("gLoad")
-	val gLoad: Int? = null,
+	val gLoad: Any? = null,
 
 	@field:SerializedName("datetime")
 	val datetime: String? = null,
 
 	@field:SerializedName("carbs")
-	val carbs: Int? = null,
+	val carbs: Any? = null,
 
 	@field:SerializedName("fats")
 	val fats: Any? = null,

@@ -78,8 +78,5 @@ interface ApiService {
     ): Call<NewFoodResponse>
 
     @GET("food")
-    fun getMyFood(
-        @Query("page") page: Int = 1,
-        @Query("size") size: Int = 2
-    ) : MyFoodResponse
+    suspend fun getMyFood() : MyFoodResponse
 }
