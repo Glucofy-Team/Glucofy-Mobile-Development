@@ -8,14 +8,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding2.glucofy.R
 import com.dicoding2.glucofy.adapter.MyFoodAdapter
 import com.dicoding2.glucofy.databinding.FragmentMyFoodBinding
 import com.dicoding2.glucofy.ui.costumview.DividerItemDecoration
 import com.dicoding2.glucofy.ui.factory.ViewModelFactory
-import kotlinx.coroutines.launch
 
 class MyFoodFragment : Fragment() {
 
@@ -24,11 +22,6 @@ class MyFoodFragment : Fragment() {
 
     private lateinit var viewModel : FoodViewModel
     private lateinit var adapter : MyFoodAdapter
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        // TODO: Use the ViewModel
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,8 +38,11 @@ class MyFoodFragment : Fragment() {
         Log.d("MyFoodFragment", "onCreateView called")
 
         return root
+    }
 
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        Log.d("MyFoodFragment", "onViewCreated called")
     }
 
     private fun obtainViewModel(activity: FragmentActivity): FoodViewModel {
@@ -66,15 +62,12 @@ class MyFoodFragment : Fragment() {
 
     private fun observeData(){
         viewModel.findMyFoods()
-        viewModel.myFood.observe(viewLifecycleOwner) { pagingData ->
-            lifecycleScope.launch {
-                adapter.submitData(pagingData)
-            }
-        }
-
-        viewModel.searchMyFoodResults.observe(viewLifecycleOwner) {pagingData ->
-            lifecycleScope.launch {
-                adapter.submitData(pagingData)
+        viewModel.myFood.observe(viewLifecycleOwner){foodReponse ->
+            if (foodReponse != null){
+                adapter.submitList(foodReponse.myFoodListItem)
+                Log.d("MyFoodFragment", "observeData called")
+            } else {
+                Log.d("MyFoodFragment", "foodResponse is empty")
             }
         }
     }

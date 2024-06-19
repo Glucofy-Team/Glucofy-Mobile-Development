@@ -3,15 +3,15 @@ package com.dicoding2.glucofy.adapter
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.dicoding2.glucofy.R
 import com.dicoding2.glucofy.data.remote.response.MyFoodListItem
 import com.dicoding2.glucofy.databinding.ItemFoodBinding
 import com.dicoding2.glucofy.ui.food.FoodDetailActivity
 
-class MyFoodAdapter : PagingDataAdapter<MyFoodListItem, MyFoodAdapter.MyFoodViewHolder> (DIFF_CALLBACK) {
+class MyFoodAdapter : ListAdapter<MyFoodListItem, MyFoodAdapter.MyFoodViewHolder> (DIFF_CALLBACK) {
     class MyFoodViewHolder(val binding: ItemFoodBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(food: MyFoodListItem) {
             binding.tvFoodName.text = food.foodName
