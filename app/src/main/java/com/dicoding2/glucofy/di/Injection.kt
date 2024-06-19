@@ -1,6 +1,7 @@
 package com.dicoding2.glucofy.di
 
 import android.content.Context
+import android.util.Log
 import com.dicoding2.glucofy.data.UserPreference
 import com.dicoding2.glucofy.data.local.room.AlarmDatabase
 import com.dicoding2.glucofy.data.local.room.FoodDatabase
@@ -17,6 +18,7 @@ object Injection {
     fun provideGlucofyRepository(context: Context): GlucofyRepository {
         val pref = UserPreference(context)
         val user = runBlocking { pref.getUser() }
+        Log.d("token45", user.token.toString())
         val apiService = ApiConfig.getApiService(user.token)
         val database = GlucofyRoomDatabase.getDatabase(context)
         return GlucofyRepository.getInstance(database, apiService)

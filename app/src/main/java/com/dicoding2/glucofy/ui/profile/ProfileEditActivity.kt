@@ -86,7 +86,7 @@ class ProfileEditActivity : AppCompatActivity() {
         binding.tiPhoneNumber.setText(data.phoneNumber)
         binding.tvEmail.text = data.email
         binding.tiAge.setText(data.age)
-//        binding.tiGender.setText(data.gender)
+        binding.tiGender.setText(data.gender)
         binding.tiHeight.setText(data.height)
         binding.tiWeight.setText(data.weight)
 

@@ -30,4 +30,5 @@
     <dimen name="body_M">16sp</dimen>
     <dimen name="body_S">14sp</dimen>
     <dimen name="body_XS">12sp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>
