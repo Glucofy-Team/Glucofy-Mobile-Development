@@ -9,5 +9,5 @@ import com.dicoding2.glucofy.data.repository.FoodRepository
 class MyFoodViewModel (
     private val repository: FoodRepository
 ): ViewModel() {
-    val myFood: LiveData<PagingData<MyFoodListItem>> = repository.getMyFoods
+    val myFood: LiveData<PagingData<MyFoodListItem>> = repository.getMyFoods()
 }

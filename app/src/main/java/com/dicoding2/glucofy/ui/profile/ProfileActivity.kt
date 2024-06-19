@@ -3,6 +3,7 @@ package com.dicoding2.glucofy.ui.profile
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.dicoding2.glucofy.data.Result
@@ -10,12 +11,9 @@ import com.dicoding2.glucofy.data.UserPreference
 import com.dicoding2.glucofy.data.local.entity.UserEntity
 import com.dicoding2.glucofy.data.remote.response.Data
 import com.dicoding2.glucofy.databinding.ActivityProfileBinding
-import com.dicoding2.glucofy.ui.MainActivity
 import com.dicoding2.glucofy.ui.auth.LoginActivity
-import com.dicoding2.glucofy.ui.viewmodel.ViewModelFactory
-import kotlinx.coroutines.launch
-import com.dicoding2.glucofy.ui.viewmodel.ProfileViewModel
 import com.dicoding2.glucofy.ui.factory.ViewModelFactory
+import kotlinx.coroutines.launch
 
 class ProfileActivity : AppCompatActivity() {
 
@@ -32,16 +30,15 @@ class ProfileActivity : AppCompatActivity() {
         }
 
         binding.btnLogout.setOnClickListener {
-            clearGlucoseTables()
             val userPreference = UserPreference(this)
-
+            clearGlucoseTables()
             userPreference.deleteUser()
 
             val intent = Intent(this, LoginActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
 
             finishAffinity()
+
         }
 
         getProfile()
@@ -51,7 +48,7 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun clearGlucoseTables() {
         lifecycleScope.launch {
-            val result = profileViewModel.clearTableGlucose()
+            profileViewModel.clearTableGlucose()
         }
     }
 
@@ -79,7 +76,7 @@ class ProfileActivity : AppCompatActivity() {
     private fun setPreferenceUser(data: Data){
         val userPreference = UserPreference(this)
         val token = userPreference.getUser().token
-
+        Log.d("testToken","$token")
 
         var userModel = UserEntity(
             token,

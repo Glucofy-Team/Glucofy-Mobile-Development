@@ -2,22 +2,22 @@ package com.dicoding2.glucofy.ui.glucose.log
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.StringRes
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.dicoding2.glucofy.R
 import com.dicoding2.glucofy.adapter.SectionPagerGlucosaAdapter
 import com.dicoding2.glucofy.databinding.FragmentGlucosaLogBinding
-import com.dicoding2.glucofy.ui.glucose.add.AddGlucosaActivity
-import com.dicoding2.glucofy.ui.viewmodel.GlucosaLogViewModel
 import com.dicoding2.glucofy.ui.factory.ViewModelFactory
+import com.dicoding2.glucofy.ui.glucose.add.AddGlucosaActivity
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.launch
+import  com.dicoding2.glucofy.data.Result
 
 class GlucosaLogFragment : Fragment() {
     private var _binding: FragmentGlucosaLogBinding? = null
@@ -42,16 +42,16 @@ class GlucosaLogFragment : Fragment() {
         glucosaLogViewModel.getRequestGlucose().observe(viewLifecycleOwner){result ->
             if (result != null) {
                 when (result) {
+                    is Result.Error -> {
+                        if (result.error.contains("HTTP 404", ignoreCase = true)) {
+                            clearGlucoseTables()
+                        }
+                    }
                     is Result.Loading -> {
                         //nothing
                     }
                     is Result.Success -> {
                         //nothing
-                    }
-                    is Result.Error -> {
-                        if (result.error.contains("HTTP 404", ignoreCase = true)) {
-                           clearGlucoseTables()
-                        }
                     }
                 }
             }
@@ -75,10 +75,12 @@ class GlucosaLogFragment : Fragment() {
             tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
     }
+
     private fun obtainViewModel(activity: FragmentActivity): GlucosaLogViewModel {
         val factory = ViewModelFactory.getInstance(requireContext())
         return ViewModelProvider(activity, factory)[GlucosaLogViewModel::class.java]
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

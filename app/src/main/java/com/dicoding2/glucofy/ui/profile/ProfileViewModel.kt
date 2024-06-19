@@ -2,6 +2,7 @@ package com.dicoding2.glucofy.ui.profile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.dicoding2.glucofy.data.repository.GlucofyRepository
 import com.dicoding2.glucofy.data.Result
@@ -12,10 +13,13 @@ import kotlinx.coroutines.launch
 class ProfileViewModel(private val glucofyRepository: GlucofyRepository, private val alarmRepository: AlarmRepository) : ViewModel() {
     fun getUserProfile(): LiveData<Result<UserProfileResponse>> = glucofyRepository.getProfile()
 
-    fun clearTableGlucose() {
+    fun clearTableGlucose(): LiveData<Boolean> {
         viewModelScope.launch {
             alarmRepository.deleteAll()
             glucofyRepository.clearTableGlucose()
+        }
+        return liveData {
+            true
         }
     }
 }

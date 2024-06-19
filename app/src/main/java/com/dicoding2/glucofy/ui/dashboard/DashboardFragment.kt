@@ -11,6 +11,7 @@ import com.dicoding2.glucofy.databinding.FragmentDashboardBinding
 import com.dicoding2.glucofy.ui.calculator.CalculatorActivity
 import com.dicoding2.glucofy.ui.profile.ProfileActivity
 import com.dicoding2.glucofy.ui.food.InputNewFoodActivity
+import com.dicoding2.glucofy.ui.recomendation.RecomendationActivity
 
 class DashboardFragment : Fragment() {
 
@@ -36,10 +37,10 @@ class DashboardFragment : Fragment() {
             startActivity(intent)
         }
 
-//        binding.ivRecomendationFood.setOnClickListener {
-//            val intent = Intent(requireContext(), RecomendationFoodActivity::class.java)
-//            startActivity(intent)
-//        }
+        binding.ivRecomendationFood.setOnClickListener {
+            val intent = Intent(requireContext(), RecomendationActivity::class.java)
+            startActivityForResult(intent,100)
+        }
 
         binding.ivProfileImage.setOnClickListener {
             val intent = Intent(requireContext(), ProfileActivity::class.java)
@@ -47,12 +48,12 @@ class DashboardFragment : Fragment() {
         }
 
         binding.fabAddFood.setOnClickListener {
-            val intent = Intent(activity, InputNewFoodActivity::class.java)
+            val intent = Intent(requireContext(), InputNewFoodActivity::class.java)
+            intent.putExtra("name", "")
             startActivity(intent)
         }
         return root
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
