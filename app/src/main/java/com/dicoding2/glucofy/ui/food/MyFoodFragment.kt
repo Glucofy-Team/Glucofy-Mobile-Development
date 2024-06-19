@@ -22,7 +22,7 @@ class MyFoodFragment : Fragment() {
     private var _binding: FragmentMyFoodBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewModel : MyFoodViewModel
+    private lateinit var viewModel : FoodViewModel
     private lateinit var adapter : MyFoodAdapter
 
     override fun onCreateView(
@@ -49,9 +49,9 @@ class MyFoodFragment : Fragment() {
         Log.d("MyFoodFragment", "onViewCreated called")
     }
 
-    private fun obtainViewModel(activity: FragmentActivity): MyFoodViewModel {
+    private fun obtainViewModel(activity: FragmentActivity): FoodViewModel {
         val factory = ViewModelFactory.getInstance(requireContext())
-        return ViewModelProvider(activity, factory)[MyFoodViewModel::class.java]
+        return ViewModelProvider(activity, factory)[FoodViewModel::class.java]
     }
 
     private fun initRecycleView(){
@@ -72,7 +72,7 @@ class MyFoodFragment : Fragment() {
             }
         }
 
-        viewModel.searchResults.observe(viewLifecycleOwner) {pagingData ->
+        viewModel.searchMyFoodResults.observe(viewLifecycleOwner) {pagingData ->
             lifecycleScope.launch {
                 adapter.submitData(pagingData)
             }

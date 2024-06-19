@@ -10,11 +10,9 @@ import com.dicoding2.glucofy.data.repository.InputFoodRepository
 import com.dicoding2.glucofy.di.Injection
 import com.dicoding2.glucofy.ui.alarm.AlarmViewModel
 import com.dicoding2.glucofy.ui.alarm.CreateAlarmViewModel
-import com.dicoding2.glucofy.ui.food.ExploreFoodViewModel
 import com.dicoding2.glucofy.ui.food.FoodDetailViewModel
 import com.dicoding2.glucofy.ui.food.FoodViewModel
 import com.dicoding2.glucofy.ui.food.InputNewFoodViewModel
-import com.dicoding2.glucofy.ui.food.MyFoodViewModel
 import com.dicoding2.glucofy.ui.viewmodel.GlucosaLogViewModel
 import com.dicoding2.glucofy.ui.viewmodel.GlucosaMonthlyViewModel
 import com.dicoding2.glucofy.ui.viewmodel.GlucosaTodayViewModel
@@ -52,9 +50,6 @@ class ViewModelFactory private constructor(
           modelClass.isAssignableFrom(AlarmViewModel::class.java) -> {
               return AlarmViewModel(alarmRepository) as T
           }
-          modelClass.isAssignableFrom(ExploreFoodViewModel::class.java) -> {
-            return ExploreFoodViewModel(foodRepository) as T
-          }
            modelClass.isAssignableFrom(FoodDetailViewModel::class.java) -> {
              return FoodDetailViewModel(foodRepository) as T
           }
@@ -63,9 +58,6 @@ class ViewModelFactory private constructor(
            }
            modelClass.isAssignableFrom(FoodViewModel::class.java) -> {
                return FoodViewModel(foodRepository) as T
-           }
-           modelClass.isAssignableFrom(MyFoodViewModel::class.java) -> {
-               return MyFoodViewModel(foodRepository) as T
            }
           else -> {throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")}
        }
