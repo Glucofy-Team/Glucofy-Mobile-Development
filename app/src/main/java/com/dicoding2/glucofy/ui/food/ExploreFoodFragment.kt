@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 class ExploreFoodFragment : Fragment() {
 
     private lateinit var adapter: FoodAdapter
-    private lateinit var viewModel: ExploreFoodViewModel
+    private lateinit var viewModel: FoodViewModel
     private var _binding: FragmentExploreFoodBinding? = null
     private val binding get() = _binding!!
 
@@ -48,9 +48,9 @@ class ExploreFoodFragment : Fragment() {
         return root
     }
 
-    private fun obtainViewModel(activity: FragmentActivity): ExploreFoodViewModel {
+    private fun obtainViewModel(activity: FragmentActivity): FoodViewModel {
         val factory = ViewModelFactory.getInstance(requireContext())
-        return ViewModelProvider(activity, factory)[ExploreFoodViewModel::class.java]
+        return ViewModelProvider(activity, factory)[FoodViewModel::class.java]
     }
 
     private fun initRecyclerView() {
@@ -82,7 +82,7 @@ class ExploreFoodFragment : Fragment() {
             }
         }
 
-        viewModel.searchResults.observe(viewLifecycleOwner) { pagingData ->
+        viewModel.searchFoodResults.observe(viewLifecycleOwner) { pagingData ->
             lifecycleScope.launch {
                 pagingData?. let {
                     adapter.submitData(it)

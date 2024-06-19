@@ -43,22 +43,22 @@
             android:name=".ui.alarm.RingActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.profile.ProfileEditActivity"
+            android:name=".ui.ProfileEditActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.profile.ProfileActivity"
+            android:name=".ui.ProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.calculator.CalculatorActivity"
+            android:name=".ui.CalculatorActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.glucose.add.AddGlucosaActivity"
+            android:name=".ui.AddGlucosaActivity"
             android:exported="false" />
         <activity
             android:name=".ui.auth.LoginActivity"
             android:exported="false"/>
         <activity
-            android:name=".ui.auth.RegisterSuccessActivity"
+            android:name=".ui.RegisterSuccessActivity"
             android:exported="false" />
         <activity
             android:name=".ui.auth.RegisterActivity"
@@ -69,7 +69,6 @@
 
         <receiver
             android:name=".broadcastreceiver.AlarmBroadcastReceiver"
-            android:enabled="true"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -78,8 +77,6 @@
 
         <service
             android:name=".data.service.AlarmService"
-            android:enabled="true"
-            android:exported="true"
             android:foregroundServiceType="remoteMessaging" />
         <service android:name=".data.service.RescheduleAlarmsService" />
     </application>

@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.dicoding2.glucofy.R
@@ -37,25 +36,6 @@ class RegisterFragmentStep1 : Fragment() {
             )
             viewPager.setCurrentItem(1, true)
         }
-
-        binding.tiEmail.addTextChangedListener {
-            updateSubmitButtonState()
-        }
-        binding.tiPassword.addTextChangedListener {
-            updateSubmitButtonState()
-        }
-        binding.tiLastName.addTextChangedListener {
-            updateSubmitButtonState()
-        }
-        binding.tiFirstName.addTextChangedListener {
-            updateSubmitButtonState()
-        }
-        binding.tiPhoneNumber.addTextChangedListener {
-            updateSubmitButtonState()
-        }
-
-        updateSubmitButtonState()
-
         return binding.root
     }
 
@@ -70,13 +50,5 @@ class RegisterFragmentStep1 : Fragment() {
         )
         registerPreference.setUserRegister(registerModel)
     }
-    private fun updateSubmitButtonState() {
-        val isAllFieldsFilled = binding.tiEmail.text?.isNotEmpty() == true &&
-                binding.tiPassword.text?.isNotEmpty() == true &&
-                binding.tiLastName.text?.isNotEmpty() == true &&
-                binding.tiFirstName.text?.isNotEmpty() == true &&
-                binding.tiPhoneNumber.text?.isNotEmpty() == true
 
-        binding.btnNext.isEnabled = isAllFieldsFilled
-    }
 }

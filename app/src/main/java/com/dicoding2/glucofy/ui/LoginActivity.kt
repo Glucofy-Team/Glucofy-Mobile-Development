@@ -1,16 +1,16 @@
-package com.dicoding2.glucofy.ui.auth
+package com.dicoding2.glucofy.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.widget.addTextChangedListener
 import com.dicoding2.glucofy.data.UserPreference
 import com.dicoding2.glucofy.data.local.entity.UserEntity
 import com.dicoding2.glucofy.data.remote.response.LoginResponse
 import com.dicoding2.glucofy.databinding.ActivityLoginBinding
 import com.dicoding2.glucofy.di.Injection
 import com.dicoding2.glucofy.helper.toast
-import com.dicoding2.glucofy.ui.MainActivity
+import com.dicoding2.glucofy.ui.auth.LoginViewModel
+import com.dicoding2.glucofy.ui.auth.RegisterActivity
 
 class LoginActivity : AppCompatActivity() {
 
@@ -42,18 +42,9 @@ class LoginActivity : AppCompatActivity() {
             loginViewModel.postLogin(email, password)
         }
 
-        binding.tiEmail.addTextChangedListener {
-            updateSubmitButtonState()
-        }
-
-        binding.tiPassword.addTextChangedListener {
-            updateSubmitButtonState()
-        }
-
         binding.tvRegister.setOnClickListener {
             startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
         }
-        updateSubmitButtonState()
     }
 
     override fun onStart() {
@@ -70,7 +61,6 @@ class LoginActivity : AppCompatActivity() {
         userPreference.setUser(userModel)
 
         checkUser()
-
     }
 
     private fun checkUser(){
@@ -81,12 +71,5 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-    }
-
-    private fun updateSubmitButtonState() {
-        val isAllFieldsFilled = binding.tiEmail.text?.isNotEmpty() == true &&
-                binding.tiPassword.text?.isNotEmpty() == true
-
-        binding.btnLogin.isEnabled = isAllFieldsFilled
     }
 }

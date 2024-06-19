@@ -7,10 +7,9 @@ import androidx.room.RoomDatabase
 import com.dicoding2.glucofy.data.local.entity.GlucoseAverageMonthlyEntity
 import com.dicoding2.glucofy.data.local.entity.GlucoseAverageTodayEntity
 import com.dicoding2.glucofy.data.local.entity.GlucoseAverageWeeklyEntity
-import com.dicoding2.glucofy.data.local.entity.GlucoseDataEntity
 
 @Database(
-    entities = [GlucoseAverageTodayEntity::class, GlucoseAverageWeeklyEntity::class, GlucoseAverageMonthlyEntity::class, GlucoseDataEntity::class],
+    entities = [GlucoseAverageTodayEntity::class, GlucoseAverageWeeklyEntity::class, GlucoseAverageMonthlyEntity::class],
     version = 1,
     exportSchema = false
 )
@@ -18,7 +17,6 @@ abstract class GlucofyRoomDatabase : RoomDatabase() {
     abstract fun glucoseAverageMonthlyDao(): GlucoseAverageMonthlyDao
     abstract fun glucoseAverageTodayDao(): GlucoseAverageTodayDao
     abstract fun glucoseAverageWeeklyDao(): GlucoseAverageWeeklyDao
-    abstract fun glucoseDataDao(): GlucoseDataDao
 
     companion object {
         @Volatile

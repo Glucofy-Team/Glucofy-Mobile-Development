@@ -1,4 +1,4 @@
-package com.dicoding2.glucofy.ui.glucose.log
+package com.dicoding2.glucofy.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,7 +9,6 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import com.dicoding2.glucofy.R
 import com.dicoding2.glucofy.adapter.SectionPagerGlucosaAdapter
 import com.dicoding2.glucofy.databinding.FragmentGlucosaLogBinding
@@ -58,13 +57,6 @@ class GlucosaLogFragment : Fragment() {
         }
         return root
     }
-
-    fun clearGlucoseTables() {
-        lifecycleScope.launch {
-            val result = glucosaLogViewModel.clearGlucoseTables()
-        }
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

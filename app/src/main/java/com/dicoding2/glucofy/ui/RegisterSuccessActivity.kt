@@ -1,7 +1,9 @@
-package com.dicoding2.glucofy.ui.auth
+package com.dicoding2.glucofy.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.dicoding2.glucofy.R
 import com.dicoding2.glucofy.databinding.ActivityRegisterSuccessBinding
 
 class RegisterSuccessActivity : AppCompatActivity() {
