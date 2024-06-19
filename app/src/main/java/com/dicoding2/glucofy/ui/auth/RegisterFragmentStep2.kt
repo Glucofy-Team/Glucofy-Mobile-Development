@@ -7,18 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.dicoding2.glucofy.R
 import com.dicoding2.glucofy.data.RegisterPreference
 import com.dicoding2.glucofy.databinding.FragmentRegisterStep2Binding
+import com.dicoding2.glucofy.ui.RegisterSuccessActivity
 
 
 class RegisterFragmentStep2 : Fragment() {
     private var _binding: FragmentRegisterStep2Binding? = null
     private val binding get() = _binding!!
-    private val items: Array<String> = arrayOf("Laki-Laki", "Perempuan")
+    private val items: Array<String> = arrayOf(getString(R.string.man), getString(R.string.woman))
     private var gender: String = ""
     private lateinit var registerViewModel: RegisterViewModel
 
@@ -58,21 +58,6 @@ class RegisterFragmentStep2 : Fragment() {
             )
         }
 
-        binding.tiAge.addTextChangedListener {
-            updateSubmitButtonState()
-        }
-        binding.tiGender.addTextChangedListener {
-            updateSubmitButtonState()
-        }
-        binding.tiHeight.addTextChangedListener {
-            updateSubmitButtonState()
-        }
-        binding.tiWeight.addTextChangedListener {
-            updateSubmitButtonState()
-        }
-
-        updateSubmitButtonState()
-
         return binding.root
     }
 
@@ -80,9 +65,9 @@ class RegisterFragmentStep2 : Fragment() {
         val registerPreference = RegisterPreference(requireContext())
         val data = registerPreference.getUserRegister()
         var genderSend = "";
-        if(gender == "Laki-Laki"){
+        if(gender === getString(R.string.man)){
             genderSend = "L"
-        }else if(gender == "Perempuan"){
+        }else if(gender === getString(R.string.woman)){
             genderSend = "P"
         }
         registerViewModel.postRegister(
@@ -95,14 +80,5 @@ class RegisterFragmentStep2 : Fragment() {
             weight,
             height,
             age)
-    }
-
-    private fun updateSubmitButtonState() {
-        val isAllFieldsFilled = binding.tiAge.text?.isNotEmpty() == true &&
-                binding.tiGender.text?.isNotEmpty() == true &&
-                binding.tiHeight.text?.isNotEmpty() == true &&
-                binding.tiWeight.text?.isNotEmpty() == true
-
-        binding.btnRegister.isEnabled = isAllFieldsFilled
     }
 }

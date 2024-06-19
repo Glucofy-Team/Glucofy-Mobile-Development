@@ -1,4 +1,4 @@
-package com.dicoding2.glucofy.ui.glucose.monthly
+package com.dicoding2.glucofy.ui.fragment
 
 import android.graphics.Color
 import android.os.Build

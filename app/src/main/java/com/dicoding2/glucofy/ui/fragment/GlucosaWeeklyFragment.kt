@@ -1,4 +1,4 @@
-package com.dicoding2.glucofy.ui.glucose.weekly
+package com.dicoding2.glucofy.ui.fragment
 
 import android.graphics.Color
 import android.os.Build
@@ -58,7 +58,7 @@ class GlucosaWeeklyFragment : Fragment() {
                 val dateStart = dateRange[0].split(" ")
                 val dateEnd = dateRange[1].split(" ")
 
-                labels.add("${dateStart[0]}-${dateEnd[0]} ${dateEnd[1]}")
+                labels.add("${dateStart[0]} - ${dateEnd[0]} ${dateEnd[1]}")
 
                 val startDate = LocalDate.parse(dateRange[0], DateTimeFormatter.ofPattern("d MMMM yyyy", Locale("id", "ID")))
                 val endDate = LocalDate.parse(dateRange[1], DateTimeFormatter.ofPattern("d MMMM yyyy", Locale("id", "ID")))

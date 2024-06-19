@@ -1,15 +1,12 @@
-package com.dicoding2.glucofy.ui.profile
+package com.dicoding2.glucofy.ui.viewmodel
 
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.dicoding2.glucofy.data.remote.response.UserProfilePostResponse
 import com.dicoding2.glucofy.data.remote.retrofit.ApiService
-import com.dicoding2.glucofy.data.repository.GlucofyRepository
 import com.dicoding2.glucofy.di.Injection
-import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -22,6 +19,7 @@ class ProfileEditViewModel(private val apiService: ApiService) : ViewModel() {
     val isLoading: LiveData<Boolean> = _isLoading
 
     fun postEditProfile(firstname: String, lastname: String, phonenumber: String,password: String, gender: String, weight: String, height: String, age: String) {
+
         val fields = mutableMapOf<String, String>(
             "firstName" to firstname,
             "lastName" to lastname,
@@ -50,10 +48,6 @@ class ProfileEditViewModel(private val apiService: ApiService) : ViewModel() {
                 _isLoading.value = false
             }
         })
-    }
-
-    fun clearProfileUpdate() {
-        _profileUpdate.value = UserProfilePostResponse()
     }
 
     companion object{

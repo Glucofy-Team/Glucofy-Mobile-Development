@@ -7,11 +7,9 @@ import com.dicoding2.glucofy.data.remote.response.LoginResponse
 import com.dicoding2.glucofy.data.remote.response.MyFoodResponse
 import com.dicoding2.glucofy.data.remote.response.NewFoodResponse
 import com.dicoding2.glucofy.data.remote.response.RegisterResponse
-import com.dicoding2.glucofy.data.remote.response.SuccessResponse
 import com.dicoding2.glucofy.data.remote.response.UserProfilePostResponse
 import com.dicoding2.glucofy.data.remote.response.UserProfileResponse
 import retrofit2.Call
-import retrofit2.http.DELETE
 import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FieldMap
@@ -67,12 +65,6 @@ interface ApiService {
     suspend fun getGlucosa(
     ): GlucosaResponse
 
-    @DELETE("tracker/delete/{id}")
-    suspend fun deleteGlucosaById(
-        @Path("id") id: String
-    ): SuccessResponse
-
-    // @GET("food")
     @GET("dataset")
     suspend fun getFood(
         @Query("name") name: String,

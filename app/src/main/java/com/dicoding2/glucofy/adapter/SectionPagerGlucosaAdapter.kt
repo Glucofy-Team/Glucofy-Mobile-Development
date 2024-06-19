@@ -1,10 +1,11 @@
 package com.dicoding2.glucofy.adapter
 
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.dicoding2.glucofy.ui.glucose.monthly.GlucosaMonthlyFragment
-import com.dicoding2.glucofy.ui.glucose.today.GlucosaTodayFragment
-import com.dicoding2.glucofy.ui.glucose.weekly.GlucosaWeeklyFragment
+import com.dicoding2.glucofy.ui.fragment.GlucosaMonthlyFragment
+import com.dicoding2.glucofy.ui.fragment.GlucosaTodayFragment
+import com.dicoding2.glucofy.ui.fragment.GlucosaWeeklyFragment
 
 class SectionPagerGlucosaAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
     override fun getItemCount(): Int {

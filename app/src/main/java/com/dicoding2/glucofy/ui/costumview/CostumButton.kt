@@ -34,5 +34,6 @@ class CostumButton : AppCompatButton {
 
         gravity = Gravity.CENTER
 
+        text = if(isEnabled) prevtext else "Loading..."
     }
 }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".ui.profile.ProfileActivity">
+    tools:context=".ui.ProfileActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -44,27 +44,18 @@
             android:layout_width="match_parent"
             android:textAlignment="textStart"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
+            android:background="@drawable/option_style"
             android:textColor="@color/black"
             android:text="Profile" />
-        <TextView
-            android:layout_height="1dp"
-            android:layout_width="match_parent"
-            android:background="@color/neutrals_500"
-            />
+
         <Button
             android:id="@+id/btnLogout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="textStart"
-            android:background="@android:color/transparent"
+            android:background="@drawable/option_style"
             android:textColor="@color/black"
             android:text="Logout" />
-        <TextView
-            android:layout_height="1dp"
-            android:layout_width="match_parent"
-            android:background="@color/neutrals_500"
-            />
     </LinearLayout>
 
 </LinearLayout>

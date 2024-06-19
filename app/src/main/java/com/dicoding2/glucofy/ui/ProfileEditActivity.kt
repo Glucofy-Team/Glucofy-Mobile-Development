@@ -1,21 +1,19 @@
-package com.dicoding2.glucofy.ui.profile
+package com.dicoding2.glucofy.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
-import androidx.core.widget.addTextChangedListener
 import com.dicoding2.glucofy.R
 import com.dicoding2.glucofy.data.UserPreference
 import com.dicoding2.glucofy.databinding.ActivityProfileEditBinding
-import com.dicoding2.glucofy.helper.toast
+import com.dicoding2.glucofy.ui.viewmodel.ProfileEditViewModel
 
 class ProfileEditActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityProfileEditBinding
     private lateinit var profileEditViewModel: ProfileEditViewModel
-    private val items: Array<String> = arrayOf("Laki-laki","Perempuan")
-
+    private val items: Array<String> = arrayOf("Laki-laki", "Perempuan")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProfileEditBinding.inflate(layoutInflater)
@@ -31,33 +29,7 @@ class ProfileEditActivity : AppCompatActivity() {
         }
 
         profileEditViewModel.profileUpdate.observe(this){response ->
-            if(response.status == 200){
-                profileEditViewModel.clearProfileUpdate()
-                toast(this, "Berhasil Update Profile")
-                finish()
-            }
-        }
-
-        binding.tiFirstName.addTextChangedListener {
-            updateSubmitButtonState()
-        }
-        binding.tiLastName.addTextChangedListener {
-            updateSubmitButtonState()
-        }
-        binding.tiPhoneNumber.addTextChangedListener {
-            updateSubmitButtonState()
-        }
-        binding.tiGender.addTextChangedListener {
-            updateSubmitButtonState()
-        }
-        binding.tiAge.addTextChangedListener {
-            updateSubmitButtonState()
-        }
-        binding.tiHeight.addTextChangedListener {
-            updateSubmitButtonState()
-        }
-        binding.tiWeight.addTextChangedListener {
-            updateSubmitButtonState()
+            Log.d("test12",response.toString())
         }
 
         binding.btnSubmit.setOnClickListener {
@@ -86,29 +58,10 @@ class ProfileEditActivity : AppCompatActivity() {
         binding.tiPhoneNumber.setText(data.phoneNumber)
         binding.tvEmail.text = data.email
         binding.tiAge.setText(data.age)
-//        binding.tiGender.setText(data.gender)
+        binding.tiGender.setText(data.gender)
         binding.tiHeight.setText(data.height)
         binding.tiWeight.setText(data.weight)
 
-        if(data.gender == "L"){
-            binding.tiGender.setText(items[0],false)
-        }else if(data.gender == "P"){
-            binding.tiGender.setText(items[1], false)
-        }
-
-    }
-
-    private fun updateSubmitButtonState() {
-        val isAllFieldsFilled = binding.tiFirstName.text?.isNotEmpty() == true &&
-                binding.tiLastName.text?.isNotEmpty() == true &&
-                binding.tiPhoneNumber.text?.isNotEmpty() == true  &&
-                binding.tiGender.text?.isNotEmpty() == true &&
-                binding.tiAge.text?.isNotEmpty() == true &&
-                binding.tiHeight.text?.isNotEmpty() == true &&
-                binding.tiWeight.text?.isNotEmpty() == true
-
-
-        binding.btnSubmit.isEnabled = isAllFieldsFilled
     }
 
 }

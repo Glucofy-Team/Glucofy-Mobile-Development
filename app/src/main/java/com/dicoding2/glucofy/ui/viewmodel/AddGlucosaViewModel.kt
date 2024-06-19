@@ -1,4 +1,4 @@
-package com.dicoding2.glucofy.ui.glucose.add
+package com.dicoding2.glucofy.ui.viewmodel
 
 
 import android.content.Context
@@ -9,6 +9,7 @@ import com.dicoding2.glucofy.data.remote.response.AddGlucosaResponse
 import com.dicoding2.glucofy.data.remote.response.ErrorResponse
 import com.dicoding2.glucofy.data.remote.retrofit.ApiService
 import com.dicoding2.glucofy.di.Injection
+import com.dicoding2.glucofy.helper.toast
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback

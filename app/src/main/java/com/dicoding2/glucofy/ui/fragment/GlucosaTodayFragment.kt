@@ -1,4 +1,4 @@
-package com.dicoding2.glucofy.ui.glucose.today
+package com.dicoding2.glucofy.ui.fragment
 
 import android.content.Context
 import android.graphics.Color
@@ -14,13 +14,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding2.glucofy.R
-import com.dicoding2.glucofy.adapter.ListGlucoseDataAdapter
-import com.dicoding2.glucofy.data.Result
 import com.dicoding2.glucofy.data.local.entity.GlucoseAverageTodayEntity
-import com.dicoding2.glucofy.data.local.entity.GlucoseDataEntity
 import com.dicoding2.glucofy.databinding.FragmentGlucosaTodayBinding
 import com.dicoding2.glucofy.ui.viewmodel.GlucosaTodayViewModel
 import com.dicoding2.glucofy.ui.factory.ViewModelFactory
@@ -34,7 +29,6 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.utils.MPPointF
 import com.github.mikephil.charting.utils.Utils
-import kotlinx.coroutines.launch
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
@@ -46,16 +40,12 @@ class GlucosaTodayFragment : Fragment() {
     private lateinit var glucosaTodayViewModel: GlucosaTodayViewModel
     private val binding get() = _binding!!
 
-    private lateinit var adapter: ListGlucoseDataAdapter
-
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         glucosaTodayViewModel = obtainViewModel(requireActivity())
-
-        adapter = ListGlucoseDataAdapter()
 
         _binding = FragmentGlucosaTodayBinding.inflate(inflater, container, false)
         lineChart = binding.lineChart
@@ -64,30 +54,8 @@ class GlucosaTodayFragment : Fragment() {
             updateChartData(data)
         })
 
-        glucosaTodayViewModel.getDataGlucose().observe(viewLifecycleOwner, Observer { data ->
-            adapter.setListGlucose(data)
-        })
-
-        adapter.setOnDeleteClickCallback { glucoseData ->
-            clearGlucoseTables(glucoseData.id)
-        }
-
-        binding?.rvGlucosa?.layoutManager = LinearLayoutManager(requireContext())
-        binding?.rvGlucosa?.setHasFixedSize(false)
-        binding?.rvGlucosa?.adapter = adapter
-
         return binding.root
     }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun clearGlucoseTables(id: String) {
-        lifecycleScope.launch {
-            glucosaTodayViewModel.deleteGlucoseById(id).observe(viewLifecycleOwner, Observer{
-
-            })
-        }
-    }
-
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun updateChartData(data: List<GlucoseAverageTodayEntity>) {
@@ -123,8 +91,6 @@ class GlucosaTodayFragment : Fragment() {
 
         if(data.isNotEmpty()){
             binding.tvAverageToday.text = (average/data.size).toString()
-        }else{
-            binding.tvAverageToday.text = "0"
         }
 
         val lineData = LineData(dataSet)
