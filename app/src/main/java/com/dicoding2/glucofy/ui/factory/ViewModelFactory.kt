@@ -54,9 +54,6 @@ class ViewModelFactory private constructor(
            modelClass.isAssignableFrom(FoodDetailViewModel::class.java) -> {
              return FoodDetailViewModel(foodRepository) as T
           }
-           modelClass.isAssignableFrom(InputNewFoodViewModel::class.java) -> {
-               return InputNewFoodViewModel(InputFoodRepository) as T
-           }
            modelClass.isAssignableFrom(FoodViewModel::class.java) -> {
                return FoodViewModel(foodRepository) as T
            }

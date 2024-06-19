@@ -1,6 +1,7 @@
 package com.dicoding2.glucofy.data.remote.retrofit
 
 import com.dicoding2.glucofy.data.remote.response.AddGlucosaResponse
+import com.dicoding2.glucofy.data.remote.response.FoodAddResponse
 import com.dicoding2.glucofy.data.remote.response.FoodResponse
 import com.dicoding2.glucofy.data.remote.response.GlucosaResponse
 import com.dicoding2.glucofy.data.remote.response.LoginResponse
@@ -10,6 +11,7 @@ import com.dicoding2.glucofy.data.remote.response.RegisterResponse
 import com.dicoding2.glucofy.data.remote.response.SuccessResponse
 import com.dicoding2.glucofy.data.remote.response.UserProfilePostResponse
 import com.dicoding2.glucofy.data.remote.response.UserProfileResponse
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -73,7 +75,6 @@ interface ApiService {
         @Path("id") id: String
     ): SuccessResponse
 
-    // @GET("food")
     @GET("dataset")
     suspend fun getFood(
         @Query("name") name: String,
@@ -81,11 +82,27 @@ interface ApiService {
         @Query("size") size: Int = 2
     ): FoodResponse
 
-    @POST("predict_new_data")
-    fun postNewFoodJson(
-        @Body request: NewFoodRequest
-    ): Call<NewFoodResponse>
+    @POST("/predict_new_data")
+    fun postNewFoodJson(@Body requestBody: RequestBody): Call<NewFoodResponse>
 
     @GET("food")
-    suspend fun getMyFood() : MyFoodResponse
+    fun getMyFood(
+        @Query("page") page: Int = 1,
+        @Query("size") size: Int = 2
+    ) : MyFoodResponse
+
+    @FormUrlEncoded
+    @POST("food/add")
+    suspend fun postFoodAdd(
+        @Field("foodName") foodName: String,
+        @Field("gIndex") gIndex: String,
+        @Field("gLoad") gLoad: String,
+        @Field("giCategory") giCategory: String,
+        @Field("glCategory") glCategory: String,
+        @Field("carbs") carbs: String,
+        @Field("calories") calories: String,
+        @Field("fats") fats: String,
+        @Field("proteins") proteins: String,
+        @Field("category") category: String,
+    ): FoodAddResponse
 }

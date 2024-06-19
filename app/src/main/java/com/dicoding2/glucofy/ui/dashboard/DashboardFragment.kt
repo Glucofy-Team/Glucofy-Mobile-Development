@@ -1,5 +1,6 @@
 package com.dicoding2.glucofy.ui.dashboard
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +15,7 @@ import com.dicoding2.glucofy.data.UserPreference
 import com.dicoding2.glucofy.data.local.entity.UserEntity
 import com.dicoding2.glucofy.data.remote.response.Data
 import com.dicoding2.glucofy.databinding.FragmentDashboardBinding
+import com.dicoding2.glucofy.ui.auth.LoginActivity
 import com.dicoding2.glucofy.ui.calculator.CalculatorActivity
 import com.dicoding2.glucofy.ui.factory.ViewModelFactory
 import com.dicoding2.glucofy.ui.food.InputNewFoodActivity
@@ -75,12 +77,12 @@ class DashboardFragment : Fragment() {
 
         binding.ivRecomendationFood.setOnClickListener {
             val intent = Intent(requireContext(), RecomendationActivity::class.java)
-            startActivityForResult(intent,100)
+            startActivity(intent)
         }
 
         binding.ivProfileImage.setOnClickListener {
             val intent = Intent(requireContext(), ProfileActivity::class.java)
-            startActivity(intent)
+            startActivityForResult(intent, 200)
         }
 
         binding.btnFoodInput.setOnClickListener {

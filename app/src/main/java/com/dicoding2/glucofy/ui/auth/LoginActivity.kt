@@ -3,6 +3,7 @@ package com.dicoding2.glucofy.ui.auth
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.core.widget.addTextChangedListener
 import com.dicoding2.glucofy.data.UserPreference
 import com.dicoding2.glucofy.data.local.entity.UserEntity
@@ -75,7 +76,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun checkUser(){
         val userPreference = UserPreference(this)
-
+        Log.d("token", userPreference.getUser().token ?: "")
         if (userPreference.getUser().token !== ""){
             val intent = Intent(this@LoginActivity, MainActivity::class.java)
             startActivity(intent)

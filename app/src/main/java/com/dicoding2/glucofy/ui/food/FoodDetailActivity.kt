@@ -1,16 +1,20 @@
 package com.dicoding2.glucofy.ui.food
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding2.glucofy.data.remote.response.FoodListItem
 import com.dicoding2.glucofy.databinding.ActivityFoodDetailBinding
 import com.dicoding2.glucofy.ui.factory.ViewModelFactory
+import com.dicoding2.glucofy.data.Result
+import com.dicoding2.glucofy.helper.toast
 
 class FoodDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityFoodDetailBinding
     private lateinit var viewModel : FoodDetailViewModel
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,8 +29,8 @@ class FoodDetailActivity : AppCompatActivity() {
         val fats = intent.getDoubleExtra("fats", 0.0)
         val carbs = intent.getDoubleExtra("carbs", 0.0)
         val proteins = intent.getDoubleExtra("proteins", 0.0)
-        val gIndex = intent.getIntExtra("gIndex", 0)
-        val gLoad = intent.getDoubleExtra("gLoad", 0.0)
+        val gIndex = intent.getDoubleExtra("giValue", 0.0)
+        val gLoad = intent.getDoubleExtra("glValue", 0.0)
         val category = intent.getStringExtra("category")
 
         val food = FoodListItem(
@@ -42,6 +46,26 @@ class FoodDetailActivity : AppCompatActivity() {
             glCategory = "",
             id = "",
         )
+
+        binding.btnSave.setOnClickListener {
+            viewModel.saveFood(foodName.toString(), calories.toString(), fats.toString(), carbs.toString(), proteins.toString(), gIndex.toString(), gLoad.toString(), category.toString()).observe(this){ result ->
+                if (result != null) {
+                    when (result) {
+                        is Result.Loading -> {
+                            binding.btnSave.isEnabled = false
+                        }
+                        is Result.Success -> {
+                            binding.btnSave.isEnabled = true
+                            toast(this, "Berhasil menambahkan data")
+                            finish()
+                        }
+                        is Result.Error -> {
+
+                        }
+                    }
+                }
+            }
+        }
 
         showFoodDetails(food)
     }

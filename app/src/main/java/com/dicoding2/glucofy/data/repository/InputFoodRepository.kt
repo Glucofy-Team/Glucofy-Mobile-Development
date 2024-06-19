@@ -30,32 +30,32 @@ class InputFoodRepository(
         onError: (ErrorResponse?) -> Unit
     ) {
         val request = NewFoodRequest(foodName, category, calories, protein, carbs, fats)
-        apiService.postNewFoodJson(request)
-            .enqueue(object : Callback<NewFoodResponse> {
-                override fun onResponse(
-                    call: Call<NewFoodResponse>,
-                    response: Response<NewFoodResponse>
-                ) {
-                    if (response.isSuccessful) {
-                        val foodResponse = response.body()!!
-                        onSuccess(foodResponse)
-                        Log.d(TAG, "onResponse: Success, navigating to FoodDetailActivity")
-                        navigateToDetailActivity(context, foodResponse)
-                    } else {
-                        val errorBody = response.errorBody()?.string()
-                        val errorResponse = try {
-                            Gson().fromJson(errorBody, ErrorResponse::class.java)
-                        } catch (e: Exception) {
-                            null
-                        }
-                        onError(errorResponse)
-                    }
-                }
-
-                override fun onFailure(call: Call<NewFoodResponse>, t: Throwable) {
-                    onError(null)
-                }
-            })
+//        apiService.postNewFoodJson(request)
+//            .enqueue(object : Callback<NewFoodResponse> {
+//                override fun onResponse(
+//                    call: Call<NewFoodResponse>,
+//                    response: Response<NewFoodResponse>
+//                ) {
+//                    if (response.isSuccessful) {
+//                        val foodResponse = response.body()!!
+//                        onSuccess(foodResponse)
+//                        Log.d(TAG, "onResponse: Success, navigating to FoodDetailActivity")
+//                        navigateToDetailActivity(context, foodResponse)
+//                    } else {
+//                        val errorBody = response.errorBody()?.string()
+//                        val errorResponse = try {
+//                            Gson().fromJson(errorBody, ErrorResponse::class.java)
+//                        } catch (e: Exception) {
+//                            null
+//                        }
+//                        onError(errorResponse)
+//                    }
+//                }
+//
+//                override fun onFailure(call: Call<NewFoodResponse>, t: Throwable) {
+//                    onError(null)
+//                }
+//            })
     }
     private fun navigateToDetailActivity(context: Context, food: NewFoodResponse) {
         val intent = Intent(context, FoodDetailActivity::class.java).apply {
