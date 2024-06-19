@@ -10,6 +10,7 @@ import com.dicoding2.glucofy.data.repository.InputFoodRepository
 import com.dicoding2.glucofy.di.Injection
 import com.dicoding2.glucofy.ui.alarm.AlarmViewModel
 import com.dicoding2.glucofy.ui.alarm.CreateAlarmViewModel
+import com.dicoding2.glucofy.ui.dashboard.DashboardViewModel
 import com.dicoding2.glucofy.ui.food.FoodDetailViewModel
 import com.dicoding2.glucofy.ui.food.FoodViewModel
 import com.dicoding2.glucofy.ui.food.InputNewFoodViewModel
@@ -58,6 +59,9 @@ class ViewModelFactory private constructor(
            }
            modelClass.isAssignableFrom(FoodViewModel::class.java) -> {
                return FoodViewModel(foodRepository) as T
+           }
+           modelClass.isAssignableFrom(DashboardViewModel::class.java) -> {
+               return DashboardViewModel(glucofyRepository) as T
            }
           else -> {throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")}
        }
