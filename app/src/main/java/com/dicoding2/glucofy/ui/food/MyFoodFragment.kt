@@ -1,6 +1,7 @@
 package com.dicoding2.glucofy.ui.food
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +22,7 @@ class MyFoodFragment : Fragment() {
     private var _binding: FragmentMyFoodBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewModel : MyFoodViewModel
+    private lateinit var viewModel : FoodViewModel
     private lateinit var adapter : MyFoodAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,8 +39,6 @@ class MyFoodFragment : Fragment() {
 
         viewModel = obtainViewModel(requireActivity())
 
-        binding.tvTitle.text = "My Food"
-
         initRecycleView()
         observeData()
 
@@ -50,12 +49,12 @@ class MyFoodFragment : Fragment() {
 
     }
 
-    private fun obtainViewModel(activity: FragmentActivity): MyFoodViewModel {
+    private fun obtainViewModel(activity: FragmentActivity): FoodViewModel {
         val factory = ViewModelFactory.getInstance(requireContext())
-        return ViewModelProvider(activity, factory)[MyFoodViewModel::class.java]
+        return ViewModelProvider(activity, factory)[FoodViewModel::class.java]
     }
 
-    private fun initRecyleView(){
+    private fun initRecycleView(){
         adapter = MyFoodAdapter()
         binding.rvMyFood.adapter = adapter
         binding.rvMyFood.layoutManager = LinearLayoutManager(context)
