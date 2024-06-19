@@ -39,8 +39,6 @@ class MyFoodFragment : Fragment() {
         initRecyleView()
 
         return root
-
-
     }
 
     private fun obtainViewModel(activity: FragmentActivity): MyFoodViewModel {

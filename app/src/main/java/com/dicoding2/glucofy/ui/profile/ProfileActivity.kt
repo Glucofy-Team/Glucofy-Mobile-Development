@@ -1,5 +1,6 @@
 package com.dicoding2.glucofy.ui.profile
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -31,13 +32,13 @@ class ProfileActivity : AppCompatActivity() {
 
         binding.btnLogout.setOnClickListener {
             val userPreference = UserPreference(this)
-            clearGlucoseTables()
+
             userPreference.deleteUser()
 
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-
-            finishAffinity()
+            val resultIntent = Intent()
+            resultIntent.putExtra("result", "berhasil")
+            setResult(Activity.RESULT_OK, resultIntent)
+            finish()
 
         }
 
