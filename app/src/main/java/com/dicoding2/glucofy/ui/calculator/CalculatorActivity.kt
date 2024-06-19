@@ -1,13 +1,13 @@
-package com.dicoding2.glucofy.ui
+package com.dicoding2.glucofy.ui.calculator
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import com.dicoding2.glucofy.R
 import com.dicoding2.glucofy.databinding.ActivityCalculatorBinding
-import com.dicoding2.glucofy.ui.viewmodel.CalculatorViewModel
 
 class CalculatorActivity : AppCompatActivity() {
 
@@ -28,14 +28,29 @@ class CalculatorActivity : AppCompatActivity() {
             binding.tvEvening.text = insulinEntity.evening.toString()
         })
 
+        binding.tiWeight.addTextChangedListener{
+            updateSubmitButtonState()
+        }
+
+        binding.tiInsulin.addTextChangedListener {
+            updateSubmitButtonState()
+        }
+
         binding.btnSum.setOnClickListener {
             val insulin = binding.tiInsulin.text.toString()
             val weight = binding.tiWeight.text.toString()
-            Log.d("aa12","$insulin - $weight")
             calculatorViewModel.calculateInsulin(insulin,weight.toInt())
         }
 
+        updateSubmitButtonState()
+
         setContentView(binding.root)
     }
+    private fun updateSubmitButtonState() {
+        val isAllFieldsFilled = binding.tiInsulin.text?.isNotEmpty() == true &&
+                binding.tiWeight.text?.isNotEmpty() == true
 
+        binding.btnSum.isEnabled = isAllFieldsFilled
+        binding.btnSum.text = if (isAllFieldsFilled) "Submit" else "Isi semua inputan"
+    }
 }

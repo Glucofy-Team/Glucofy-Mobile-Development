@@ -44,7 +44,7 @@ class ViewModelFactory private constructor(
               return GlucosaMonthlyViewModel(glucofyRepository) as T
           }
           modelClass.isAssignableFrom(ProfileViewModel::class.java) -> {
-              return ProfileViewModel(glucofyRepository) as T
+              return ProfileViewModel(glucofyRepository,alarmRepository) as T
           }
           modelClass.isAssignableFrom(CreateAlarmViewModel::class.java) -> {
               return CreateAlarmViewModel(alarmRepository) as T

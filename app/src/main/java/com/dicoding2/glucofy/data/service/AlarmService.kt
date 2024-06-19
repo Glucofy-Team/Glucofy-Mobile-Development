@@ -11,6 +11,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.IBinder
 import android.os.Vibrator
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.dicoding2.glucofy.App.Companion.CHANNEL_ID
 import com.dicoding2.glucofy.App.Companion.CHANNEL_NAME
@@ -35,73 +36,82 @@ class AlarmService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        val bundle = intent?.getBundleExtra(getString(R.string.bundle_alarm_obj))
-        val alarm = bundle?.getSerializable(getString(R.string.arg_alarm_obj)) as? Alarm
-
-        // Start RingActivity immediately
-        val ringActivityIntent = Intent(this, RingActivity::class.java).apply {
-            putExtra(getString(R.string.bundle_alarm_obj), bundle)
-            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) // This flag is necessary to start an activity from a service
-        }
-        startActivity(ringActivityIntent)
-
-        // Create an intent for the notification tap action
-        val notificationIntent = Intent(this, RingActivity::class.java).apply {
-            putExtra(getString(R.string.bundle_alarm_obj), bundle)
-        }
-        val pendingIntent = PendingIntent.getActivity(
-            this,
-            0,
-            notificationIntent,
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-        )
-
-        // Create a MediaPlayer instance and set the alarm tone
-        val mediaPlayer = MediaPlayer()
-        val ringtoneUri = alarm?.tone?.let { Uri.parse(it) } ?: RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
-        try {
-            mediaPlayer.setDataSource(this, ringtoneUri)
-            mediaPlayer.prepareAsync()
-        } catch (ex: IOException) {
-            ex.printStackTrace()
-        }
-
-        // Build the notification
-        val builder = NotificationCompat.Builder(this, CHANNEL_ID)
-            .setContentTitle(getString(R.string.notification_title))
-            .setContentText(alarm?.title ?: getString(R.string.default_alarm_title))
-            .setSmallIcon(R.drawable.ic_alarm_white_24dp)
-            .setCategory(NotificationCompat.CATEGORY_ALARM)
-            .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-            .setPriority(NotificationCompat.PRIORITY_MAX)
-            .setContentIntent(pendingIntent)
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH).apply {
-                enableVibration(true)
-                vibrationPattern = longArrayOf(1000, 1000, 1000, 1000, 1000)
+        when (intent?.action) {
+            ACTION_STOP_ALARM -> {
+                stopAlarm()
+                return START_NOT_STICKY
             }
-            val notificationManager = getSystemService(NotificationManager::class.java)
-            notificationManager.createNotificationChannel(channel)
+            else -> {
+                val bundle = intent?.getBundleExtra(getString(R.string.bundle_alarm_obj))
+                val alarm = bundle?.getSerializable(getString(R.string.arg_alarm_obj)) as? Alarm
+
+                // Start RingActivity immediately
+                val ringActivityIntent = Intent(this, RingActivity::class.java).apply {
+                    putExtra(getString(R.string.bundle_alarm_obj), bundle)
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) // This flag is necessary to start an activity from a service
+                }
+                startActivity(ringActivityIntent)
+
+                // Create an intent for the notification tap action
+                val notificationIntent = Intent(this, RingActivity::class.java).apply {
+                    putExtra(getString(R.string.bundle_alarm_obj), bundle)
+                }
+                val pendingIntent = PendingIntent.getActivity(
+                    this,
+                    0,
+                    notificationIntent,
+                    PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                )
+
+                // Create a MediaPlayer instance and set the alarm tone
+                val mediaPlayer = MediaPlayer()
+                val ringtoneUri = alarm?.tone?.let { Uri.parse(it) } ?: RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
+                try {
+                    mediaPlayer.setDataSource(this, ringtoneUri)
+                    mediaPlayer.prepareAsync()
+                } catch (ex: IOException) {
+                    ex.printStackTrace()
+                }
+
+                // Build the notification
+                val builder = NotificationCompat.Builder(this, CHANNEL_ID)
+                    .setContentTitle(getString(R.string.notification_title))
+                    .setContentText(alarm?.title ?: getString(R.string.default_alarm_title))
+                    .setSmallIcon(R.drawable.ic_alarm_white_24dp)
+                    .setCategory(NotificationCompat.CATEGORY_ALARM)
+                    .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                    .setPriority(NotificationCompat.PRIORITY_MAX)
+                    .setContentIntent(pendingIntent)
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    val channel = NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH).apply {
+                        enableVibration(true)
+                        vibrationPattern = longArrayOf(1000, 1000, 1000, 1000, 1000)
+                    }
+                    val notificationManager = getSystemService(NotificationManager::class.java)
+                    notificationManager.createNotificationChannel(channel)
+                }
+
+                val notification = builder.build()
+
+                // Start the service in the foreground
+                startForeground(FOREGROUND_NOTIFICATION_ID, notification)
+
+                // Start the MediaPlayer once it's prepared
+                mediaPlayer.setOnPreparedListener { it.start() }
+
+                return START_STICKY
+            }
         }
-
-        val notification = builder.build()
-
-        // Start the service in the foreground
-        startForeground(FOREGROUND_NOTIFICATION_ID, notification)
-
-        // Start the MediaPlayer once it's prepared
-        mediaPlayer.setOnPreparedListener { it.start() }
-
-        return START_STICKY
     }
 
-
-
+    private fun stopAlarm() {
+        stopForeground(true)
+        stopSelf()
+    }
 
     override fun onDestroy() {
         super.onDestroy()
-
         mediaPlayer!!.stop()
         vibrator!!.cancel()
     }
@@ -111,5 +121,6 @@ class AlarmService : Service() {
     }
     companion object {
         private const val FOREGROUND_NOTIFICATION_ID = 1
+        const val ACTION_STOP_ALARM = "com.dicoding2.glucofy.ACTION_STOP_ALARM"
     }
 }

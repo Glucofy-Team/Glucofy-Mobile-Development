@@ -23,7 +23,7 @@
 
     <fragment
         android:id="@+id/navigation_glucosa"
-        android:name="com.dicoding2.glucofy.ui.fragment.GlucosaLogFragment"
+        android:name="com.dicoding2.glucofy.ui.glucose.log.GlucosaLogFragment"
         android:label="@string/title_glucosa"
         tools:layout="@layout/fragment_glucosa_log" />
 

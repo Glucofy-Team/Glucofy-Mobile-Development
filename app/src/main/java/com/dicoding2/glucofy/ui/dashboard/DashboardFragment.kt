@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding2.glucofy.databinding.FragmentDashboardBinding
+import com.dicoding2.glucofy.ui.calculator.CalculatorActivity
+import com.dicoding2.glucofy.ui.profile.ProfileActivity
 import com.dicoding2.glucofy.ui.food.InputNewFoodActivity
 
 class DashboardFragment : Fragment() {
@@ -28,6 +30,21 @@ class DashboardFragment : Fragment() {
 
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        binding.ivCalculator.setOnClickListener{
+            val intent = Intent(requireContext(), CalculatorActivity::class.java)
+            startActivity(intent)
+        }
+
+//        binding.ivRecomendationFood.setOnClickListener {
+//            val intent = Intent(requireContext(), RecomendationFoodActivity::class.java)
+//            startActivity(intent)
+//        }
+
+        binding.ivProfileImage.setOnClickListener {
+            val intent = Intent(requireContext(), ProfileActivity::class.java)
+            startActivity(intent)
+        }
 
         binding.fabAddFood.setOnClickListener {
             val intent = Intent(activity, InputNewFoodActivity::class.java)

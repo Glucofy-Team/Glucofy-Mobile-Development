@@ -21,4 +21,7 @@ interface AlarmDao {
 
     @Query("Delete from alarm_table where alarmId = :alarmID")
     fun delete(alarmID: Int)
+
+    @Query("Delete from alarm_table")
+    fun deleteAll()
 }

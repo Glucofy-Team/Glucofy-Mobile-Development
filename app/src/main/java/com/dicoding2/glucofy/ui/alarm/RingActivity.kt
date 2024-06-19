@@ -73,11 +73,11 @@ class RingActivity() : AppCompatActivity() {
         alarm.setStarted(false)
         alarm.cancelAlarm(baseContext)
         viewModel.update(alarm)
-        val intentService = Intent(
-            applicationContext,
-            AlarmService::class.java
-        )
-        applicationContext.stopService(intentService)
+        val stopIntent = Intent(this, AlarmService::class.java).apply {
+            action = AlarmService.ACTION_STOP_ALARM
+        }
+        startService(stopIntent)
+//        applicationContext.stopService(intentService)
         finish()
     }
 
