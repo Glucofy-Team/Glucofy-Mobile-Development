@@ -1,10 +1,11 @@
-package com.dicoding2.glucofy.ui
+package com.dicoding2.glucofy.ui.profile
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.dicoding2.glucofy.data.Result
 import com.dicoding2.glucofy.data.UserPreference
 import com.dicoding2.glucofy.data.local.entity.UserEntity
@@ -70,20 +71,6 @@ class ProfileActivity : AppCompatActivity() {
                 }
             }
         }
-
-        binding.btnProfile.setOnClickListener {
-            startActivity(Intent(this, ProfileEditActivity::class.java))
-        }
-
-        binding.btnLogout.setOnClickListener {
-            val userPreference = UserPreference(this)
-
-            userPreference.deleteUser()
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
-        }
-
-        setContentView(binding.root)
     }
 
     private fun setPreferenceUser(data: Data){
@@ -108,5 +95,10 @@ class ProfileActivity : AppCompatActivity() {
     private fun obtainViewModel(activity: AppCompatActivity): ProfileViewModel {
         val factory = ViewModelFactory.getInstance(this)
         return ViewModelProvider(activity, factory)[ProfileViewModel::class.java]
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getProfile()
     }
 }

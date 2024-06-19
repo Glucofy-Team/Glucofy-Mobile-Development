@@ -1,6 +1,5 @@
 package com.dicoding2.glucofy.ui.food
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,9 +9,8 @@ import androidx.paging.cachedIn
 import com.dicoding2.glucofy.data.remote.response.FoodListItem
 import com.dicoding2.glucofy.data.remote.response.MyFoodListItem
 import com.dicoding2.glucofy.data.repository.FoodRepository
-import kotlinx.coroutines.launch
 
-class FoodViewModel(private val foodRepository: FoodRepository) : ViewModel() {
+class FoodViewModel(private val repository: FoodRepository) : ViewModel() {
 
     // Explore Food
     val food: LiveData<PagingData<FoodListItem>> =

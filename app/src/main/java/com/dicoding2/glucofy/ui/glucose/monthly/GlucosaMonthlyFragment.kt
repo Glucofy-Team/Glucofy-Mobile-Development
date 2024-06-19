@@ -1,4 +1,4 @@
-package com.dicoding2.glucofy.ui.fragment
+package com.dicoding2.glucofy.ui.glucose.monthly
 
 import android.graphics.Color
 import android.os.Build
@@ -9,9 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.dicoding2.glucofy.data.local.entity.GlucoseAverageWeeklyEntity
-import com.dicoding2.glucofy.databinding.FragmentGlucosaWeeklyBinding
+import com.dicoding2.glucofy.data.local.entity.GlucoseAverageMonthlyEntity
+import com.dicoding2.glucofy.databinding.FragmentGlucosaMonthlyBinding
+import com.dicoding2.glucofy.ui.glucose.monthly.GlucosaMonthlyViewModel
 import com.dicoding2.glucofy.ui.factory.ViewModelFactory
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
@@ -20,51 +22,42 @@ import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.util.Locale
 
-class GlucosaWeeklyFragment : Fragment() {
-    private var _binding: FragmentGlucosaWeeklyBinding? = null
+class GlucosaMonthlyFragment : Fragment() {
+
+    private var _binding: FragmentGlucosaMonthlyBinding? = null
     private val binding get() = _binding!!
-    private lateinit var glucosaWeeklyViewModel: GlucosaWeeklyViewModel
-
+    private lateinit var glucosaMonthlyViewModel: GlucosaMonthlyViewModel
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentGlucosaWeeklyBinding.inflate(inflater, container, false)
-        glucosaWeeklyViewModel = obtainViewModel(requireActivity())
+        glucosaMonthlyViewModel = obtainViewModel(requireActivity())
 
-        glucosaWeeklyViewModel.getAllDataGlucose().observe(viewLifecycleOwner) { data ->
+        _binding = FragmentGlucosaMonthlyBinding.inflate(inflater, container, false)
+
+        glucosaMonthlyViewModel.getAllDataGlucose().observe(viewLifecycleOwner, Observer { data ->
             updateChartData(data)
-        }
+        })
 
         return binding.root
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun updateChartData(data: List<GlucoseAverageWeeklyEntity>) {
+    private fun updateChartData(data: List<GlucoseAverageMonthlyEntity>) {
         val entries = ArrayList<BarEntry>()
         val labels = ArrayList<String>()
         val today = LocalDate.now()
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM")
+        val formattedDate = today.format(formatter)
 
         data.forEachIndexed { index, glucoseData ->
-            val dateRange = glucoseData.date?.split(" - ")
-
             entries.add(BarEntry(index.toFloat(), glucoseData.glucose?.toFloat() ?: 0f))
+            labels.add(glucoseData.date ?: "")
 
-            if (dateRange?.size == 2) {
-                val dateStart = dateRange[0].split(" ")
-                val dateEnd = dateRange[1].split(" ")
-
-                labels.add("${dateStart[0]} - ${dateEnd[0]} ${dateEnd[1]}")
-
-                val startDate = LocalDate.parse(dateRange[0], DateTimeFormatter.ofPattern("d MMMM yyyy", Locale("id", "ID")))
-                val endDate = LocalDate.parse(dateRange[1], DateTimeFormatter.ofPattern("d MMMM yyyy", Locale("id", "ID")))
-
-                if (today in startDate..endDate) {
-                    binding.tvAverageGlucose.text = glucoseData.glucose.toString()
-                }
+            if(formattedDate.toString() == glucoseData.date.toString()){
+                binding.tvAverageGlucose.text = glucoseData.glucose.toString()
             }
         }
 
@@ -94,16 +87,16 @@ class GlucosaWeeklyFragment : Fragment() {
         binding.barChart.invalidate()
     }
 
-    private fun obtainViewModel(activity: FragmentActivity): GlucosaWeeklyViewModel {
+    private fun obtainViewModel(activity: FragmentActivity): GlucosaMonthlyViewModel {
         val factory = ViewModelFactory.getInstance(requireContext())
-        return ViewModelProvider(activity, factory)[GlucosaWeeklyViewModel::class.java]
+        return ViewModelProvider(activity, factory)[GlucosaMonthlyViewModel::class.java]
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onResume() {
         super.onResume()
-        glucosaWeeklyViewModel.getAllDataGlucose().observe(viewLifecycleOwner) { data ->
+        glucosaMonthlyViewModel.getAllDataGlucose().observe(viewLifecycleOwner, Observer { data ->
             updateChartData(data)
-        }
+        })
     }
 }

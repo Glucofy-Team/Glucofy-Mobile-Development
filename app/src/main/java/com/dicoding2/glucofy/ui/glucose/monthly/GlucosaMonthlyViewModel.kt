@@ -1,4 +1,4 @@
-package com.dicoding2.glucofy.ui.viewmodel
+package com.dicoding2.glucofy.ui.glucose.monthly
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

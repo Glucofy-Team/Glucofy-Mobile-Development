@@ -42,6 +42,12 @@ class AlarmRepository(
         }
     }
 
+    fun deleteAll(){
+        AlarmDatabase.databaseWriteExecutor.execute{
+            alarmDao?.deleteAll()
+        }
+    }
+
     companion object {
         @Volatile
         private var instance: AlarmRepository? = null

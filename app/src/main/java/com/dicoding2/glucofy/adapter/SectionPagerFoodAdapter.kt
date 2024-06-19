@@ -3,7 +3,6 @@ package com.dicoding2.glucofy.adapter
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.dicoding2.glucofy.ui.food.ExploreFoodFragment
-import com.dicoding2.glucofy.ui.food.MyFoodFragment
 
 class SectionPagerFoodAdapter (fragment: Fragment) : FragmentStateAdapter(fragment) {
     override fun getItemCount(): Int {
@@ -14,7 +13,7 @@ class SectionPagerFoodAdapter (fragment: Fragment) : FragmentStateAdapter(fragme
         var fragment: Fragment? = null
         when (position) {
             0 -> fragment = ExploreFoodFragment()
-            1 -> fragment = MyFoodFragment()
+            1 -> fragment = ExploreFoodFragment()
         }
         return fragment as Fragment
     }
