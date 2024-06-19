@@ -21,6 +21,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Glucofy">
         <activity
+            android:name=".ui.SplashScreenActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Glucofy" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.recomendation.RecomendationActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.food.InputNewFoodActivity"
             android:exported="false" />
         <activity
@@ -42,14 +55,8 @@
             android:name=".ui.AddGlucosaActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.LoginActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:name=".ui.auth.LoginActivity"
+            android:exported="false"/>
         <activity
             android:name=".ui.RegisterSuccessActivity"
             android:exported="false" />

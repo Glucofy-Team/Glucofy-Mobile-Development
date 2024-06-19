@@ -13,11 +13,12 @@ import com.dicoding2.glucofy.ui.alarm.CreateAlarmViewModel
 import com.dicoding2.glucofy.ui.food.FoodDetailViewModel
 import com.dicoding2.glucofy.ui.food.FoodViewModel
 import com.dicoding2.glucofy.ui.food.InputNewFoodViewModel
-import com.dicoding2.glucofy.ui.viewmodel.GlucosaLogViewModel
-import com.dicoding2.glucofy.ui.viewmodel.GlucosaMonthlyViewModel
-import com.dicoding2.glucofy.ui.viewmodel.GlucosaTodayViewModel
-import com.dicoding2.glucofy.ui.viewmodel.GlucosaWeeklyViewModel
-import com.dicoding2.glucofy.ui.viewmodel.ProfileViewModel
+import com.dicoding2.glucofy.ui.food.MyFoodViewModel
+import com.dicoding2.glucofy.ui.glucose.log.GlucosaLogViewModel
+import com.dicoding2.glucofy.ui.glucose.monthly.GlucosaMonthlyViewModel
+import com.dicoding2.glucofy.ui.glucose.today.GlucosaTodayViewModel
+import com.dicoding2.glucofy.ui.glucose.weekly.GlucosaWeeklyViewModel
+import com.dicoding2.glucofy.ui.profile.ProfileViewModel
 
 class ViewModelFactory private constructor(
     private val glucofyRepository: GlucofyRepository,

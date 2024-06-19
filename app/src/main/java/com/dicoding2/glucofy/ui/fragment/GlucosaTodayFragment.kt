@@ -17,7 +17,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.dicoding2.glucofy.R
 import com.dicoding2.glucofy.data.local.entity.GlucoseAverageTodayEntity
 import com.dicoding2.glucofy.databinding.FragmentGlucosaTodayBinding
-import com.dicoding2.glucofy.ui.viewmodel.GlucosaTodayViewModel
+import com.dicoding2.glucofy.ui.glucose.today.GlucosaTodayViewModel
 import com.dicoding2.glucofy.ui.factory.ViewModelFactory
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Description

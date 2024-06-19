@@ -3,14 +3,16 @@ package com.dicoding2.glucofy.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding2.glucofy.data.Result
 import com.dicoding2.glucofy.data.UserPreference
 import com.dicoding2.glucofy.data.local.entity.UserEntity
 import com.dicoding2.glucofy.data.remote.response.Data
 import com.dicoding2.glucofy.databinding.ActivityProfileBinding
-import com.dicoding2.glucofy.ui.viewmodel.ProfileViewModel
+import com.dicoding2.glucofy.ui.auth.LoginActivity
 import com.dicoding2.glucofy.ui.factory.ViewModelFactory
+import kotlinx.coroutines.launch
 
 class ProfileActivity : AppCompatActivity() {
 
@@ -22,6 +24,34 @@ class ProfileActivity : AppCompatActivity() {
 
         profileViewModel = obtainViewModel(this)
 
+        binding.btnProfile.setOnClickListener {
+            startActivity(Intent(this, ProfileEditActivity::class.java))
+        }
+
+        binding.btnLogout.setOnClickListener {
+            val userPreference = UserPreference(this)
+            clearGlucoseTables()
+            userPreference.deleteUser()
+
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+
+            finishAffinity()
+
+        }
+
+        getProfile()
+
+        setContentView(binding.root)
+    }
+
+    private fun clearGlucoseTables() {
+        lifecycleScope.launch {
+            profileViewModel.clearTableGlucose()
+        }
+    }
+
+    private fun getProfile(){
         profileViewModel.getUserProfile().observe(this){ result ->
             if (result != null) {
                 when (result) {
@@ -59,7 +89,7 @@ class ProfileActivity : AppCompatActivity() {
     private fun setPreferenceUser(data: Data){
         val userPreference = UserPreference(this)
         val token = userPreference.getUser().token
-
+        Log.d("testToken","$token")
 
         var userModel = UserEntity(
             token,
