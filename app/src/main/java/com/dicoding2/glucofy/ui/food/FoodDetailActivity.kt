@@ -73,11 +73,11 @@ class FoodDetailActivity : AppCompatActivity() {
             tvFoodName.text = food.foodName
             tvFoodCategory.text = food.category
             tvGlIndex.text = food.gIndex.toString()
-            tvProtein.text = food.proteins.toString()
-            tvFats.text = food.fats.toString()
+            tvProtein.text = "${ food.proteins }g"
+            tvFats.text = "${ food.fats }g"
             tvGlLoad.text = food.gLoad.toString()
-            tvCalories.text = food.calories.toString()
-            tvCarbohydrate.text = food.carbs.toString()
+            tvCalories.text = "${ food.calories }kkal"
+            tvCarbohydrate.text = "${ food.carbs }g"
         }
     }
 

@@ -61,6 +61,7 @@ class DashboardFragment : Fragment() {
                         val data = result.data.data
                         setPreferenceUser(data)
                         setupGraphData()
+                        setupLastGlucose()
                         binding.tvHeadingTitle.text = "Hello, ${data.firstName}"
                     }
                     is Result.Error -> {
@@ -128,6 +129,15 @@ class DashboardFragment : Fragment() {
             val progress = (todayCalor!!.toFloat() / maxCalor.toFloat()) * 100
             binding.progressDaily.progress = progress
         }
+    }
+
+    private fun setupLastGlucose(){
+        viewModel.lastGlucoseData.observe(viewLifecycleOwner) {lastGlucoseData ->
+            if (lastGlucoseData != null){
+                binding.tvLastGlucose.text = lastGlucoseData.glucose.toString()
+            }
+        }
+        viewModel.getLastGlucose()
     }
 
     private fun obtainViewModel(activity: FragmentActivity) : DashboardViewModel{

@@ -34,18 +34,7 @@ class ExploreFoodFragment : Fragment() {
 
         viewModel = obtainViewModel(requireActivity())
 
-        with(binding) {
-            searchView.setupWithSearchBar(searchBar)
-            searchView.editText.setOnEditorActionListener { _, _, _ ->
-                binding.searchBar.setText(binding.searchView.text)
-                searchView.hide()
-                binding.addNewFoodButton.text = "Tambahkan \"${binding.searchView.text}\""
-                val query = searchView.text.toString()
-                viewModel.findFoods(query)
-                false
-            }
-        }
-
+        setupSearchView()
         initRecyclerView()
         observeData()
 
@@ -73,8 +62,18 @@ class ExploreFoodFragment : Fragment() {
         binding.rvFood.addItemDecoration(dividerItemDecoration)
     }
 
-    private fun setupSearchView() {
-
+    private fun setupSearchView(){
+        with(binding) {
+            searchView.setupWithSearchBar(searchBar)
+            searchView.editText.setOnEditorActionListener { _, _, _ ->
+                binding.searchBar.setText(binding.searchView.text)
+                searchView.hide()
+                binding.addNewFoodButton.text = "Tambahkan \"${binding.searchView.text}\""
+                val query = searchView.text.toString()
+                viewModel.findFoods(query)
+                false
+            }
+        }
     }
 
     private fun observeData() {

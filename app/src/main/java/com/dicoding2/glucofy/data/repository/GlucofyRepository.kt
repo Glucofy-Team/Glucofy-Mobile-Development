@@ -1,6 +1,5 @@
 package com.dicoding2.glucofy.data.repository
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.dicoding2.glucofy.data.Result
@@ -9,8 +8,8 @@ import com.dicoding2.glucofy.data.local.entity.GlucoseAverageTodayEntity
 import com.dicoding2.glucofy.data.local.entity.GlucoseAverageWeeklyEntity
 import com.dicoding2.glucofy.data.local.entity.GlucoseDataEntity
 import com.dicoding2.glucofy.data.local.room.GlucofyRoomDatabase
+import com.dicoding2.glucofy.data.remote.response.DataItem
 import com.dicoding2.glucofy.data.remote.response.GlucosaResponse
-import com.dicoding2.glucofy.data.remote.response.TodayFoodResponse
 import com.dicoding2.glucofy.data.remote.response.UserProfileResponse
 import com.dicoding2.glucofy.data.remote.retrofit.ApiService
 import com.dicoding2.glucofy.helper.generateRandomString
@@ -89,11 +88,6 @@ class GlucofyRepository (
         }
     }
 
-    suspend fun getTodayFood() : TodayFoodResponse {
-        Log.d("Food Repository", "Fetching MyFood")
-        return apiService.getTodayFood()
-    }
-
     suspend fun deleteGlucose(id: String): LiveData<Boolean>{
         try {
             apiService.deleteGlucosaById(id)
@@ -115,6 +109,28 @@ class GlucofyRepository (
         return liveData {
             emit(Result.Success(true))
         }
+    }
+
+    suspend fun getGlucoseByTime(): DataItem? {
+        val response = apiService.getGlucosa()
+
+        val data = response.data ?: emptyList()
+
+        val dataList = data.mapNotNull { item ->
+            if (item?.id != null && item.datetime != null) {
+                DataItem(
+                    item.glucose,
+                    item.condition,
+                    item.datetime,
+                    item.notes,
+                    item.id,
+                )
+            } else {
+                null
+            }
+        }
+        val sortedList = dataList.sortedByDescending { it.datetime }
+        return sortedList.firstOrNull()
     }
 
     companion object {

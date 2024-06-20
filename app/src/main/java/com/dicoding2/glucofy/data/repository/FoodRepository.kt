@@ -13,6 +13,7 @@ import com.dicoding2.glucofy.data.pagingsource.FoodPagingSource
 import com.dicoding2.glucofy.data.remote.response.FoodAddResponse
 import com.dicoding2.glucofy.data.remote.response.FoodListItem
 import com.dicoding2.glucofy.data.remote.response.MyFoodResponse
+import com.dicoding2.glucofy.data.remote.response.TodayFoodResponse
 import com.dicoding2.glucofy.data.remote.retrofit.ApiService
 
 class FoodRepository (
@@ -46,6 +47,11 @@ class FoodRepository (
             }catch (e: Exception){
                 emit(Result.Error(e.message.toString()))
             }
+    }
+
+    suspend fun getTodayFood() : TodayFoodResponse {
+        Log.d("Food Repository", "Fetching MyFood")
+        return apiService.getTodayFood()
     }
 
     companion object {
