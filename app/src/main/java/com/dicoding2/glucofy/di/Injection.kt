@@ -52,4 +52,9 @@ object Injection {
         val user = runBlocking { pref.getUser() }
         return ApiConfig.getApiService(user.token)
     }
+    fun provideApiMlConfig(context: Context): ApiService {
+        val pref = UserPreference(context)
+        val user = runBlocking { pref.getUser() }
+        return ApiConfig.getApiServiceML(user.token)
+    }
 }

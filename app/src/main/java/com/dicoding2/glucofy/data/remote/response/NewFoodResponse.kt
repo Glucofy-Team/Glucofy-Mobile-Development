@@ -14,7 +14,7 @@ data class NewFoodResponse(
 	val giValue: Int? = null,
 
 	@field:SerializedName("gl_value")
-	val glValue: Any? = null,
+	val glValue: Double? = null,
 
 	@field:SerializedName("carbs")
 	val carbs: Any? = null,
@@ -35,8 +35,9 @@ data class NewFoodResponse(
 	val glCategory: String? = null,
 
 	var isSuccessful: Boolean? = null
-) {
-	init {
-	    isSuccessful = foodName!= null && giValue != null && glValue != null && carbs != null && fats != null && proteins != null && calories != null && category != null && glCategory != null
-	}
-}
+)
+//{
+//	init {
+//	    isSuccessful = foodName!= null && giValue != null && glValue != null && carbs != null && fats != null && proteins != null && calories != null && category != null && glCategory != null
+//	}
+//}

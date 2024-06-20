@@ -1,0 +1,26 @@
+<!-- res/drawable/card_background.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Outer shadow layer -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#1A000000" /> <!-- Semi-transparent black for outer shadow -->
+            <corners android:radius="8dp" />
+            <padding android:left="4dp" android:top="4dp" android:right="4dp" android:bottom="8dp" />
+        </shape>
+    </item>
+    <!-- Inner shadow layer -->
+    <item android:top="2dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#0D000000" /> <!-- More transparent black for inner shadow -->
+            <corners android:radius="8dp" />
+            <padding android:left="2dp" android:top="2dp" android:right="2dp" android:bottom="4dp" />
+        </shape>
+    </item>
+    <!-- Main card layer -->
+    <item android:top="4dp">
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/white" />
+            <corners android:radius="8dp" />
+        </shape>
+    </item>
+</layer-list>

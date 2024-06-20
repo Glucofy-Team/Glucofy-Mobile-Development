@@ -10,10 +10,6 @@
         android:icon="@drawable/ic_food"
         android:title="@string/title_food" />
     <item
-        android:id="@+id/navigation_input"
-        android:icon="@drawable/baseline_add_24"
-        android:title="Input"/>
-    <item
         android:id="@+id/navigation_glucosa"
         android:icon="@drawable/ic_glucose"
         android:title="@string/title_glucosa" />
