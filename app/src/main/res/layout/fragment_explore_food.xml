@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.food.ExploreFoodFragment">
-    
+
     <com.google.android.material.search.SearchBar
         android:id="@+id/search_bar"
         android:layout_width="0dp"
@@ -26,6 +26,96 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.cardview.widget.CardView
+        android:layout_marginTop="12dp"
+        android:id="@+id/cv_information"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/search_bar"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="8dp"
+        app:cardElevation="8dp"
+        android:layout_marginHorizontal="12dp"
+        app:cardCornerRadius="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginVertical="8dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="Panduan nilai Glycemix Index(GI)"
+                android:textColor="@color/neutrals_600"
+                android:textStyle="bold"/>
+
+            <LinearLayout
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:background="@drawable/circle_background_low" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Kadar GI rendah"
+                    android:gravity="center"
+                    android:textColor="@color/neutrals_600"
+                    android:layout_marginStart="12dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:background="@drawable/circle_background_medium" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Kadar GI sedang"
+                    android:gravity="center"
+                    android:textColor="@color/neutrals_600"
+                    android:layout_marginStart="12dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:background="@drawable/circle_background_high" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Kadar GI tinggi"
+                    android:gravity="center"
+                    android:textColor="@color/neutrals_600"
+                    android:layout_marginStart="12dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_food"
         android:layout_marginTop="16dp"
@@ -35,7 +125,7 @@
         android:overScrollMode="never"
         android:scrollbarSize="0dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_bar"
+        app:layout_constraintTop_toBottomOf="@id/cv_information"
         app:layout_constraintStart_toStartOf="parent"/>
 
     <Button
@@ -50,6 +140,6 @@
         android:textColor="@color/neutrals_600"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/searchView"
-        app:layout_constraintTop_toBottomOf="@+id/rv_food" />
+        app:layout_constraintTop_toBottomOf="@+id/cv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
