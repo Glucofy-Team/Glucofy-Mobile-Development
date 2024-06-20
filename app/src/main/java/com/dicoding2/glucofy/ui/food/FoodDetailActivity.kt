@@ -1,6 +1,7 @@
 package com.dicoding2.glucofy.ui.food
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding2.glucofy.data.Result
@@ -24,13 +25,15 @@ class FoodDetailActivity : AppCompatActivity() {
         viewModel = obtainViewModel(this)
 
         val foodName = intent.getStringExtra("foodName")
-        val calories = intent.getIntExtra("calories", 0)
+        val calories = intent.getDoubleExtra("calories", 0.0)
         val fats = intent.getDoubleExtra("fats", 0.0)
         val carbs = intent.getDoubleExtra("carbs", 0.0)
         val proteins = intent.getDoubleExtra("proteins", 0.0)
         val gIndex = intent.getIntExtra("gIndex", 0)
         val gLoad = intent.getDoubleExtra("gLoad", 0.0)
         val category = intent.getStringExtra("category")
+
+        Log.d("testing98", "$carbs == $proteins ,, $calories")
 
         val food = FoodListItem(
             foodName = foodName,

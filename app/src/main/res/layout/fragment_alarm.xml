@@ -11,10 +11,10 @@
         android:id="@+id/tv_alarm_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:text="Set Alarm"
         android:textSize="24sp"
-        android:text="Set Reminder"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/btn_addAlarm"

@@ -21,10 +21,11 @@ class ProfileEditActivity : AppCompatActivity() {
         binding = ActivityProfileEditBinding.inflate(layoutInflater)
         profileEditViewModel = ProfileEditViewModel.getInstance(this)
 
+        getUser()
+
         val adapter = ArrayAdapter(this, R.layout.input_list_item, items)
         binding.tiGender.setAdapter(adapter)
 
-        getUser()
 
         profileEditViewModel.isLoading.observe(this){
             binding.btnSubmit.isEnabled = !it
@@ -70,7 +71,9 @@ class ProfileEditActivity : AppCompatActivity() {
             val height = binding.tiHeight.text.toString()
             val age = binding.tiAge.text.toString()
 
-            profileEditViewModel.postEditProfile(firstname, lastname, phonenumber,password, gender, weight, height, age)
+            val sendGender = if(gender == "Laki-laki"){ "L" } else if (gender == "Perempuan") { "P" } else {"L"}
+
+            profileEditViewModel.postEditProfile(firstname, lastname, phonenumber,password, sendGender, weight, height, age)
         }
 
         setContentView(binding.root)
@@ -91,9 +94,11 @@ class ProfileEditActivity : AppCompatActivity() {
         binding.tiWeight.setText(data.weight)
 
         if(data.gender == "L"){
-            binding.tiGender.setText(items[0],false)
+            binding.tiGender.setText(items[0])
+            binding.ivProfile.setImageResource(R.drawable.ic_user_man)
         }else if(data.gender == "P"){
-            binding.tiGender.setText(items[1], false)
+            binding.tiGender.setText(items[1])
+            binding.ivProfile.setImageResource(R.drawable.ic_user_woman)
         }
 
     }
