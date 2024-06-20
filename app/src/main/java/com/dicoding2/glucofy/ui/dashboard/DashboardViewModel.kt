@@ -27,10 +27,10 @@ class DashboardViewModel (
             try {
                 val newResult = repository.getTodayFood()
                 _todayFood.value = newResult
-                Log.d("DashoardViewModel", "TodayFood data received:")
+                Log.d("DashboardViewModel", "TodayFood data received:")
             } catch (e: Exception) {
                 _errorMessage.value = e.message
-                Log.e("FoodViewModel", "Error: ${e.message}")
+                Log.e("DashboardViewModel", "Error: ${e.message}")
             }
         }
     }
