@@ -22,7 +22,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-data class TestData(
+data class SendData(
     val foodName: String,
     val category: String,
     val carbs: Int,
@@ -40,9 +40,8 @@ class InputNewFoodViewModel(private val apiService: ApiService) : ViewModel() {
 
     fun postNewFood(foodName: String, category: String, carbs: Int, protein: Int, fats: Int, calories: Int) {
         _isLoading.value = true
-        val testData = TestData(foodName, category, carbs, protein, fats, calories)
-
-        val json = Gson().toJson(testData)
+        val sendData = SendData(foodName, category, carbs, protein, fats, calories)
+        val json = Gson().toJson(sendData)
 
         val requestBody = json.toRequestBody("application/json".toMediaTypeOrNull())
 
