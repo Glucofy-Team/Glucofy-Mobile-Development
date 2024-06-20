@@ -32,6 +32,7 @@ class RegisterFragmentStep2 : Fragment() {
 
         registerViewModel.register.observe(viewLifecycleOwner, Observer { registerResponse ->
             if (registerResponse.status == 201) {
+                registerViewModel.clearRegister()
                 startActivity(Intent(requireContext(), RegisterSuccessActivity::class.java))
                 requireActivity().finish()
             }
@@ -47,6 +48,10 @@ class RegisterFragmentStep2 : Fragment() {
         binding.tiGender.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
             val selectedItem = parent.getItemAtPosition(position) as String
             gender = selectedItem
+        }
+
+        binding.tvLogin.setOnClickListener {
+            requireActivity().finish()
         }
 
         binding.btnRegister.setOnClickListener{

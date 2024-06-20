@@ -8,9 +8,9 @@
     <string name="tab_text_2">Minggu Ini</string>
     <string name="tab_text_3">Bulan Ini</string>
 
-    <string name="tab_text_food_1">Explore</string>
-    <string name="tab_text_food_2">My Foods</string>
-    <string name="tab_text_food_3">Favorites</string>
+    <string name="tab_text_food_1">Jelajahi</string>
+    <string name="tab_text_food_2">Makanan Ku</string>
+    <string name="tab_text_food_3">Favorite</string>
 
     <!--Home navigation-->
     <string name="title_food">Makanan</string>
@@ -19,26 +19,26 @@
     <string name="title_glucosa">Glucosa</string>
 
     <!--Fragment Register 1-->
-    <string name="fragment_register_1_tv_title">Create your account</string>
-    <string name="fragment_register_1_tv_description">This will be used for each time you’re trying to log in.</string>
-    <string name="fragment_register_1_ti_first_name">First Name...</string>
-    <string name="fragment_register_1_ti_phone_number">Phone Number...</string>
+    <string name="fragment_register_1_tv_title">Buat akun kamu</string>
+    <string name="fragment_register_1_tv_description">Ini akan digunakan setiap kali Anda mencoba masuk.</string>
+    <string name="fragment_register_1_ti_first_name">Nama Depan...</string>
+    <string name="fragment_register_1_ti_phone_number">No Telepon...</string>
     <string name="fragment_register_1_ti_email">Email...</string>
     <string name="fragment_register_1_ti_password">Password...</string>
-    <string name="fragment_register_1_btn_next"><![CDATA[Next ->]]></string>
-    <string name="fragment_register_1_ti_lastname">Last Name...</string>
+    <string name="fragment_register_1_btn_next"><![CDATA[Selanjutnya ->]]></string>
+    <string name="fragment_register_1_ti_lastname">Nama Belakang...</string>
     <string name="fragment_register_1_tv_login">Log In</string>
-    <string name="fragment_register_1_tv_description_login">Already have an account?</string>
+    <string name="fragment_register_1_tv_description_login">Sudah mempunyai akun ?</string>
 
     <!--Fragment Register 2-->
-    <string name="fragment_register_2_tv_title">Introduce Yourself</string>
-    <string name="fragment_register_2_tv_description">Your detail is important for thorough customization.</string>
-    <string name="fragment_register_2_ti_gender">Gender</string>
+    <string name="fragment_register_2_tv_title">Perkenalkan dirimu</string>
+    <string name="fragment_register_2_tv_description">Detail Anda penting untuk penyesuaian menyeluruh.</string>
+    <string name="fragment_register_2_ti_gender">Jenis kelamin</string>
     <string name="fragment_register_2_ti_weight">Berat (KG)</string>
     <string name="fragment_register_2_ti_height">Tinggi (CM)</string>
-    <string name="fragment_register_2_ti_age">Age</string>
+    <string name="fragment_register_2_ti_age">Umur</string>
     <string name="fragment_register_2_btn_register">Register</string>
-    <string name="fragment_register_2_tv_login_description">Already have an account?</string>
+    <string name="fragment_register_2_tv_login_description">Sudah memiliki akun?</string>
     <string name="fragment_register_2_tv_login">Log In</string>
 
     <!--Activity Login-->
@@ -53,7 +53,7 @@
     <!--Alarm-->
     <string name="arg_alarm_obj">AlarmObject</string>
     <string name="bundle_alarm_obj">BundleAlarmObject</string>
-    <string name="alarm_title">My Alarm</string>
+    <string name="alarm_title">Alarm Ku</string>
     <string name="dayNightTheme">DayNightTheme</string>
 
     <string name="notification_title">Tester</string>

@@ -129,6 +129,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
+                    android:layout_marginEnd="10dp"
                     android:text="@string/fragment_register_1_tv_description_login"
                     android:textColor="@color/neutrals_600" />
 
