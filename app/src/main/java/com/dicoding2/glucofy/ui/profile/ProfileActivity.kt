@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.dicoding2.glucofy.R
 import com.dicoding2.glucofy.data.Result
 import com.dicoding2.glucofy.data.UserPreference
 import com.dicoding2.glucofy.data.local.entity.UserEntity
@@ -30,14 +32,18 @@ class ProfileActivity : AppCompatActivity() {
             startActivity(Intent(this, ProfileEditActivity::class.java))
         }
 
+
         binding.btnLogout.setOnClickListener {
             val userPreference = UserPreference(this)
 
             userPreference.deleteUser()
 
-            val resultIntent = Intent()
-            resultIntent.putExtra("result", "berhasil")
-            setResult(Activity.RESULT_OK, resultIntent)
+            val logoutIntent = Intent("LOGOUT_ACTION")
+            LocalBroadcastManager.getInstance(this).sendBroadcast(logoutIntent)
+
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
             finish()
 
         }
@@ -77,7 +83,12 @@ class ProfileActivity : AppCompatActivity() {
     private fun setPreferenceUser(data: Data){
         val userPreference = UserPreference(this)
         val token = userPreference.getUser().token
-        Log.d("testToken","$token")
+
+        if(data.gender == "L"){
+            binding.ivProfile.setImageResource(R.drawable.ic_user_man)
+        }else if (data.gender == "P"){
+            binding.ivProfile.setImageResource(R.drawable.ic_user_woman)
+        }
 
         var userModel = UserEntity(
             token,

@@ -7,6 +7,7 @@ import com.dicoding2.glucofy.data.remote.response.GlucosaResponse
 import com.dicoding2.glucofy.data.remote.response.LoginResponse
 import com.dicoding2.glucofy.data.remote.response.MyFoodResponse
 import com.dicoding2.glucofy.data.remote.response.NewFoodResponse
+import com.dicoding2.glucofy.data.remote.response.RecomendationResponse
 import com.dicoding2.glucofy.data.remote.response.RegisterResponse
 import com.dicoding2.glucofy.data.remote.response.SuccessResponse
 import com.dicoding2.glucofy.data.remote.response.TodayFoodResponse
@@ -85,6 +86,9 @@ interface ApiService {
 
     @POST("/predict_new_data")
     fun postNewFoodJson(@Body requestBody: RequestBody): Call<NewFoodResponse>
+
+    @POST("ai/recommend")
+    fun postRecomendationJson(@Body requestBody: RequestBody): Call<RecomendationResponse>
 
     @GET("food")
     suspend fun getMyFood(

@@ -2,6 +2,7 @@ package com.dicoding2.glucofy.ui.food
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import com.dicoding2.glucofy.R
@@ -62,9 +63,9 @@ class InputNewFoodActivity : AppCompatActivity() {
                 putExtra("foodName", it.foodName)
                 putExtra("category", it.category)
                 putExtra("carbs", it.carbs as Double)
-                putExtra("protein", it.proteins)
+                putExtra("proteins", it.proteins as Double)
                 putExtra("fats", it.fats)
-                putExtra("calories", it.calories)
+                putExtra("calories", it.calories as Double)
                 putExtra("gIndex", it.giValue as Int)
                 putExtra("gLoad", it.glValue as Double)
             }

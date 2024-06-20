@@ -1,6 +1,7 @@
 package com.dicoding2.glucofy.ui.recomendation
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -15,26 +16,45 @@ class RecomendationActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRecomendationBinding
     private lateinit var chatHistoryAdapter: ChatHistoryAdapter
+    private lateinit var recomendationViewModel: RecomendationViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRecomendationBinding.inflate(layoutInflater)
+
+        recomendationViewModel = RecomendationViewModel.getInstance(this)
 
         chatHistoryAdapter = ChatHistoryAdapter()
         val historyLayoutManager = LinearLayoutManager(this)
 
         binding.rvChatHistory.layoutManager = historyLayoutManager
         binding.rvChatHistory.adapter = chatHistoryAdapter
+        recomendationViewModel.isLoading.observe(this){
+            binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
+            binding.btnSend.isEnabled = !it
+        }
+
+        chatHistoryAdapter.addMessage(RecomendationEntity("Halo, hari ini ingin makan apa ?",false))
+
+        recomendationViewModel.recomendationFood.observe(this){ recomendationResponse ->
+            if (recomendationResponse.status == 200){
+                chatHistoryAdapter.addMessage(RecomendationEntity(recomendationResponse.message,false))
+                recomendationViewModel.clearFoodData()
+            }
+        }
 
         binding.btnSend.setOnClickListener {
             val text = binding.tvInputUser.text.toString()
 
             chatHistoryAdapter.addMessage(RecomendationEntity(text,true))
-
-            chatHistoryAdapter.addMessage(RecomendationEntity("Sabar bre",false))
+            sendRecomendation(text)
         }
 
 
         setContentView(binding.root)
+    }
+
+    private fun sendRecomendation(food: String){
+        recomendationViewModel.postRecomendation(food)
     }
 }

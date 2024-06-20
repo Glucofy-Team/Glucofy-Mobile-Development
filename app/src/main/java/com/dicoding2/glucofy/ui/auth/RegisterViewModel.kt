@@ -54,6 +54,11 @@ class RegisterViewModel(private val context: Context, private val apiService: Ap
             }
         })
     }
+
+    fun clearRegister(){
+        _register.value = RegisterResponse("",0,"")
+    }
+
     companion object{
         private const val TAG = "LoginViewModel"
         @Volatile

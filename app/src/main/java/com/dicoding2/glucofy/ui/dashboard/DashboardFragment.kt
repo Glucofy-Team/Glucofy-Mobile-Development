@@ -17,6 +17,7 @@ import com.dicoding2.glucofy.databinding.FragmentDashboardBinding
 import com.dicoding2.glucofy.ui.calculator.CalculatorActivity
 import com.dicoding2.glucofy.ui.factory.ViewModelFactory
 import com.dicoding2.glucofy.ui.food.InputTodayFoodActivity
+import com.dicoding2.glucofy.ui.glucose.add.AddGlucosaActivity
 import com.dicoding2.glucofy.ui.profile.ProfileActivity
 import com.dicoding2.glucofy.ui.recomendation.RecomendationActivity
 
@@ -89,6 +90,11 @@ class DashboardFragment : Fragment() {
         binding.btnFoodInput.setOnClickListener {
             val intent = Intent(requireContext(), InputTodayFoodActivity::class.java)
             intent.putExtra("name", "")
+            startActivity(intent)
+        }
+
+        binding.btnGlucoseLog.setOnClickListener {
+            val intent = Intent(requireContext(), AddGlucosaActivity::class.java)
             startActivity(intent)
         }
     }

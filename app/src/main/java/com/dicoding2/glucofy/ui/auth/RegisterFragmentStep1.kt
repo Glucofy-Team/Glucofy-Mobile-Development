@@ -38,6 +38,10 @@ class RegisterFragmentStep1 : Fragment() {
             viewPager.setCurrentItem(1, true)
         }
 
+        binding.tvLogin.setOnClickListener {
+            requireActivity().finish()
+        }
+
         binding.tiEmail.addTextChangedListener {
             updateSubmitButtonState()
         }
