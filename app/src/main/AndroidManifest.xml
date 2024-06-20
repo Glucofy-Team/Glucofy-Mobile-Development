@@ -21,9 +21,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Glucofy">
         <activity
+            android:name=".ui.food.InputTodayFoodActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.SplashScreenActivity"
             android:exported="true"
-            android:theme="@style/Theme.Glucofy" >
+            android:theme="@style/Theme.Glucofy">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -56,7 +59,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.auth.LoginActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".ui.auth.RegisterSuccessActivity"
             android:exported="false" />

@@ -10,13 +10,10 @@ import androidx.paging.liveData
 import com.dicoding2.glucofy.data.Result
 import com.dicoding2.glucofy.data.local.room.FoodDatabase
 import com.dicoding2.glucofy.data.pagingsource.FoodPagingSource
-import com.dicoding2.glucofy.data.pagingsource.MyFoodPagingSource
 import com.dicoding2.glucofy.data.remote.response.FoodAddResponse
 import com.dicoding2.glucofy.data.remote.response.FoodListItem
-import com.dicoding2.glucofy.data.remote.response.GlucosaResponse
-import com.dicoding2.glucofy.data.remote.response.MyFoodListItem
+import com.dicoding2.glucofy.data.remote.response.MyFoodResponse
 import com.dicoding2.glucofy.data.remote.retrofit.ApiService
-import retrofit2.http.Field
 
 class FoodRepository (
     private val foodDatabase : FoodDatabase,
@@ -44,7 +41,6 @@ class FoodRepository (
             emit(Result.Loading)
             try {
                 val response = apiService.postFoodAdd(foodName, gIndex, gLoad, "-", "-", carbs, calories, fats, proteins, category)
-
                 Log.d("testing786",response.toString())
                 emit(Result.Success(response))
             }catch (e: Exception){

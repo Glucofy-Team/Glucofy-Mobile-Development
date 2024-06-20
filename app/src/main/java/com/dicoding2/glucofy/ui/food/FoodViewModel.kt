@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.dicoding2.glucofy.data.remote.response.FoodListItem
-import com.dicoding2.glucofy.data.remote.response.MyFoodListItem
 import com.dicoding2.glucofy.data.remote.response.MyFoodResponse
 import com.dicoding2.glucofy.data.repository.FoodRepository
 import kotlinx.coroutines.launch
@@ -25,9 +24,6 @@ class FoodViewModel(private val foodRepository: FoodRepository) : ViewModel() {
     // My Food
     private val _myFood = MutableLiveData<MyFoodResponse>()
     val myFood: LiveData<MyFoodResponse> = _myFood
-
-    private val _searchMyFoodResults = MutableLiveData<PagingData<MyFoodListItem>>()
-    val searchMyFoodResults: LiveData<PagingData<MyFoodListItem>> get() = _searchMyFoodResults
 
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String> get() = _errorMessage

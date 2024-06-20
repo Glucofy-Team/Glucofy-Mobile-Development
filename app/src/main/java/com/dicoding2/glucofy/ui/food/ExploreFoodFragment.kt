@@ -64,10 +64,11 @@ class ExploreFoodFragment : Fragment() {
 
     private fun setupSearchView() {
         with(binding) {
+            searchView.setupWithSearchBar(searchBar)
             searchView.editText.setOnEditorActionListener { _, _, _ ->
                 binding.searchBar.setText(binding.searchView.text)
                 binding.addNewFoodButton.text = "Tambahkan \"${binding.searchView.text}\""
-                searchView.hide()
+                searchView.visibility = View.GONE
                 val query = searchView.text.toString()
                 viewModel.findFoods(query)
                 true

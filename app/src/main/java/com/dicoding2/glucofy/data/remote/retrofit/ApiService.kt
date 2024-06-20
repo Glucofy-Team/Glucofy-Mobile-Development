@@ -9,6 +9,7 @@ import com.dicoding2.glucofy.data.remote.response.MyFoodResponse
 import com.dicoding2.glucofy.data.remote.response.NewFoodResponse
 import com.dicoding2.glucofy.data.remote.response.RegisterResponse
 import com.dicoding2.glucofy.data.remote.response.SuccessResponse
+import com.dicoding2.glucofy.data.remote.response.TodayFoodResponse
 import com.dicoding2.glucofy.data.remote.response.UserProfilePostResponse
 import com.dicoding2.glucofy.data.remote.response.UserProfileResponse
 import okhttp3.RequestBody
@@ -86,9 +87,7 @@ interface ApiService {
     fun postNewFoodJson(@Body requestBody: RequestBody): Call<NewFoodResponse>
 
     @GET("food")
-    fun getMyFood(
-        @Query("page") page: Int = 1,
-        @Query("size") size: Int = 2
+    suspend fun getMyFood(
     ) : MyFoodResponse
 
     @FormUrlEncoded
@@ -105,4 +104,7 @@ interface ApiService {
         @Field("proteins") proteins: String,
         @Field("category") category: String,
     ): FoodAddResponse
+
+    @GET("food/today")
+    suspend fun getTodayFood() : TodayFoodResponse
 }

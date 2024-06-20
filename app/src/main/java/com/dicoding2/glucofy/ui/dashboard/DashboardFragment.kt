@@ -1,6 +1,5 @@
 package com.dicoding2.glucofy.ui.dashboard
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -15,10 +14,9 @@ import com.dicoding2.glucofy.data.UserPreference
 import com.dicoding2.glucofy.data.local.entity.UserEntity
 import com.dicoding2.glucofy.data.remote.response.Data
 import com.dicoding2.glucofy.databinding.FragmentDashboardBinding
-import com.dicoding2.glucofy.ui.auth.LoginActivity
 import com.dicoding2.glucofy.ui.calculator.CalculatorActivity
 import com.dicoding2.glucofy.ui.factory.ViewModelFactory
-import com.dicoding2.glucofy.ui.food.InputNewFoodActivity
+import com.dicoding2.glucofy.ui.food.InputTodayFoodActivity
 import com.dicoding2.glucofy.ui.profile.ProfileActivity
 import com.dicoding2.glucofy.ui.recomendation.RecomendationActivity
 
@@ -28,6 +26,7 @@ class DashboardFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var viewModel : DashboardViewModel
+    private var userWeight: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,8 +38,10 @@ class DashboardFragment : Fragment() {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        bindButton()
         getProfile()
+        setupGraphData()
+        bindButton()
+
         return root
     }
 
@@ -50,7 +51,7 @@ class DashboardFragment : Fragment() {
     }
 
     private fun getProfile(){
-        viewModel.getUserProfile().observe(this){ result ->
+        viewModel.getUserProfile().observe(viewLifecycleOwner){ result ->
             if (result != null) {
                 when (result) {
                     is Result.Loading -> {
@@ -82,11 +83,11 @@ class DashboardFragment : Fragment() {
 
         binding.ivProfileImage.setOnClickListener {
             val intent = Intent(requireContext(), ProfileActivity::class.java)
-            startActivityForResult(intent, 200)
+            startActivity(intent)
         }
 
         binding.btnFoodInput.setOnClickListener {
-            val intent = Intent(requireContext(), InputNewFoodActivity::class.java)
+            val intent = Intent(requireContext(), InputTodayFoodActivity::class.java)
             intent.putExtra("name", "")
             startActivity(intent)
         }
@@ -97,8 +98,7 @@ class DashboardFragment : Fragment() {
         val token = userPreference.getUser().token
         Log.d("testToken","$token")
 
-        val userWeight = data.weight
-        setMaxCalor(userWeight)
+        userWeight = data.weight
 
         val userModel = UserEntity(
             token,
@@ -114,9 +114,15 @@ class DashboardFragment : Fragment() {
         userPreference.setUser(userModel)
     }
 
-    private fun setMaxCalor(userWeight: Int){
+    private fun setupGraphData(){
         val maxCalor = userWeight * 25
-        binding.tvDailyEaten.text = "00/${maxCalor}"
+        var todayCalor: Int = 0
+
+        viewModel.getTodayFood()
+        viewModel.todayFood.observe(viewLifecycleOwner) {response ->
+            todayCalor = response.totalCalories!!
+        }
+        binding.tvDailyEaten.text = "${todayCalor} / ${maxCalor} kkal"
     }
 
     private fun obtainViewModel(activity: FragmentActivity) : DashboardViewModel{

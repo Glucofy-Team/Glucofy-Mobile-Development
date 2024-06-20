@@ -11,10 +11,10 @@ data class NewFoodResponse(
 	val foodName: String? = null,
 
 	@field:SerializedName("gi_value")
-	val giValue: String? = null,
+	val giValue: Int? = null,
 
 	@field:SerializedName("gl_value")
-	val glValue: String? = null,
+	val glValue: Double? = null,
 
 	@field:SerializedName("carbs")
 	val carbs: Any? = null,

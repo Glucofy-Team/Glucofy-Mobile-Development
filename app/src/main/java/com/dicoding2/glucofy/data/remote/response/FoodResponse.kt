@@ -17,7 +17,7 @@ data class FoodResponse(
 data class FoodListItem(
 
 	@field:SerializedName("gIndex")
-	val gIndex: Double,
+	val gIndex: Int,
 
 	@field:SerializedName("gLoad")
 	val gLoad: Any,

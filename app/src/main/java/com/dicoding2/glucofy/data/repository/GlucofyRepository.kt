@@ -10,6 +10,7 @@ import com.dicoding2.glucofy.data.local.entity.GlucoseAverageWeeklyEntity
 import com.dicoding2.glucofy.data.local.entity.GlucoseDataEntity
 import com.dicoding2.glucofy.data.local.room.GlucofyRoomDatabase
 import com.dicoding2.glucofy.data.remote.response.GlucosaResponse
+import com.dicoding2.glucofy.data.remote.response.TodayFoodResponse
 import com.dicoding2.glucofy.data.remote.response.UserProfileResponse
 import com.dicoding2.glucofy.data.remote.retrofit.ApiService
 import com.dicoding2.glucofy.helper.generateRandomString
@@ -86,6 +87,11 @@ class GlucofyRepository (
         }catch (e: Exception){
             emit(Result.Error(e.message.toString()))
         }
+    }
+
+    suspend fun getTodayFood() : TodayFoodResponse {
+        Log.d("Food Repository", "Fetching MyFood")
+        return apiService.getTodayFood()
     }
 
     suspend fun deleteGlucose(id: String): LiveData<Boolean>{

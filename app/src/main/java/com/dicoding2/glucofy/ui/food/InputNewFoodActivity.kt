@@ -2,13 +2,10 @@ package com.dicoding2.glucofy.ui.food
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.dicoding2.glucofy.R
 import com.dicoding2.glucofy.databinding.ActivityInputNewFoodBinding
-import com.dicoding2.glucofy.ui.factory.ViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 
 class InputNewFoodActivity : AppCompatActivity() {
@@ -68,8 +65,8 @@ class InputNewFoodActivity : AppCompatActivity() {
                 putExtra("protein", it.proteins)
                 putExtra("fats", it.fats)
                 putExtra("calories", it.calories)
-                putExtra("giValue", it.giValue?.toDouble() ?: 0.0)
-                putExtra("glValue", it.glValue?.toDouble() ?: 0.0)
+                putExtra("gIndex", it.giValue as Int)
+                putExtra("gLoad", it.glValue as Double)
             }
             startActivity(intent)
         }

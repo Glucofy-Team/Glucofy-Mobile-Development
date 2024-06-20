@@ -1,14 +1,13 @@
 package com.dicoding2.glucofy.ui.food
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.dicoding2.glucofy.data.Result
 import com.dicoding2.glucofy.data.remote.response.FoodListItem
 import com.dicoding2.glucofy.databinding.ActivityFoodDetailBinding
-import com.dicoding2.glucofy.ui.factory.ViewModelFactory
-import com.dicoding2.glucofy.data.Result
 import com.dicoding2.glucofy.helper.toast
+import com.dicoding2.glucofy.ui.factory.ViewModelFactory
 
 class FoodDetailActivity : AppCompatActivity() {
 
@@ -29,8 +28,8 @@ class FoodDetailActivity : AppCompatActivity() {
         val fats = intent.getDoubleExtra("fats", 0.0)
         val carbs = intent.getDoubleExtra("carbs", 0.0)
         val proteins = intent.getDoubleExtra("proteins", 0.0)
-        val gIndex = intent.getDoubleExtra("giValue", 0.0)
-        val gLoad = intent.getDoubleExtra("glValue", 0.0)
+        val gIndex = intent.getIntExtra("gIndex", 0)
+        val gLoad = intent.getDoubleExtra("gLoad", 0.0)
         val category = intent.getStringExtra("category")
 
         val food = FoodListItem(
