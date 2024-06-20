@@ -1,6 +1,5 @@
 # <img src="https://github.com/Glucofy-Team/.github/blob/main/profile/img/logo.png" width="50"> Glucofy-Android
 This repository is utilized by our mobile development team to collaboratively build and refine the Glucofy app.
-https://www.figma.com/design/pX7ifeUaUVrawtPFbnueAV/Main-Design?node-id=0-1&t=yytz87w1h9NYxVrk-1
 
 ## Description
 Introducing Glucofy, a comprehensive app designed to help diabetic patients manage their health effortlessly. Glucofy allows users to track their daily food intake and monitor their glucose levels on a daily, weekly, and monthly basis. The app also offers personalized food recommendations and features a reminder alarm for important tasks. With plans for future enhancements, including automatic data synchronization with smartwatches and multilingual support, Glucofy aims to make diabetes management more accessible and user-friendly for diabetes patient.
