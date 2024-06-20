@@ -28,6 +28,7 @@ class DashboardFragment : Fragment() {
 
     private lateinit var viewModel : DashboardViewModel
     private var userWeight: Int = 0
+    private var todayCalor: Int? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,7 +41,6 @@ class DashboardFragment : Fragment() {
         val root: View = binding.root
 
         getProfile()
-        setupGraphData()
         bindButton()
 
         return root
@@ -61,6 +61,7 @@ class DashboardFragment : Fragment() {
                     is Result.Success -> {
                         val data = result.data.data
                         setPreferenceUser(data)
+                        setupGraphData()
                         binding.tvHeadingTitle.text = "Hello, ${data.firstName}"
                     }
                     is Result.Error -> {
@@ -122,13 +123,17 @@ class DashboardFragment : Fragment() {
 
     private fun setupGraphData(){
         val maxCalor = userWeight * 25
-        var todayCalor: Int = 0
 
         viewModel.getTodayFood()
         viewModel.todayFood.observe(viewLifecycleOwner) {response ->
-            todayCalor = response.totalCalories!!
+            Log.d("Dashboard", "Assingning todayCalor")
+            todayCalor = response.totalCalories
+            Log.d("Dashboard", "todayCalor: $todayCalor")
+            binding.tvDailyEaten.text = "${todayCalor} / ${maxCalor} kkal"
+
+            val progress = (todayCalor!!.toFloat() / maxCalor.toFloat()) * 100
+            binding.progressDaily.progress = progress
         }
-        binding.tvDailyEaten.text = "${todayCalor} / ${maxCalor} kkal"
     }
 
     private fun obtainViewModel(activity: FragmentActivity) : DashboardViewModel{

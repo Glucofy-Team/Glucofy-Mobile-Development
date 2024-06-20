@@ -5,53 +5,53 @@ import com.google.gson.annotations.SerializedName
 data class TodayFoodResponse(
 
 	@field:SerializedName("data")
-	val todayFoodListItem: List<TodayFoodListItem?>? = null,
+	val data: List<TodayFoodListItem>,
 
 	@field:SerializedName("totalCalories")
-	val totalCalories: Int? = null,
+	val totalCalories: Int,
 
 	@field:SerializedName("message")
-	val message: String? = null,
+	val message: String,
 
 	@field:SerializedName("status")
-	val status: Int? = null
+	val status: Int
 )
 
 data class TodayFoodListItem(
 
 	@field:SerializedName("gIndex")
-	val gIndex: Int? = null,
+	val gIndex: Int,
 
 	@field:SerializedName("foodName")
-	val foodName: String? = null,
+	val foodName: String,
 
 	@field:SerializedName("gLoad")
-	val gLoad: Int? = null,
+	val gLoad: Any,
 
 	@field:SerializedName("datetime")
-	val datetime: String? = null,
+	val datetime: String,
 
 	@field:SerializedName("carbs")
-	val carbs: Int? = null,
+	val carbs: Any,
 
 	@field:SerializedName("fats")
-	val fats: Int? = null,
+	val fats: Any,
 
 	@field:SerializedName("proteins")
-	val proteins: Int? = null,
+	val proteins: Any,
 
 	@field:SerializedName("id")
-	val id: String? = null,
+	val id: String,
 
 	@field:SerializedName("giCategory")
-	val giCategory: String? = null,
+	val giCategory: String,
 
 	@field:SerializedName("glCategory")
-	val glCategory: String? = null,
+	val glCategory: String,
 
 	@field:SerializedName("calories")
-	val calories: Int? = null,
+	val calories: Int,
 
 	@field:SerializedName("category")
-	val category: String? = null
+	val category: String
 )
