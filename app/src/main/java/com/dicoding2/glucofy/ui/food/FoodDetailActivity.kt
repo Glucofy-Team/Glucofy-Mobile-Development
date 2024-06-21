@@ -33,7 +33,6 @@ class FoodDetailActivity : AppCompatActivity() {
         val gLoad = intent.getDoubleExtra("gLoad", 0.0)
         val category = intent.getStringExtra("category")
 
-        Log.d("testing98", "$carbs == $proteins ,, $calories")
 
         val food = FoodListItem(
             foodName = foodName,

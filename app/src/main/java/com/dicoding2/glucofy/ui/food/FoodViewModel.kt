@@ -61,6 +61,7 @@ class FoodViewModel(private val foodRepository: FoodRepository) : ViewModel() {
                 _myFood.value = newResult
                 Log.d("FoodViewModel", "MyFood data received:")
             } catch (e: Exception) {
+                _myFood.value = MyFoodResponse()
                 _errorMessage.value = e.message
                 Log.e("FoodViewModel", "Error: ${e.message}")
             }

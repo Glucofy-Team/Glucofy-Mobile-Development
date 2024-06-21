@@ -93,7 +93,7 @@ class ExploreFoodFragment : Fragment() {
         }
 
         viewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
-            Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+            Log.d("FoodViewModel", "Error: $errorMessage")
         }
     }
 

@@ -47,6 +47,7 @@ class MyFoodFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        observeData()
         Log.d("MyFoodFragment", "onResume called")
     }
 
@@ -72,6 +73,7 @@ class MyFoodFragment : Fragment() {
                 adapter.submitList(foodReponse.myFoodListItem)
                 Log.d("MyFoodFragment", "observeData called")
             } else {
+                adapter.submitList(null)
                 Log.d("MyFoodFragment", "foodResponse is empty")
             }
         }

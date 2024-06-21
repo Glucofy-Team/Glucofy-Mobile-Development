@@ -32,7 +32,6 @@ class MyFoodDetailActivity : AppCompatActivity() {
         val gLoad = intent.getDoubleExtra("gLoad", 0.0)
         val category = intent.getStringExtra("category")
 
-        Log.d("testing98", "$carbs == $proteins ,, $calories")
 
         val food = FoodListItem(
             foodName = foodName,
@@ -48,25 +47,6 @@ class MyFoodDetailActivity : AppCompatActivity() {
             id = "",
         )
 
-        binding.btnSave.setOnClickListener {
-            viewModel.saveFood(foodName.toString(), calories.toString(), fats.toString(), carbs.toString(), proteins.toString(), gIndex.toString(), gLoad.toString(), category.toString()).observe(this){ result ->
-                if (result != null) {
-                    when (result) {
-                        is Result.Loading -> {
-                            binding.btnSave.isEnabled = false
-                        }
-                        is Result.Success -> {
-                            binding.btnSave.isEnabled = true
-                            toast(this, "Berhasil menambahkan data")
-                            finish()
-                        }
-                        is Result.Error -> {
-
-                        }
-                    }
-                }
-            }
-        }
         showFoodDetails(food)
 
         binding.btnDeleteFood.setOnClickListener {

@@ -47,7 +47,7 @@ data class MyFoodListItem(
 	val glCategory: String? = null,
 
 	@field:SerializedName("calories")
-	val calories: Int? = null,
+	val calories: Double? = null,
 
 	@field:SerializedName("category")
 	val category: String? = null
