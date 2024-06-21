@@ -39,6 +39,7 @@ class ProfileActivity : AppCompatActivity() {
             val userPreference = UserPreference(this)
 
             userPreference.deleteUser()
+            clearGlucoseTables()
 
             val logoutIntent = Intent("LOGOUT_ACTION")
             LocalBroadcastManager.getInstance(this).sendBroadcast(logoutIntent)

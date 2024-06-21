@@ -42,6 +42,7 @@ class AddGlucosaActivity : AppCompatActivity() {
             binding.btnSubmit.isEnabled = !loading
         }
 
+
         binding.tiDate.setOnClickListener {
             val c = Calendar.getInstance()
 

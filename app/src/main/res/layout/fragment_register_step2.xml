@@ -119,6 +119,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
+                    android:textSize="@dimen/body_L"
                     android:text="@string/fragment_register_2_tv_login_description"
                     android:textColor="@color/neutrals_600" />
 
@@ -127,6 +128,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/fragment_register_2_tv_login"
+                    android:textSize="@dimen/body_L"
                     android:textColor="@color/red_500"
                     android:textStyle="bold" />
             </LinearLayout>

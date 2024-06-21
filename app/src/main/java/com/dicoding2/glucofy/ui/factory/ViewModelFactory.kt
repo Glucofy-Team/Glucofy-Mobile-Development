@@ -12,6 +12,7 @@ import com.dicoding2.glucofy.ui.alarm.CreateAlarmViewModel
 import com.dicoding2.glucofy.ui.dashboard.DashboardViewModel
 import com.dicoding2.glucofy.ui.food.FoodDetailViewModel
 import com.dicoding2.glucofy.ui.food.FoodViewModel
+import com.dicoding2.glucofy.ui.glucose.detail.DetailViewModel
 import com.dicoding2.glucofy.ui.glucose.log.GlucosaLogViewModel
 import com.dicoding2.glucofy.ui.glucose.monthly.GlucosaMonthlyViewModel
 import com.dicoding2.glucofy.ui.glucose.today.GlucosaTodayViewModel
@@ -57,9 +58,11 @@ class ViewModelFactory private constructor(
            modelClass.isAssignableFrom(DashboardViewModel::class.java) -> {
                return DashboardViewModel(glucofyRepository, foodRepository) as T
            }
+           modelClass.isAssignableFrom(DetailViewModel::class.java) -> {
+               return DetailViewModel(glucofyRepository) as T
+           }
           else -> {throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")}
        }
-        
     }
 
     companion object {

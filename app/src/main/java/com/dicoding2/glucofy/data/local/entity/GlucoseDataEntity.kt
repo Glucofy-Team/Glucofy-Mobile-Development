@@ -14,6 +14,9 @@ class GlucoseDataEntity (
     @ColumnInfo(name = "glucose")
     val glucose: Int? = null,
 
+    @ColumnInfo(name = "note")
+    val note: String? = null,
+
     @ColumnInfo(name = "condition")
     val condition: String? = null,
 )

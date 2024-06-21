@@ -1,9 +1,11 @@
 package com.dicoding2.glucofy.ui.glucose.today
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +26,7 @@ import com.dicoding2.glucofy.data.local.entity.GlucoseDataEntity
 import com.dicoding2.glucofy.databinding.FragmentGlucosaTodayBinding
 import com.dicoding2.glucofy.ui.glucose.today.GlucosaTodayViewModel
 import com.dicoding2.glucofy.ui.factory.ViewModelFactory
+import com.dicoding2.glucofy.ui.glucose.detail.DetailActivity
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.components.MarkerView
@@ -55,8 +58,6 @@ class GlucosaTodayFragment : Fragment() {
     ): View? {
         glucosaTodayViewModel = obtainViewModel(requireActivity())
 
-        adapter = ListGlucoseDataAdapter()
-
         _binding = FragmentGlucosaTodayBinding.inflate(inflater, container, false)
         lineChart = binding.lineChart
 
@@ -64,12 +65,33 @@ class GlucosaTodayFragment : Fragment() {
             updateChartData(data)
         })
 
-        glucosaTodayViewModel.getDataGlucose().observe(viewLifecycleOwner, Observer { data ->
-            adapter.setListGlucose(data)
-        })
 
-        adapter.setOnDeleteClickCallback { glucoseData ->
-            clearGlucoseTables(glucoseData.id)
+        try {
+            adapter = ListGlucoseDataAdapter()
+
+            glucosaTodayViewModel.getDataGlucose().observe(viewLifecycleOwner, Observer { data ->
+                adapter.setListGlucose(data)
+            })
+
+            adapter.setOnItemClickCallback(object: ListGlucoseDataAdapter.OnItemClickCallback{
+                override fun onItemClicked(data: GlucoseDataEntity) {
+                    val intent = Intent(requireContext(), DetailActivity::class.java)
+                    intent.putExtra("id", data.id.toString())
+                    intent.putExtra("glucose", data.glucose.toString())
+                    intent.putExtra("condition", data.condition)
+                    intent.putExtra("note", data.note)
+                    intent.putExtra("date", data.date)
+
+                    startActivity(intent)
+                }
+            })
+        }catch (e: Exception) {
+            glucosaTodayViewModel.getAllDataGlucose().observe(viewLifecycleOwner, Observer { data ->
+                updateChartData(data)
+            })
+            glucosaTodayViewModel.getDataGlucose().observe(viewLifecycleOwner, Observer { data ->
+                adapter.setListGlucose(data)
+            })
         }
 
         binding?.rvGlucosa?.layoutManager = LinearLayoutManager(requireContext())
@@ -77,15 +99,6 @@ class GlucosaTodayFragment : Fragment() {
         binding?.rvGlucosa?.adapter = adapter
 
         return binding.root
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun clearGlucoseTables(id: String) {
-        lifecycleScope.launch {
-            glucosaTodayViewModel.deleteGlucoseById(id).observe(viewLifecycleOwner, Observer{
-
-            })
-        }
     }
 
 
@@ -174,6 +187,10 @@ class GlucosaTodayFragment : Fragment() {
         super.onResume()
         glucosaTodayViewModel.getAllDataGlucose().observe(viewLifecycleOwner, Observer { data ->
             updateChartData(data)
+        })
+
+        glucosaTodayViewModel.getDataGlucose().observe(viewLifecycleOwner, Observer { data ->
+            adapter.setListGlucose(data)
         })
     }
 }
