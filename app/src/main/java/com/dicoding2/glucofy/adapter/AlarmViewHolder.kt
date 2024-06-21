@@ -14,6 +14,7 @@ class AlarmViewHolder(binding: ItemAlarmBinding) : RecyclerView.ViewHolder(bindi
     private val alarmTitle: TextView = binding.tvAlarmTitle
     private val alarmStarted: SwitchCompat = binding.btnAlarmStarted
     private val alarmDay: TextView = binding.tvAlarmDay
+    private val deleteBtn = binding.btnDeleteAlarm
 
     fun bind(alarm: Alarm, listener: OnToggleAlarmListener) {
         val alarmText = String.format("%02d:%02d", alarm.hour, alarm.minute)
@@ -39,5 +40,7 @@ class AlarmViewHolder(binding: ItemAlarmBinding) : RecyclerView.ViewHolder(bindi
         }
 
         itemView.setOnClickListener { view -> listener.onItemClick(alarm, view) }
+
+        deleteBtn.setOnClickListener { listener.onDelete(alarm) }
     }
 }

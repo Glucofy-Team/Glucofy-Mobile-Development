@@ -1,8 +1,8 @@
 package com.dicoding2.glucofy.ui.alarm
 
+import androidx.lifecycle.ViewModel
 import com.dicoding2.glucofy.data.repository.AlarmRepository
 import com.dicoding2.glucofy.model.Alarm
-import androidx.lifecycle.ViewModel
 
 class CreateAlarmViewModel(private val alarmRepository: AlarmRepository) : ViewModel() {
 
