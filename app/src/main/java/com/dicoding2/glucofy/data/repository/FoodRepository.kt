@@ -42,7 +42,6 @@ class FoodRepository (
             emit(Result.Loading)
             try {
                 val response = apiService.postFoodAdd(foodName, gIndex, gLoad, "-", "-", carbs, calories, fats, proteins, category)
-                Log.d("testing786",response.toString())
                 emit(Result.Success(response))
             }catch (e: Exception){
                 emit(Result.Error(e.message.toString()))

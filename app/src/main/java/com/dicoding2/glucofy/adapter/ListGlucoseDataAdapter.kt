@@ -10,15 +10,11 @@ import com.dicoding2.glucofy.helper.ListGlucoseDiffCallback
 
 class ListGlucoseDataAdapter : RecyclerView.Adapter<ListGlucoseDataAdapter.GlucoseViewHolder>() {
     private lateinit var setOnItemClickCallback: OnItemClickCallback
-    private lateinit var onDeleteClickCallback: (GlucoseDataEntity) -> Unit
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback){
         this.setOnItemClickCallback = onItemClickCallback
     }
 
-    fun setOnDeleteClickCallback(onDeleteClickCallback: (GlucoseDataEntity) -> Unit) {
-        this.onDeleteClickCallback = onDeleteClickCallback
-    }
 
     private val listGlucose = ArrayList<GlucoseDataEntity>()
     fun setListGlucose(listNotes: List<GlucoseDataEntity>) {
@@ -49,14 +45,9 @@ class ListGlucoseDataAdapter : RecyclerView.Adapter<ListGlucoseDataAdapter.Gluco
             with(binding) {
                 tvGlucose.text = data.glucose.toString()
                 tvCondition.text = data.condition
-                btnDelete.setOnClickListener {
-                    onDeleteClickCallback(data)
-                }
-            }
+           }
         }
     }
-
-
 
     interface OnItemClickCallback{
         fun onItemClicked(data: GlucoseDataEntity)

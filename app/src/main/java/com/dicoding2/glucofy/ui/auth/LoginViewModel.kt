@@ -50,6 +50,10 @@ class LoginViewModel(private val context: Context, private val apiService: ApiSe
         })
     }
 
+    fun loginClearData(){
+        _login.value = LoginResponse("","",0,"")
+    }
+
     companion object{
         private const val TAG = "LoginViewModel"
         @Volatile

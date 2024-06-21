@@ -104,7 +104,6 @@ class DashboardFragment : Fragment() {
     private fun setPreferenceUser(data: Data){
         val userPreference = UserPreference(requireContext())
         val token = userPreference.getUser().token
-        Log.d("testToken","$token")
 
         userWeight = data.weight
 
