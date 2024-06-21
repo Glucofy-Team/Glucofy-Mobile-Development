@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dicoding2.glucofy.R
 import com.dicoding2.glucofy.data.remote.response.MyFoodListItem
 import com.dicoding2.glucofy.databinding.ItemFoodBinding
-import com.dicoding2.glucofy.ui.food.FoodDetailActivity
+import com.dicoding2.glucofy.ui.food.MyFoodDetailActivity
 
 class MyFoodAdapter : ListAdapter<MyFoodListItem, MyFoodAdapter.MyFoodViewHolder> (DIFF_CALLBACK) {
     class MyFoodViewHolder(val binding: ItemFoodBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -37,7 +37,8 @@ class MyFoodAdapter : ListAdapter<MyFoodListItem, MyFoodAdapter.MyFoodViewHolder
         if (food != null) {
             holder.bind(food)
             holder.itemView.setOnClickListener {
-                val intent = Intent(holder.itemView.context, FoodDetailActivity::class.java).apply {
+                val intent = Intent(holder.itemView.context, MyFoodDetailActivity::class.java).apply {
+                    putExtra("foodId", food.id)
                     putExtra("foodName", food.foodName)
                     putExtra("calories", food.calories)
                     putExtra("fats", food.fats as Double)

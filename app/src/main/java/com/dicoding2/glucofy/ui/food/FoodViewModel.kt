@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.dicoding2.glucofy.data.remote.response.DetailFoodResponse
 import com.dicoding2.glucofy.data.remote.response.FoodListItem
 import com.dicoding2.glucofy.data.remote.response.MyFoodResponse
 import com.dicoding2.glucofy.data.repository.FoodRepository
@@ -27,6 +28,14 @@ class FoodViewModel(private val foodRepository: FoodRepository) : ViewModel() {
 
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String> get() = _errorMessage
+
+
+    //FoooDetail
+    private val _foodDetail= MutableLiveData<DetailFoodResponse>()
+    val foodDetail: LiveData<DetailFoodResponse> = _foodDetail
+
+    fun saveFood( foodName: String, calories: String, fats: String, carbs: String, proteins: String, gIndex: String, gLoad: String, category: String)
+            = foodRepository.postFood(foodName, calories, fats, carbs, proteins, gIndex, gLoad, category)
 
     // Function to search foods by name
     fun findFoods(name: String) {
@@ -53,6 +62,17 @@ class FoodViewModel(private val foodRepository: FoodRepository) : ViewModel() {
                 Log.d("FoodViewModel", "MyFood data received:")
             } catch (e: Exception) {
                 _errorMessage.value = e.message
+                Log.e("FoodViewModel", "Error: ${e.message}")
+            }
+        }
+    }
+
+    fun deleteFoodById(id: String) {
+        viewModelScope.launch {
+            try {
+                foodRepository.deleteFoodById(id)
+                Log.d("FoodViewModel", "Food data deleted")
+            } catch (e: Exception) {
                 Log.e("FoodViewModel", "Error: ${e.message}")
             }
         }

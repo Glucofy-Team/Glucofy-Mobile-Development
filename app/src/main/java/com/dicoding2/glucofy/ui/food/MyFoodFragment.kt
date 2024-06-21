@@ -45,6 +45,11 @@ class MyFoodFragment : Fragment() {
         Log.d("MyFoodFragment", "onViewCreated called")
     }
 
+    override fun onResume() {
+        super.onResume()
+        Log.d("MyFoodFragment", "onResume called")
+    }
+
     private fun obtainViewModel(activity: FragmentActivity): FoodViewModel {
         val factory = ViewModelFactory.getInstance(requireContext())
         return ViewModelProvider(activity, factory)[FoodViewModel::class.java]

@@ -54,6 +54,15 @@ class FoodRepository (
         return apiService.getTodayFood()
     }
 
+    suspend fun deleteFoodById(id: String) {
+        try {
+            apiService.deleteFoodById(id)
+            Log.d(TAG, "deleteFoodById: Success")
+        } catch (e: Exception) {
+            Log.d(TAG, "deleteFoodById: ${e.message.toString()} ")
+        }
+    }
+
     companion object {
         private const val TAG = "FoodRepository"
         @Volatile

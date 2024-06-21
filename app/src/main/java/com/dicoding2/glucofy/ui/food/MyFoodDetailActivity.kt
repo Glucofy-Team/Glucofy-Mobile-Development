@@ -2,28 +2,27 @@ package com.dicoding2.glucofy.ui.food
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding2.glucofy.data.Result
 import com.dicoding2.glucofy.data.remote.response.FoodListItem
-import com.dicoding2.glucofy.databinding.ActivityFoodDetailBinding
+import com.dicoding2.glucofy.databinding.ActivityMyFoodDetailBinding
 import com.dicoding2.glucofy.helper.toast
 import com.dicoding2.glucofy.ui.factory.ViewModelFactory
 
-class FoodDetailActivity : AppCompatActivity() {
+class MyFoodDetailActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityFoodDetailBinding
+    private lateinit var binding: ActivityMyFoodDetailBinding
     private lateinit var viewModel : FoodViewModel
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityFoodDetailBinding.inflate(layoutInflater)
+        binding = ActivityMyFoodDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         viewModel = obtainViewModel(this)
 
+        val foodId = intent.getStringExtra("foodId")
         val foodName = intent.getStringExtra("foodName")
         val calories = intent.getDoubleExtra("calories", 0.0)
         val fats = intent.getDoubleExtra("fats", 0.0)
@@ -68,8 +67,16 @@ class FoodDetailActivity : AppCompatActivity() {
                 }
             }
         }
-
         showFoodDetails(food)
+
+        binding.btnDeleteFood.setOnClickListener {
+            if (foodId != null) {
+                viewModel.deleteFoodById(foodId)
+                Toast.makeText(this, "Data berhasil dihapus", Toast.LENGTH_SHORT).show()
+            }
+
+            finish()
+        }
     }
     private fun showFoodDetails(food: FoodListItem) {
         with(binding) {

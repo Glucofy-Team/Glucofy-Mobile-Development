@@ -111,4 +111,9 @@ interface ApiService {
 
     @GET("food/today")
     suspend fun getTodayFood() : TodayFoodResponse
+
+    @DELETE("/food/delete/{foodId}")
+    suspend fun deleteFoodById(
+        @Path("foodId") foodId: String
+    ) : SuccessResponse
 }
