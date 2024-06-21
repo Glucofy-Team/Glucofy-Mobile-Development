@@ -1,6 +1,7 @@
 package com.dicoding2.glucofy.data
 
 import android.content.Context
+import android.util.Log
 import com.dicoding2.glucofy.data.local.entity.UserEntity
 
 class UserPreference (context: Context) {
@@ -35,6 +36,7 @@ class UserPreference (context: Context) {
     }
 
     fun deleteUser() {
+        Log.d("getuser","${getUser()}")
         val editor = preferences.edit()
         editor.putString(TOKEN, "")
         editor.putString(PHONENUMBER, "")

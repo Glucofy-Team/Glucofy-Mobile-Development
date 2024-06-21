@@ -16,24 +16,24 @@ import com.dicoding2.glucofy.ui.MainActivity
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var loginViewModel: LoginViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val loginViewModel: LoginViewModel = LoginViewModel.getInstance(this)
+        loginViewModel = LoginViewModel.getInstance(this)
 
         loginViewModel.isLoading.observe(this){loading ->
             binding.btnLogin.isEnabled = !loading
         }
 
         loginViewModel.login.observe(this){loginResponse ->
-            if(loginResponse.status == 201){
+            if(loginResponse.status == 200){
                 toast(this@LoginActivity, "Berhasil Login")
+                setUserData(loginResponse)
             }
-//            Injection.provideGlucofyRepository(this)
-            setUserData(loginResponse)
         }
 
         binding.btnLogin.setOnClickListener {
@@ -76,10 +76,10 @@ class LoginActivity : AppCompatActivity() {
 
     private fun checkUser(){
         val userPreference = UserPreference(this)
-        Log.d("token", userPreference.getUser().token ?: "")
         if (userPreference.getUser().token !== ""){
             val intent = Intent(this@LoginActivity, MainActivity::class.java)
             startActivity(intent)
+            loginViewModel.loginClearData()
             finish()
         }
     }

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context=".ui.glucose.detail.DetailActivity">
+
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="15dp"
+        android:textSize="@dimen/heading_bold_S"
+        android:textColor="@color/red_500"
+        android:text="Glucosa Detail" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="@dimen/body_L"
+        android:text="Kadar glucosa : " />
+
+    <TextView
+        android:id="@+id/tvGlucose"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/body_L"
+        android:text="0" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="@dimen/body_L"
+        android:textStyle="bold"
+        android:text="Kondisi :" />
+
+    <TextView
+        android:id="@+id/tv_condition"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/body_L"
+        android:text="-" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:textSize="@dimen/body_L"
+        android:text="Catatan :" />
+    <TextView
+        android:id="@+id/tv_note"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/body_L"
+        android:text="-" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:textSize="@dimen/body_L"
+        android:text="Tanggal :" />
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/body_L"
+        android:text="-" />
+
+    <com.dicoding2.glucofy.ui.costumview.CostumButton
+        android:id="@+id/btn_delete"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginBottom="21dp"
+        android:gravity="center"
+        android:text="Hapus" />
+</LinearLayout>

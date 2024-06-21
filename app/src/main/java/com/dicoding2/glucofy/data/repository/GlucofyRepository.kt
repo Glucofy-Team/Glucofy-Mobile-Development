@@ -2,6 +2,7 @@ package com.dicoding2.glucofy.data.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
+import androidx.room.ColumnInfo
 import com.dicoding2.glucofy.data.Result
 import com.dicoding2.glucofy.data.local.entity.GlucoseAverageMonthlyEntity
 import com.dicoding2.glucofy.data.local.entity.GlucoseAverageTodayEntity
@@ -39,9 +40,10 @@ class GlucofyRepository (
                 glucofyRoomDatabase.glucoseAverageTodayDao().insertGlucose(glucoseToday)
             }
 
+
             val glucoseData = response.data?.map {data ->
                 GlucoseDataEntity(
-                    data?.id ?: "", data?.datetime, data?.glucose, data?.condition
+                    data?.id ?: "", data?.datetime, data?.glucose, data?.notes, data?.condition
                 )
             }
 
@@ -112,25 +114,29 @@ class GlucofyRepository (
     }
 
     suspend fun getGlucoseByTime(): DataItem? {
-        val response = apiService.getGlucosa()
+        try{
+            val response = apiService.getGlucosa()
+            val data = response.data ?: emptyList()
 
-        val data = response.data ?: emptyList()
-
-        val dataList = data.mapNotNull { item ->
-            if (item?.id != null && item.datetime != null) {
-                DataItem(
-                    item.glucose,
-                    item.condition,
-                    item.datetime,
-                    item.notes,
-                    item.id,
-                )
-            } else {
-                null
+            val dataList = data.mapNotNull { item ->
+                if (item?.id != null && item.datetime != null) {
+                    DataItem(
+                        item.glucose,
+                        item.condition,
+                        item.datetime,
+                        item.notes,
+                        item.id,
+                    )
+                } else {
+                    null
+                }
             }
+            val sortedList = dataList.sortedByDescending { it.datetime }
+            return sortedList.firstOrNull()
+        }catch (e: Exception){
+            return null
         }
-        val sortedList = dataList.sortedByDescending { it.datetime }
-        return sortedList.firstOrNull()
+
     }
 
     companion object {

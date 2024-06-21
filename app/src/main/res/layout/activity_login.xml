@@ -85,6 +85,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/body_L"
                 android:text="@string/activity_login_tv_register_title"
                 android:textColor="@color/neutrals_600" />
 
@@ -95,6 +96,7 @@
                 android:text="@string/activity_login_tv_register"
                 android:layout_marginStart="10sp"
                 android:textColor="@color/red_500"
+                android:textSize="@dimen/body_L"
                 android:textStyle="bold" />
         </LinearLayout>
 

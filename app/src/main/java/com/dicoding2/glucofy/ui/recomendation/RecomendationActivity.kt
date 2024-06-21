@@ -39,6 +39,7 @@ class RecomendationActivity : AppCompatActivity() {
         recomendationViewModel.recomendationFood.observe(this){ recomendationResponse ->
             if (recomendationResponse.status == 200){
                 chatHistoryAdapter.addMessage(RecomendationEntity(recomendationResponse.message,false))
+                binding.tvInputUser.setText("")
                 recomendationViewModel.clearFoodData()
             }
         }
